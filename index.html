@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
 
-    <title>From particles to mesh and back</title>
+    <title>Camley & Brown</title>
 
-    <meta name="description" content="SPHeric WS 2016">
-    <meta name="author" content="D Duque">
+    <meta name="description" content="Talk at UW">
+    <meta name="author" content="Daniel Duque">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -32,10 +32,8 @@
     <!--[if lt IE 9]>
 	<script src="lib/js/html5shiv.js"></script>
 	<![endif]-->
-
   </head>
 
-  
   <body>
 
     <div class="reveal">
@@ -44,41 +42,175 @@
       <div class="slides">
 
 	<section>
-	  <h2>From particles to mesh and back</h2>
-	  <h3>SPHeric Workshop 2016</h3>
+	  <h3>Brian A Camley & Frank LH Brown</h3>
+	  <h3>Dynamic scaling in phase separation kinetics for quasi-two-dimensional membranes</h3>
+	  <h3>The Journal of chemical physics 135 (22) 225106 (2011) </h3>
+	  <h4>Amphiphiles meeting UW 2016</h4>
 	  <p>
-          <table style="width:100%" >
-            <tbody>
-            <tr>
-              <td style = "vertical-align : bottom " style = "text-align : left ">
- 	       <img width="140"  data-src="./EscudoUNED.jpg">
-               &nbsp; &nbsp; &nbsp; &nbsp;
-               &nbsp; &nbsp; &nbsp; &nbsp;
-              </td>
-              <td style = "text-align : center ">
+            <td style = "text-align : center ">
 	      Daniel Duque <br>
 	      CEHINAV, UPM, Spain <br>
-	      <a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a> <br>
-	      <br>
-	      Pep Español <br>
-	      Dep Física Fundamental, UNED, Spain
-              </td>
-              <td style = "vertical-align : bottom ">
-               &nbsp; &nbsp; &nbsp; &nbsp;
-               &nbsp; &nbsp; &nbsp; &nbsp;
- 	       <img width="140"  data-src="./EscUpm.gif">
-	       <br>
-               &nbsp; &nbsp; &nbsp; &nbsp;
-               &nbsp; &nbsp; &nbsp; &nbsp;
- 	       <img width="140"  data-src="./LogoCEHINAV.jpg">
-              </td>
-            </tr>
-            </tbody>
-          </table>
+	      <a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a>
 	  </p>
 	</section>
 
-	<section id="PiC" data-background="./Parma_notes.jpg">
+	<section>
+	  <h3>Resources</h3>
+	  <A HREF="./Camley_Brown_JCP/Camley_and_Brown.pdf#page=2"> JCP article (PDF) </a>
+	</section>
+
+	
+	<section>
+	  <h3>Categories</h3>
+ 	  <img height="500"  data-src="./Camley_Brown_JCP/Categories.png" alt="Figure 1">
+	</section>
+
+
+	<section>
+	  <h3>Navier-Stokes equations</h3>
+	  <p>Convection of a field $A$:
+	    <br>
+	    <br>
+	    $\frac{d A}{d t} =  f $ &nbsp;&nbsp;&nbsp;&nbsp;
+	    $\frac{d A }{d t} = \frac{\partial A}{\partial t} + \mathbf{u} \cdot \nabla A $
+	    <br>
+	    <br>
+	    E.g. convection - diffusion:
+	    $\frac{d \phi}{d t} =  \eta \nabla^2 \phi $
+	  </p>
+	  <br>
+	</section>
+
+	<section>
+	  <h3>The momentum equation</h3>
+	  <p>Applying convection to velocity itself:
+	    <br>
+	    <br>
+	    $\frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
+	    <br>
+	    <br>
+	    Newton's 2nd law:
+	    <br>
+	    $\frac{d \mathbf{u} }{d t} =  - \alpha \mathbf{u} + \mathbf{f}  $
+	  </p>
+	  <br>
+	</section>
+
+	
+
+	
+	<section>
+	  <h3>Figure 1</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+	</section>
+
+
+	<section>
+	  <h3>Figure 2</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/2.svg" alt="Figure 2">
+	</section>
+
+	<section>
+	  <h3>Figure 3</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 4</h3>
+ 	  <img width="600"   style="background: white" data-src="./Camley_Brown_JCP/4.svg" alt="Figure 4">
+	</section>
+	<section>
+	  <h3>Figure 5</h3>
+ 	  <img width="600"   style="background: white" data-src="./Camley_Brown_JCP/5.svg" alt="Figure 5">
+	</section>
+	<section>
+	  <h3>Figure 6</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/6.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 7</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/7.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 8</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/8.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 9</h3>
+ 	  <img width="600"   style="background: white"  data-src="./Camley_Brown_JCP/9.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 10</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/10.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 11</h3>
+ 	  <img width="600"   style="background: white"  data-src="./Camley_Brown_JCP/11.svg" alt="Figure 2">
+	</section>
+	<section>
+	  <h3>Figure 12</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/12.svg" alt="Figure 2">
+	</section>
+
+
+
+
+      </div>
+
+    </div>
+
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+
+    <script>
+
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      math: {
+      mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+//      mathjax: './MathJax/MathJax.js',
+      config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+//      config: 'TeX-AMS_SVG'  // See http://docs.mathjax.org/en/latest/config-files.html
+      },
+
+      zoomKey: 'shift',
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'plugin/math/math.js', async: true }
+      ]
+      });
+
+      Reveal.configure({
+        keyboard: {
+          39: 'next' // go to the next slide when right arrow key is pressed
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
 	  <h2>Particle-in-cell idea</h2>
 	  <section data-transition="fade">
 	    <blockquote>
@@ -91,37 +223,37 @@
 	    </blockquote>
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_1.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_1.svg" alt="Motivation picture">
 	    <br>
 	    Starting with particles + velocity values
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_2.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_2.svg" alt="Motivation picture">
 	    <br>
 	    Let's <em>project</em> onto a fixed mesh
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_3.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_3.svg" alt="Motivation picture">
 	    <br>
 	    Using some triangulation (pFEM style)
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_4.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_4.svg" alt="Motivation picture">
 	    <br>
 	    The problem is on the mesh only
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_5.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_5.svg" alt="Motivation picture">
 	    <br>
 	    We compute new velocities (and pressure)
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_6.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_6.svg" alt="Motivation picture">
 	    <br>
 	    We project back onto the particles ...
 	  </section>
           <section data-transition="fade">
- 	    <img width="400"  data-src="./motivation_7.png" alt="Motivation picture">
+ 	    <img width="400"  data-src="./motivation_7.svg" alt="Motivation picture">
 	    <br>
 	    Particles are finally moved, Lagrangian-ly
 	  </section>
@@ -371,16 +503,16 @@
 	  <h2>Errors for Taylor-Green</h2>
 	  <h3>Velocity err vs $\Delta t$</h3>
           <section data-transition="fade">
- 	    <img width="500"  data-src="./L2x_v_vs_Dt_1.png">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_1.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="500"  data-src="./L2x_v_vs_Dt_2.png">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_2.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="500"  data-src="./L2x_v_vs_Dt_3.png">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_3.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="500"  data-src="./L2x_v_vs_Dt_4.png">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_4.svg">
 	  </section>
 	</section>
 
@@ -388,16 +520,16 @@
 	  <h2>Errors for Taylor-Green</h2>
 	  <h3>Pressure err vs $\Delta t$</h3>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_Dt_1.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_1.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_Dt_2.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_2.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_Dt_3.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_3.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_Dt_4.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_4.svg">
 	  </section>
 	</section>
 
@@ -408,19 +540,19 @@
 	  <h3>Velocity err vs CPU time</h3>
 	  <br>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_v_vs_time_1.png">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_1.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_v_vs_time_2.png">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_2.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_v_vs_time_3.png">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_3.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_v_vs_time_4.png">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_4.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_v_vs_time_5.png">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_5.svg">
 	  </section>
 	</section>
 
@@ -431,19 +563,19 @@
 	  <h3>Pressure err vs CPU time</h3>
 	  <br>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_time_1.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_1.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_time_2.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_2.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_time_3.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_3.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_time_4.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_4.svg">
 	  </section>
           <section data-transition="fade">
- 	    <img width="600"  data-src="./L2x_p_vs_time_5.png">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_5.svg">
 	  </section>
 	</section>
 
@@ -527,10 +659,10 @@
 	  </ul>
 	</section>
 
-	<!-- <section id="Thanks" data-background="./OMAE.png"> -->
+	<!-- <section id="Thanks" data-background="./OMAE.svg"> -->
 	<section id="Thanks">
 	  <h2>Thank you for your attention</h2>
- 	    <img width="700"  data-src="./OMAE.png">
+ 	    <img width="700"  data-src="./OMAE.svg">
 	</section>
 
 	<section id="extras">
@@ -556,54 +688,3 @@ void areas(Triangulation& T) {
           </code></pre>
 	</section>
 
-
-	
-      </div>
-
-    </div>
-
-
-
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.js"></script>
-
-
-    <script>
-
-      // More info https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
-      math: {
-      mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
-//      mathjax: './MathJax/MathJax.js',
-      config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-//      config: 'TeX-AMS_SVG'  // See http://docs.mathjax.org/en/latest/config-files.html
-      },
-
-      zoomKey: 'shift',
-
-      transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-      // More info https://github.com/hakimel/reveal.js#dependencies
-      dependencies: [
-      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: 'plugin/zoom-js/zoom.js', async: true },
-      { src: 'plugin/notes/notes.js', async: true },
-      { src: 'plugin/math/math.js', async: true }
-      ]
-      });
-
-      Reveal.configure({
-        keyboard: {
-          39: 'next' // go to the next slide when right arrow key is pressed
-        }
-      });
-    </script>
-  </body>
-</html>
