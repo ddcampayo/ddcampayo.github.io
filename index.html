@@ -90,42 +90,56 @@
 	  <p>Applying convection to velocity itself:
 	    <br>
 	    <br>
-	    $\frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
+	    $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
 	    <br>
 	    <br>
 	    Newton's 2nd law:
 	    <br>
-	    $\frac{d \mathbf{u} }{d t} =  - \alpha \mathbf{u} + \mathbf{f}  $
+	    $m \frac{d \mathbf{u} }{d t} =  - \alpha \mathbf{u} + \mathbf{f}  $
 	  </p>
 	  <br>
 	</section>
 
 	<section>
-	  <h3>Generalized convection - diffusion</h3>
-	  <p>Usual formulation, from a free energy functional $f=\frac12 \phi^2$
+	  <h3>Generalized convection - diffusion (1)</h3>
+	  <p>Let's begin with a free energy functional
 	    <br>
+                $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
 	    <br>
-	    $\frac{d \phi}{d t} =  D \nabla^2 \phi  = D \nabla^2 \frac{\delta f }{\delta \phi} $
+	  With the chemical potential
 	    <br>
+	  $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
 	    <br>
-	    Now, we could do that with any $f$!. For example, from
+          Our conserved dynamics is given by
 	    <br>
-	    $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
-	    <br>
-	    $\frac{d \phi}{d t} =  \gamma  \nabla^2 \left( - a \phi +  b \phi^3 - c \nabla^2\phi \right),$
-	    the celebrated Cahn-Hilliard equation (+ convection!)
-	  </p>
-	  <br>
+	    $\frac{d \phi}{d t} =  D \nabla^2 \mu  = D \nabla^2 \phi $
 	</section>
+
+        <section>
+          <h3>Generalized convection - diffusion (2)</h3>
+          <p> Now, we could do that with any $f$!. For example, the vdW-G-L one:
+            <br>
+            $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
+            <br>
+          Whichs yields the chemical potential
+          $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
+            <br>
+          Our conserved dynamics is again given by
+            <br>
+            $\frac{d \phi}{d t} =  D \nabla^2 \mu , $
+            <br>
+	    the celebrated Cahn-Hilliard equation (+ convection!)
+        </section>
 
 	<section>
 	  <h3>The two equations</h3>
 	  With the chemical potential
-	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi \right$
+	    <br>
+	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi $
 	  <br>
 	  $\frac{d \phi}{d t} =  \gamma  \nabla^2 \mu,$
 	  <br>
-	  $\frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	  $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	  <br>
 	</section>
 
@@ -136,12 +150,12 @@
 	  Let's see, there's $a$, $b$, and $c$, which can be related
 	  to: $\sigma$, $\xi$, and $\phi_0$.
 	  <br>
-	  There's also $D = 2\gamma a$, $\eta$, length and time scales \ldots
+	  There's also $D = 2\gamma a$, $\eta$, $\rho$, length and time scales $\ldots$
 	  <br>
-	  But I can show that everything may be reduced as:
-	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi \right$
+	  But I can show that everything may be reduced to:
+	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi $
 	  <br>
-	  $\frac{d \phi}{d t} =   \nabla^2 \left \mu,$
+	  $\frac{d \phi}{d t} =   \nabla^2 \mu,$
 	  <br>
 	  $\mathbf{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	</section>
@@ -156,11 +170,13 @@
 	  <br>
 	  It may be solved in general, for any force:
 	  <br>
-	  $ \nabla^2 \mathbf{u} - \nabla p - f = 0 $
+	  $ \nabla^2 \mathbf{u} - \nabla p + f = 0 $
 	  <br>
 	  BUT, there is a solvent-mediated force !
-	  $ \nabla^2 \mathbf{u} - \nabla p - f  - \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 $
-	  and this, I still don't know how to model ...
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p + f  - \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 $
+	  <br>
+	  this one, I still don't know how to model ...
 	</section>
 
 	
@@ -169,6 +185,15 @@
 	  <h3>Figure 1</h3>
  	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
 	</section>
+
+	<section>
+	  <h3>Figure 1</h3>
+	  <br>
+ 	  <img width="100"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+	  <br>
+          This case seems to be the only one with actual realistic parameters !
+	</section>
+
 
 
 	<section>
