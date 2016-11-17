@@ -57,7 +57,9 @@
 	<section>
 	  <h3>Resources</h3>
 	  <A HREF="./Camley_Brown_JCP/Camley_and_Brown.pdf#page=2"> JCP article (PDF) </a>
+	  <br>
 	  <A HREF="./Camley_Brown_JCP/PhysRevLett.105.148102.pdf"> previous PRL article (PDF) </a>
+	  <br>
 	  <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> details of the PRL article (PDF) </a>
 	</section>
 
@@ -78,7 +80,7 @@
 	    <br>
 	    <br>
 	    E.g. convection - diffusion:
-	    $\frac{d \phi}{d t} =  \eta \nabla^2 \phi $
+	    $\frac{d \phi}{d t} =  D \nabla^2 \phi $
 	  </p>
 	  <br>
 	</section>
@@ -98,8 +100,70 @@
 	  <br>
 	</section>
 
-	
+	<section>
+	  <h3>Generalized convection - diffusion</h3>
+	  <p>Usual formulation, from a free energy functional $f=\frac12 \phi^2$
+	    <br>
+	    <br>
+	    $\frac{d \phi}{d t} =  D \nabla^2 \phi  = D \nabla^2 \frac{\delta f }{\delta \phi} $
+	    <br>
+	    <br>
+	    Now, we could do that with any $f$!. For example, from
+	    <br>
+	    $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
+	    <br>
+	    $\frac{d \phi}{d t} =  \gamma  \nabla^2 \left( - a \phi +  b \phi^3 - c \nabla^2\phi \right),$
+	    the celebrated Cahn-Hilliard equation (+ convection!)
+	  </p>
+	  <br>
+	</section>
 
+	<section>
+	  <h3>The two equations</h3>
+	  With the chemical potential
+	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi \right$
+	  <br>
+	  $\frac{d \phi}{d t} =  \gamma  \nabla^2 \mu,$
+	  <br>
+	  $\frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	  <br>
+	</section>
+
+
+	<section>
+	  <h3>So many parameters!</h3>
+	  <br>
+	  Let's see, there's $a$, $b$, and $c$, which can be related
+	  to: $\sigma$, $\xi$, and $\phi_0$.
+	  <br>
+	  There's also $D = 2\gamma a$, $\eta$, length and time scales \ldots
+	  <br>
+	  But I can show that everything may be reduced as:
+	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi \right$
+	  <br>
+	  $\frac{d \phi}{d t} =   \nabla^2 \left \mu,$
+	  <br>
+	  $\mathbf{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	</section>
+
+
+	<section>
+	  <h3>Low Reynolds hydrodynamics</h3>
+	  It turns out the Reynolds number is very low, so that we end up with
+	  the creeping flow, Stokes, equation:
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu = 0 $
+	  <br>
+	  It may be solved in general, for any force:
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p - f = 0 $
+	  <br>
+	  BUT, there is a solvent-mediated force !
+	  $ \nabla^2 \mathbf{u} - \nabla p - f  - \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 $
+	  and this, I still don't know how to model ...
+	</section>
+
+	
 	
 	<section>
 	  <h3>Figure 1</h3>
