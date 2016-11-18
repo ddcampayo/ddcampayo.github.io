@@ -71,6 +71,17 @@
 
 
 	<section>
+	  <h3>Why this article</h3>
+	  <p>
+	    Lately, I have been doing hydrodynamics
+	    <br>
+	    So, I thought I might do some research on membrane dynamics
+	    <br>
+	    In fact, I have a grant to do so form my university (UPM) ...
+	</section>
+
+
+	<section>
 	  <h3>Navier-Stokes equations</h3>
 	  <p>Convection of a field $A$:
 	    <br>
@@ -93,7 +104,7 @@
 	    $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
 	    <br>
 	    <br>
-	    Newton's 2nd law:
+	    Similar to Newton's 2nd law (yet so different!):
 	    <br>
 	    $m \frac{d \mathbf{u} }{d t} =  - \alpha \mathbf{u} + \mathbf{f}  $
 	  </p>
@@ -104,13 +115,13 @@
 	  <h3>Generalized convection - diffusion (1)</h3>
 	  <p>Let's begin with a free energy functional
 	    <br>
-                $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
+            $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
 	    <br>
-	  With the chemical potential
+	    With the chemical potential
 	    <br>
-	  $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
+	    $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
 	    <br>
-          Our conserved dynamics is given by
+            Our conserved dynamics is given by
 	    <br>
 	    $\frac{d \phi}{d t} =  D \nabla^2 \mu  = D \nabla^2 \phi $
 	</section>
@@ -121,20 +132,20 @@
             <br>
             $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
             <br>
-          Whichs yields the chemical potential
-          $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
+            Whichs yields the chemical potential
+            $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
             <br>
-          Our conserved dynamics is again given by
+            Our conserved dynamics is again given by
             <br>
             $\frac{d \phi}{d t} =  D \nabla^2 \mu , $
             <br>
 	    the celebrated Cahn-Hilliard equation (+ convection!)
         </section>
-
+	
 	<section>
 	  <h3>The two equations</h3>
 	  With the chemical potential
-	    <br>
+	  <br>
 	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi $
 	  <br>
 	  $\frac{d \phi}{d t} =  \gamma  \nabla^2 \mu,$
@@ -152,10 +163,10 @@
 	  <br>
 	  There's also $D = 2\gamma a$, $\eta$, $\rho$, length and time scales $\ldots$
 	  <br>
-	  But I can show that everything may be reduced to:
+	  But I can show that everything may be reduced to two parameters!
 	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi $
 	  <br>
-	  $\frac{d \phi}{d t} =   \nabla^2 \mu,$
+	  $\frac{d \phi}{d t} = D  \nabla^2 \mu,$
 	  <br>
 	  $\mathbf{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	</section>
@@ -163,8 +174,10 @@
 
 	<section>
 	  <h3>Low Reynolds hydrodynamics</h3>
-	  It turns out the Reynolds number is very low, so that we end up with
-	  the creeping flow, Stokes, equation:
+
+	  It turns out the Reynolds number is very low, so that it
+	  drops out, and we end up with the creeping flow (Stokes)
+	  equation:
 	  <br>
 	  $ \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu = 0 $
 	  <br>
@@ -177,72 +190,243 @@
 	  $ \nabla^2 \mathbf{u} - \nabla p + f  - \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 $
 	  <br>
 	  this one, I still don't know how to model ...
+	  <br>
+	  Its range is given by the Saffman-Delbrück length:
+	  <br>
+	  $L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $
 	</section>
 
-	
-	
+
+	<section>
+	  <h3>Cases</h3>
+	  There should be a table for simulation cases! As they are, the details are given in
+	  figure captions...
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="4">Lengths</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$\xi$ (nm)      </th>
+		<th>$L$ ($\mu$m)     </th>
+		<th>$L_\mathrm{SD}$ (nm) </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $40$ </th>
+		<th> $30$ </th>
+		<th> $2500$ </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $20$ </th>
+		<th> $20$ </th>
+		<th> $25$ (!) </th>
+	      </tr>
+	      <tr>
+		<th> Figs 3 , 6 & 12 </th>
+		<th> $5$ </th>
+		<th> $5$ </th>
+		<th> $6.2$ (!) </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $40$ </th>
+		<th> $30$ </th>
+		<th> $\infty$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
+
+
 	<section>
 	  <h3>Figure 1</h3>
  	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
 	</section>
 
+	
 	<section>
 	  <h3>Figure 1</h3>
 	  <br>
- 	  <img width="100"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+ 	  <img width="200"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
 	  <br>
-          This case seems to be the only one with actual realistic parameters !
+          This case seems to be the only one with actual, realistic
+	  parameters !  For the rest of the cases, the solvent's
+	  viscosity is either $400\times$ that of water, or nill.
+	</section>
+
+	<section>
+	  <h3>Figures 3&4</h3>
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 3">
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/4.svg" alt="Figure 4">	  
+	  <br>
+          The article seems to be more about scaling than about reality!
 	</section>
 
 
+	<section>
+	  <h3>Figures 3&5</h3>
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 3">
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/5.svg" alt="Figure 5">	  
+	</section>
+
+	<section>
+	  <h3>Figures 6 & 7</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/6.svg" alt="Figure 6">
+	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/7.svg" alt="Figure 7">
+	</section>
+
+	<section>
+	  <h3>Figures 8 & 9</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/8.svg" alt="Figure 8">
+	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/9.svg" alt="Figure 9">
+	</section>
+
+	<section>
+	  <h3>Figures 10 & 11</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/10.svg" alt="Figure 10">
+	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/11.svg" alt="Figure 11">
+	</section>
+
+
+	<section>
+	  <h3>Criticism</h3>
+
+	  <ul>
+	    <li>No dimensional study</li>
+	    <li>For one set of reasonable parameters, a series of cases result with no clear application
+	      (vary the temperature, or something!)</li>
+	    <li>As mentioned, the spatial resolution does not really cover the interfacial zones, of width $\xi$</li>
+	    <li>I think the temporal scale is also too coarse</li>
+	  </ul>
+	</section>
+
+	<section>
+	  <h3>Times</h3>
+	  The velocity time scale is set by $t_0 = \eta \xi / \sigma $
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="3">Times</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$t_0$ ($\mu$s)     </th>
+		<th> #steps = $t_0 / \Delta t$     </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $2\times 10^{-3}$ </th>
+		<th> $10^{-4}$ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $5\times 10^{-3}$ </th>
+		<th> $5\times 10^{-5}$ !! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 3 </th>
+		<th> $3\times 10^{-2}$ </th>
+		<th> $8\times 10^{-3}$ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $2$ </th>
+		<th> $0.2$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
+
+
+	<section>
+	  <h3>Diffusion times</h3>
+	  The diffusion time scale is set by $t_0 /D $. Some cases look better
+	  in this regard (not Figure 1!)
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="3">Times</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$t_0/D$ ($\mu$s)     </th>
+		<th> #steps = $t_0/D / \Delta t$     </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $0.05$ </th>
+		<th> $5\times 10^{-3} $ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $61$ </th>
+		<th> $0.62$  </th>
+	      </tr>
+	      <tr>
+		<th> Fig 3 </th>
+		<th> $0.8$ </th>
+		<th> $0.8$  </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $50$ </th>
+		<th> $5$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
+
+
+	<section>
+	  <h2>Some results</h2>
+                <video width="600" controls="controls">
+                  <source data-src="./my_movie1.mp4" type="video/mp4">
+                </video>
+	</section>
+	
+	
 
 	<section>
 	  <h3>Figure 2</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/2.svg" alt="Figure 2">
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/2.svg" alt="Figure 2">
 	</section>
 
-	<section>
-	  <h3>Figure 3</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 4</h3>
- 	  <img width="600"   style="background: white" data-src="./Camley_Brown_JCP/4.svg" alt="Figure 4">
-	</section>
-	<section>
-	  <h3>Figure 5</h3>
- 	  <img width="600"   style="background: white" data-src="./Camley_Brown_JCP/5.svg" alt="Figure 5">
-	</section>
-	<section>
-	  <h3>Figure 6</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/6.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 7</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/7.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 8</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/8.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 9</h3>
- 	  <img width="600"   style="background: white"  data-src="./Camley_Brown_JCP/9.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 10</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/10.svg" alt="Figure 2">
-	</section>
-	<section>
-	  <h3>Figure 11</h3>
- 	  <img width="600"   style="background: white"  data-src="./Camley_Brown_JCP/11.svg" alt="Figure 2">
-	</section>
 	<section>
 	  <h3>Figure 12</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/12.svg" alt="Figure 2">
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/12.svg" alt="Figure 12">
 	</section>
 
-
+	<section>
+	  <h3>Times</h3>
+	  The reduced time is given by $t_0 = \eta \xi / \sigma $, or $t_0 / D $ for diffusion.
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="6">Times</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$\xi$   (nm)      </th>
+		<th>$\eta$   (P cm)      </th>
+		<th>$\sigma$ (pN)     </th>
+		<th>$t_0$ ($\mu$m)     </th>
+		<th>$t_0 / \Delta t$     </th>
+	      </tr>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
 
 
       </div>
