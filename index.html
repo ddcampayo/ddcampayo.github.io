@@ -74,8 +74,6 @@
 	    <li>
 	      <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> Supp material of PRL article (PDF) </a>
 	    <li>
-	      <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> Supp material of PRL article (PDF) </a>
-	    <li>
 	      <A HREF="./Camley_Brown_JCP/Lubensky_Goldstein.pdf">
 		Lubensky & Goldstein influential paper  </a>
 	    </li>
@@ -113,48 +111,37 @@
 	</section>
 
 
-	<section>
-	  <h3>Convection - diffusion equations</h3>
-	  <p>Diffusion of a field $A$:
-	    <br>
-	    $\frac{\partial A}{\partial t} =    D \nabla^2 \phi$
-	  </p>
-	  <p>Convection of $A$ due to velocity field $ \mathbf{u}$:
-	    <br>
-	    $\frac{\partial A}{\partial t}  \rightarrow  \frac{d A}{d t} $
-	    &nbsp;&nbsp;&nbsp;&nbsp;	    &nbsp;&nbsp;&nbsp;&nbsp;
-	    $\frac{d A }{d t} = \frac{\partial A}{\partial t} + \mathbf{u} \cdot \nabla A $
-	    <br>
-	    <br>
-	    Then, convection - diffusion is "simply"
-	    <br>
-	    $\frac{d \phi}{d t} =  D \nabla^2 \phi $
-	  </p>
-	  <br>
-	</section>
 
 	<section>
-	  <h3>Generalized convection - diffusion (1)</h3>
-	  <p>Let's begin with a free energy functional
+	  <h3>Conserved dynamics</h3>
+	  <p>We have <em>conserved</em> dynamics, since $\int \phi =
+	    \langle\phi\rangle$ is constant. "Model B" procedure
+	    begins with a free energy functional
 	    <br>
-            $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
-	    <br>
-	    <br>
+            $F=\int d\mathbf{r} \, f(\phi,\nabla\phi)  $
+	  </p>
+	  <p class="fragment">
 	    With the chemical potential
 	    <br>
-	    $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
+	    $ \mu =  \frac{\delta F }{\delta \phi}  $
+	  </p>
+	  <p class="fragment">
+	    Recipe:
 	    <br>
-	    <br>
-            Our <em>conserved</em> dynamics is given by
-	    <br>
-	    $\frac{d \phi}{d t} =  D \nabla^2 \mu  = D \nabla^2 \phi $
+	    $\frac{d \phi}{d t} =  D \nabla^2 \mu $
+	  </p>
+	  <p class="fragment">
+	    It's easy to show that $f=\frac12 \phi^2$  usual diff results,
+	    $\frac{\partial \phi}{\partial t} =    D \nabla^2 \phi$
+	  </p>
 	</section>
 
         <section>
-          <h3>Generalized convection - diffusion (2)</h3>
-          <p> Now, we could do that with any $f$!. For example, vdW-G-L:
+          <h3>Chan - Hilliard theory</h3>
+          <p>For phase separation,  vdW-G-L:
             <br>
-            $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
+            $f(\phi) = - \frac a2 \phi^2 +
+	    \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
             <br>
 	    <br>
             Whichs yields the chemical potential
@@ -164,10 +151,33 @@
             <br>
             Our conserved dynamics is
             <br>
-            $\frac{d \phi}{d t} =  D \nabla^2 \mu , $
+            $\frac{\partial \phi}{\partial t} =  D \nabla^2 \mu , $
             <br>
-	    the celebrated Cahn-Hilliard equation (+ convection!)
+	    the celebrated Cahn-Hilliard equation
         </section>
+
+
+	<section>
+	  <h3>Convection and hydrodynamics </h3>
+	  <p>Convection of $\phi$ due to velocity field $ \mathbf{u}$:
+	    <br>
+	    $\frac{\partial \phi}{\partial t}  \rightarrow  \frac{d \phi}{d t} $
+	    &nbsp;&nbsp;&nbsp;&nbsp;	    &nbsp;&nbsp;&nbsp;&nbsp;
+	    $\frac{d \phi }{d t} = \frac{\partial \phi}{\partial t} + \mathbf{u} \cdot \nabla \phi $
+	    <br>
+	    <br>
+	    Then, convection - diffusion is "simply"
+	    <br>
+	    $\frac{d \phi}{d t} =  D \nabla^2 \phi $
+	    <br>
+	    <br>
+	    and convected CH is "simply"
+	    <br>
+            $\frac{d \phi}{d t} =  D \nabla^2 \mu , $	    
+	  </p>
+	  <br>
+	</section>
+
 
 	
 	<section>
@@ -202,10 +212,10 @@
 
 
 	<section>
-	  <h3>Parameters overload</h3>
+	  <h3>Parameter overload!</h3>
 	  <br>
 	  There's $a$, $b$, and $c$, which can be related to:
-	  $\sigma$, $\xi$, and $\phi_0$.
+	  $\sigma$, $\xi$, and $\langle\phi\rangle$.
 	  <br>
 	  <br>
 	  There's also $D$, $\eta$, $\rho$, length and time scales
@@ -215,9 +225,9 @@
 	  <br>
 	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi $
 	  <br>
-	  $\frac{d \phi}{d t} = D  \nabla^2 \mu,$
+	  $\frac{d \phi}{d t} = D^*  \nabla^2 \mu,$
 	  <br>
-	  $\mathbf{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	  $\mathrm{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	</section>
 
 
@@ -230,19 +240,23 @@
 	  $ \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu = 0 $
 	  <br>
 	  <br>
-	  It may be solved in general, for any force:
+	  Which can be solved for <em>any</em> force:
 	  <br>
 	  $ \nabla^2 \mathbf{u} - \nabla p + f = 0 $
+	</section>
+
+	<section>
+	  <h3>Quasi-2D hydrodynamics</h3>
+	  There is indeed an additional solvent-mediated force !
 	  <br>
-	  <br>
-	  BUT, there is also a solvent-mediated force !
-	  <br>
-	  $ \nabla^2 \mathbf{u} - \nabla p + f  -
+	  $ \nabla^2 \mathbf{u} - \nabla p  - \phi \nabla \mu  -
 	  \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 ,$
+	  <br>
 	  <br>
 	  whose range is given by the Saffman-Delbrück length:
 	  <br>
 	  $L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $
+	  <br>
 	  <br>
 	  this term, I still don't know how to model ...
 	</section>
@@ -291,13 +305,6 @@
 	    </tbody>	    
 	  </table>
 	</section>
-
-
-	<section>
-	  <h3>Figure 1</h3>
- 	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
-	</section>
-
 	
 	<section>
 	  <h3>Figure 1</h3>
@@ -308,6 +315,14 @@
 	  parameters !  For the rest of the cases, the solvent's
 	  viscosity is either $400\times$ that of water, or zero.
 	</section>
+
+
+	<section>
+	  <h3>Figure 1</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+	</section>
+
+	
 
 	<section>
 	  <h3>Figures 3&4</h3>
@@ -357,9 +372,10 @@
 
 	  <ul>
 	    <li>No dimensional study</li>
-	    <li>For one set of reasonable parameters, a series of
-	      cases result with no clear justification (why not vary
-	      the temperature, add detergent ... )</li>
+	    <li>One set of reasonable parameters, the rest have no
+	      justification (why not vary the temperature, add detergent
+	      ... )</li>
+	    <li>I am not sure thermal noise should be included at all</li>
 	    <li>As mentioned, the spatial resolution does not really
 	    cover the interfacial zones, of width $\xi$</li>
 	    <li>I think the temporal scale is also too coarse</li>
@@ -409,7 +425,7 @@
 	<section>
 	  <h3>Diffusion times</h3>
 	  The diffusion time scale is set by
-	  $t_0 /D $. Some cases look better in this regard (not Figure
+	  $t_0 /D^* $. Some cases look better in this regard (not Figure
 	  1!)
 	  <table border="3">
 	    <thead>
@@ -420,7 +436,7 @@
 	    <tbody>
 	      <tr>
 		<th> case </th>
-		<th>$t_0/D$ ($\mu$s)     </th>
+		<th>$t_0/D^*$ ($\mu$s)     </th>
 		<th> #steps = $t_0/D / \Delta t$     </th>
 	      </tr>
 	      <tr>
@@ -456,12 +472,14 @@
 	</section>
 	
 	<section>
-	  <h4>Thanks</h4>
+	  <h1>Thanks</h1>
 	  <br>
 	  <br>
 	  <br>
 	  This presentation is at:
 	  <A HREF="https://ddcampayo.github.io"> https://ddcampayo.github.io</a>
+	  <br>
+	  <br>
 	  <br>
 	  Created with <A HREF="http://lab.hakim.se/reveal-js"> 
 	    reveal.js, the HTML Presentation Framework
