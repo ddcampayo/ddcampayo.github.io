@@ -42,10 +42,20 @@
       <div class="slides">
 
 	<section>
-	  <h3>Brian A Camley & Frank LH Brown</h3>
-	  <h3>Dynamic scaling in phase separation kinetics for quasi-two-dimensional membranes</h3>
-	  <h3>The Journal of chemical physics 135 (22) 225106 (2011) </h3>
-	  <h4>Amphiphiles meeting UW 2016</h4>
+	  <br>
+	  Brian A Camley & Frank LH Brown
+	  <br>
+	  <br>
+	  <i>
+	    Dynamic scaling in phase separation kinetics for
+	    quasi-two-dimensional membranes
+	  </i>
+	  <br>
+	  <br>
+	  The Journal of chemical physics <b>135</b> (22) 225106 (2011)
+	  <br>
+	  <br>
+	  Amphiphiles meeting UW 2016
 	  <p>
             <td style = "text-align : center ">
 	      Daniel Duque <br>
@@ -53,52 +63,117 @@
 	      <a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a>
 	  </p>
 	</section>
-
+	
 	<section>
 	  <h3>Resources</h3>
-	  <A HREF="./Camley_Brown_JCP/Camley_and_Brown.pdf#page=2"> JCP article (PDF) </a>
-	  <br>
-	  <A HREF="./Camley_Brown_JCP/PhysRevLett.105.148102.pdf"> previous PRL article (PDF) </a>
-	  <br>
-	  <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> details of the PRL article (PDF) </a>
+	  <ul>
+	    <li>
+	      <A HREF="./Camley_Brown_JCP/Camley_and_Brown.pdf#page=2"> JCP article (PDF) </a>
+	    <li>
+	      <A HREF="./Camley_Brown_JCP/PhysRevLett.105.148102.pdf"> previous PRL article (PDF) </a>
+	    <li>
+	      <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> Supp material of PRL article (PDF) </a>
+	    <li>
+	      <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> Supp material of PRL article (PDF) </a>
+	    <li>
+	      <A HREF="./Camley_Brown_JCP/Lubensky_Goldstein.pdf">
+		Lubensky & Goldstein influential paper  </a>
+	    </li>
+	  </ul>
 	</section>
 
 	
 	<section>
-	  <h3>Categories</h3>
+	  <h3>Why this article</h3>
  	  <img height="500"  data-src="./Camley_Brown_JCP/Categories.png" alt="Figure 1">
 	</section>
 
 
 	<section>
 	  <h3>Why this article</h3>
-	  <p>
-	    Lately, I have been doing hydrodynamics
-	    <br>
-	    So, I thought I might do some research on membrane dynamics
-	    <br>
-	    In fact, I have a grant to do so form my university (UPM) ...
+	  <ul>
+	    <li>
+	      Lately, I have been doing hydrodynamics (Naval Eng)
+	    </li>
+	    <li>
+	      So, it seemed natural to do research on membrane
+	      dynamics while at UW
+	    </li>
+	  </ul>
+	</section>
+
+	<section>
+	  <h2>Some simulations</h2>
+                <video width="350" controls="controls">
+                  <source data-src="./movie_pfem.mp4" type="video/mp4">
+                </video>
+                <video width="350" controls="controls">
+                  <source data-src="./movie_KH_pfem.mp4" type="video/mp4">
+                </video>
 	</section>
 
 
 	<section>
-	  <h3>Navier-Stokes equations</h3>
-	  <p>Convection of a field $A$:
+	  <h3>Convection - diffusion equations</h3>
+	  <p>Diffusion of a field $A$:
 	    <br>
+	    $\frac{\partial A}{\partial t} =    D \nabla^2 \phi$
+	  </p>
+	  <p>Convection of $A$ due to velocity field $ \mathbf{u}$:
 	    <br>
-	    $\frac{d A}{d t} =  f $ &nbsp;&nbsp;&nbsp;&nbsp;
+	    $\frac{\partial A}{\partial t}  \rightarrow  \frac{d A}{d t} $
+	    &nbsp;&nbsp;&nbsp;&nbsp;	    &nbsp;&nbsp;&nbsp;&nbsp;
 	    $\frac{d A }{d t} = \frac{\partial A}{\partial t} + \mathbf{u} \cdot \nabla A $
 	    <br>
 	    <br>
-	    E.g. convection - diffusion:
+	    Then, convection - diffusion is "simply"
+	    <br>
 	    $\frac{d \phi}{d t} =  D \nabla^2 \phi $
 	  </p>
 	  <br>
 	</section>
 
 	<section>
+	  <h3>Generalized convection - diffusion (1)</h3>
+	  <p>Let's begin with a free energy functional
+	    <br>
+            $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
+	    <br>
+	    <br>
+	    With the chemical potential
+	    <br>
+	    $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
+	    <br>
+	    <br>
+            Our <em>conserved</em> dynamics is given by
+	    <br>
+	    $\frac{d \phi}{d t} =  D \nabla^2 \mu  = D \nabla^2 \phi $
+	</section>
+
+        <section>
+          <h3>Generalized convection - diffusion (2)</h3>
+          <p> Now, we could do that with any $f$!. For example, vdW-G-L:
+            <br>
+            $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
+            <br>
+	    <br>
+            Whichs yields the chemical potential
+	    <br>
+            $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
+            <br>
+            <br>
+            Our conserved dynamics is
+            <br>
+            $\frac{d \phi}{d t} =  D \nabla^2 \mu , $
+            <br>
+	    the celebrated Cahn-Hilliard equation (+ convection!)
+        </section>
+
+	
+	<section>
 	  <h3>The momentum equation</h3>
-	  <p>Applying convection to velocity itself:
+	  <p>Applying convection to velocity itself results in the
+	    Navier-Stokes equation:
 	    <br>
 	    <br>
 	    $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
@@ -111,36 +186,6 @@
 	  <br>
 	</section>
 
-	<section>
-	  <h3>Generalized convection - diffusion (1)</h3>
-	  <p>Let's begin with a free energy functional
-	    <br>
-            $F=\int d\mathbf{r} \, f(\mathbf{r}) \qquad  f=\frac12 \phi^2$
-	    <br>
-	    With the chemical potential
-	    <br>
-	    $ \mu =  \frac{\delta F }{\delta \phi} = \phi $
-	    <br>
-            Our conserved dynamics is given by
-	    <br>
-	    $\frac{d \phi}{d t} =  D \nabla^2 \mu  = D \nabla^2 \phi $
-	</section>
-
-        <section>
-          <h3>Generalized convection - diffusion (2)</h3>
-          <p> Now, we could do that with any $f$!. For example, the vdW-G-L one:
-            <br>
-            $f(\phi) = - \frac a2 \phi^2 + \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
-            <br>
-            Whichs yields the chemical potential
-            $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
-            <br>
-            Our conserved dynamics is again given by
-            <br>
-            $\frac{d \phi}{d t} =  D \nabla^2 \mu , $
-            <br>
-	    the celebrated Cahn-Hilliard equation (+ convection!)
-        </section>
 	
 	<section>
 	  <h3>The two equations</h3>
@@ -148,22 +193,26 @@
 	  <br>
 	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi $
 	  <br>
+	  <br>
 	  $\frac{d \phi}{d t} =  \gamma  \nabla^2 \mu,$
 	  <br>
-	  $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	  <br>
+	  $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
 	</section>
 
 
 	<section>
-	  <h3>So many parameters!</h3>
+	  <h3>Parameters overload</h3>
 	  <br>
-	  Let's see, there's $a$, $b$, and $c$, which can be related
-	  to: $\sigma$, $\xi$, and $\phi_0$.
+	  There's $a$, $b$, and $c$, which can be related to:
+	  $\sigma$, $\xi$, and $\phi_0$.
 	  <br>
-	  There's also $D = 2\gamma a$, $\eta$, $\rho$, length and time scales $\ldots$
+	  <br>
+	  There's also $D$, $\eta$, $\rho$, length and time scales
+	  $\ldots$
 	  <br>
 	  But I can show that everything may be reduced to two parameters!
+	  <br>
 	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi $
 	  <br>
 	  $\frac{d \phi}{d t} = D  \nabla^2 \mu,$
@@ -175,32 +224,33 @@
 	<section>
 	  <h3>Low Reynolds hydrodynamics</h3>
 
-	  It turns out the Reynolds number is very low, so that it
-	  drops out, and we end up with the creeping flow (Stokes)
-	  equation:
+	  The Reynolds number is very low in membranes, so we end up
+	  with the creeping flow (Stokes) equation:
 	  <br>
 	  $ \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu = 0 $
+	  <br>
 	  <br>
 	  It may be solved in general, for any force:
 	  <br>
 	  $ \nabla^2 \mathbf{u} - \nabla p + f = 0 $
 	  <br>
-	  BUT, there is a solvent-mediated force !
 	  <br>
-	  $ \nabla^2 \mathbf{u} - \nabla p + f  - \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 $
+	  BUT, there is also a solvent-mediated force !
 	  <br>
-	  this one, I still don't know how to model ...
+	  $ \nabla^2 \mathbf{u} - \nabla p + f  -
+	  \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 ,$
 	  <br>
-	  Its range is given by the Saffman-Delbrück length:
+	  whose range is given by the Saffman-Delbrück length:
 	  <br>
 	  $L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $
+	  <br>
+	  this term, I still don't know how to model ...
 	</section>
 
 
 	<section>
-	  <h3>Cases</h3>
-	  There should be a table for simulation cases! As they are, the details are given in
-	  figure captions...
+	  <h3>Cases</h3> There should be a table for simulation cases!
+	  All the details are given as figure captions...
 	  <table border="3">
 	    <thead>
 	      <tr>
@@ -256,7 +306,7 @@
 	  <br>
           This case seems to be the only one with actual, realistic
 	  parameters !  For the rest of the cases, the solvent's
-	  viscosity is either $400\times$ that of water, or nill.
+	  viscosity is either $400\times$ that of water, or zero.
 	</section>
 
 	<section>
@@ -266,7 +316,8 @@
 	  <br>
           $R_n \sim t^{1/2} $
 	  <br>
-          The article really concerns scaling, not so much actual systems
+          The article really concerns dynamic scaling, not so much
+          actual systems
 	</section>
 
 
@@ -281,7 +332,7 @@
 	<section>
 	  <h3>Figures 6 & 7</h3>
  	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/6.svg" alt="Figure 6">
-	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/7.svg" alt="Figure 7">
+	  <img width="420"   style="background: white" data-src="./Camley_Brown_JCP/7.svg" alt="Figure 7">
 	</section>
 
 	<section>
@@ -306,9 +357,11 @@
 
 	  <ul>
 	    <li>No dimensional study</li>
-	    <li>For one set of reasonable parameters, a series of cases result with no clear application
-	      (vary the temperature, or something!)</li>
-	    <li>As mentioned, the spatial resolution does not really cover the interfacial zones, of width $\xi$</li>
+	    <li>For one set of reasonable parameters, a series of
+	      cases result with no clear justification (why not vary
+	      the temperature, add detergent ... )</li>
+	    <li>As mentioned, the spatial resolution does not really
+	    cover the interfacial zones, of width $\xi$</li>
 	    <li>I think the temporal scale is also too coarse</li>
 	  </ul>
 	</section>
@@ -355,8 +408,9 @@
 
 	<section>
 	  <h3>Diffusion times</h3>
-	  The diffusion time scale is set by $t_0 /D $. Some cases look better
-	  in this regard (not Figure 1!)
+	  The diffusion time scale is set by
+	  $t_0 /D $. Some cases look better in this regard (not Figure
+	  1!)
 	  <table border="3">
 	    <thead>
 	      <tr>
@@ -401,6 +455,18 @@
                 </video>
 	</section>
 	
+	<section>
+	  <h4>Thanks</h4>
+	  <br>
+	  <br>
+	  <br>
+	  This presentation is at:
+	  <A HREF="https://ddcampayo.github.io"> https://ddcampayo.github.io</a>
+	  <br>
+	  Created with <A HREF="http://lab.hakim.se/reveal-js"> 
+	    reveal.js, the HTML Presentation Framework
+	  </a>
+	</section>
 	
 
 	<section>
@@ -413,28 +479,8 @@
  	  <img width="800"  data-src="./Camley_Brown_JCP/12.svg" alt="Figure 12">
 	</section>
 
-	<section>
-	  <h3>Times</h3>
-	  The reduced time is given by $t_0 = \eta \xi / \sigma $, or $t_0 / D $ for diffusion.
-	  <table border="3">
-	    <thead>
-	      <tr>
-		<td colspan="6">Times</td>
-	      </tr>
-	    </thead>
-	    <tbody>
-	      <tr>
-		<th> case </th>
-		<th>$\xi$   (nm)      </th>
-		<th>$\eta$   (P cm)      </th>
-		<th>$\sigma$ (pN)     </th>
-		<th>$t_0$ ($\mu$m)     </th>
-		<th>$t_0 / \Delta t$     </th>
-	      </tr>
-	      </tr>
-	    </tbody>	    
-	  </table>
-	</section>
+
+
 
 
       </div>
