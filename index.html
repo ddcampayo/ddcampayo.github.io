@@ -108,7 +108,9 @@
                 <video width="350" controls="controls">
                   <source data-src="./movie_KH_pfem.mp4" type="video/mp4">
                 </video>
-	</section>
+	  <br>
+           pFEM method
+      </section>
 
 
 
@@ -128,7 +130,7 @@
 	  <p class="fragment">
 	    Recipe:
 	    <br>
-	    $\frac{d \phi}{d t} =  D \nabla^2 \mu $
+	    $\frac{\partial \phi}{\partial t} =  D \nabla^2 \mu $
 	  </p>
 	  <p class="fragment">
 	    It's easy to show that $f=\frac12 \phi^2$  usual diff results,
@@ -249,8 +251,8 @@
 	  <h3>Quasi-2D hydrodynamics</h3>
 	  There is indeed an additional solvent-mediated force !
 	  <br>
-	  $ \nabla^2 \mathbf{u} - \nabla p  - \phi \nabla \mu  -
-	  \eta_\mathrm{f} \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 ,$
+	  $ \nabla^2 \mathbf{u} - \nabla p  - \phi \nabla \mu  - \frac{L_\mathrm{SD}}{\xi} 
+	  \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 ,$
 	  <br>
 	  <br>
 	  whose range is given by the Saffman-Delbrück length:
@@ -304,6 +306,8 @@
 	      </tr>
 	    </tbody>	    
 	  </table>
+		<br>
+		(The spacial resolution is always $L/1024$)
 	</section>
 	
 	<section>
@@ -348,7 +352,9 @@
 	  <h3>Figures 6 & 7</h3>
  	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/6.svg" alt="Figure 6">
 	  <img width="420"   style="background: white" data-src="./Camley_Brown_JCP/7.svg" alt="Figure 7">
-	</section>
+	  <br>
+          No scaling observed
+	      </section>
 
 	<section>
 	  <h3>Figures 8 & 9</h3>
