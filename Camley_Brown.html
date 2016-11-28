@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Camley & Brown</title>
+
+    <meta name="description" content="Talk at UW">
+    <meta name="author" content="Daniel Duque">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+	<script src="lib/js/html5shiv.js"></script>
+	<![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+	<section>
+	  <br>
+	  Brian A Camley & Frank LH Brown
+	  <br>
+	  <br>
+	  <i>
+	    Dynamic scaling in phase separation kinetics for
+	    quasi-two-dimensional membranes
+	  </i>
+	  <br>
+	  <br>
+	  The Journal of chemical physics <b>135</b> (22) 225106 (2011)
+	  <br>
+	  <br>
+	  Amphiphiles meeting UW 2016
+	  <p>
+            <td style = "text-align : center ">
+	      Daniel Duque <br>
+	      CEHINAV, UPM, Spain <br>
+	      <a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a>
+	  </p>
+	</section>
+	
+	<section>
+	  <h3>Resources</h3>
+	  <ul>
+	    <li>
+	      <A HREF="http://scitation.aip.org/content/aip/journal/jcp/135/22/10.1063/1.3662131">The article</a>, also
+	      <A HREF="http://web.physics.ucsb.edu/~camley/camley_dynamic_scaling.pdf">at UCSB</a>
+<!--	      <A HREF="./Camley_Brown_JCP/Camley_and_Brown.pdf#page=2"> JCP article (PDF) </a> -->
+	    <li>
+<!--	      <A HREF="./Camley_Brown_JCP/PhysRevLett.105.148102.pdf"> previous PRL article (PDF) </a> -->
+	      <A HREF="http://journals.aps.org/prl/abstract/10.1103/PhysRevLett.105.148102">Previous PRL article</a>, 
+	      <A HREF="http://arxiv.org/abs/1105.4898">arXiv version</a>
+	    <li>
+<!--	      <A HREF="./Camley_Brown_JCP/numericaldetailsPhysRevLett.105.148102.pdf"> Supp material of PRL article (PDF) </a> -->
+	      <A HREF="http://journals.aps.org/prl/supplemental/10.1103/PhysRevLett.105.148102">Supp material of PRL article</a>
+	    <li>
+<!--	      <A HREF="./Camley_Brown_JCP/Lubensky_Goldstein.pdf"> Lubensky & Goldstein influential paper  </a> -->
+	      <A HREF="http://scitation.aip.org/content/aip/journal/pof2/8/4/10.1063/1.868893">Lubensky & Goldstein influential paper</a>, 
+	      <A HREF="http://arxiv.org/pdf/patt-sol/9602002">arXiv version</a>
+	    </li>
+	    <li>
+	      <A HREF="http://www.sciencedirect.com/science/article/pii/S0006349513006917">Stanich et al 2013 article</a>, 
+	    </li>
+	  </ul>
+	</section>
+
+	
+	<section>
+	  <h3>Why this article</h3>
+ 	  <img height="500"  data-src="./Camley_Brown_JCP/Categories.png" alt="Figure 1">
+	</section>
+
+
+	<section>
+	  <h3>Why this article</h3>
+	  <ul>
+	    <li>
+	      Lately, I have been doing hydrodynamics (Naval Eng)
+	    </li>
+	    <li>
+	      So, it seemed natural to do research on membrane
+	      dynamics while at UW
+	    </li>
+	  </ul>
+	</section>
+
+	<section>
+	  <h2>Some simulations</h2>
+                <video width="350" controls="controls">
+                  <source data-src="./movie_pfem.mp4" type="video/mp4">
+                </video>
+                <video width="350" controls="controls">
+                  <source data-src="./movie_KH_pfem.mp4" type="video/mp4">
+                </video>
+	  <br>
+           pFEM method
+      </section>
+
+
+
+	<section>
+	  <h3>Conserved dynamics</h3>
+	  <p>We have <em>conserved</em> dynamics, since $\int \phi =
+	    \langle\phi\rangle$ is constant. "Model B" procedure
+	    begins with a free energy functional
+	    <br>
+            $F=\int d\mathbf{r} \, f(\phi,\nabla\phi)  $
+	  </p>
+	  <p class="fragment">
+	    With the chemical potential
+	    <br>
+	    $ \mu =  \frac{\delta F }{\delta \phi}  $
+	  </p>
+	  <p class="fragment">
+	    Recipe:
+	    <br>
+	    $\frac{\partial \phi}{\partial t} =  \gamma \nabla^2 \mu $
+	  </p>
+	  <p class="fragment">
+	    It's easy to show that $f=\frac a2 \phi^2$  usual diff results,
+	    $\frac{\partial \phi}{\partial t} =    D \nabla^2 \phi$
+	  </p>
+	</section>
+
+        <section>
+          <h3>Cahn - Hilliard theory</h3>
+          <p>For phase separation,  vdW-G-L:
+            <br>
+            $f(\phi) = - \frac a2 \phi^2 +
+	    \frac b4 \phi^4 + \frac c2 (\nabla\phi)^2$
+            <br>
+	    <br>
+            Whichs yields the chemical potential
+	    <br>
+            $ \mu =  \frac{\delta F }{\delta \phi} = - a \phi +  b \phi^3 - c \nabla^2\phi $
+            <br>
+            <br>
+            Our conserved dynamics is
+            <br>
+            $\frac{\partial \phi}{\partial t} =  \gamma \nabla^2 \mu , $
+            <br>
+	    the celebrated Cahn-Hilliard equation
+        </section>
+
+
+	<section>
+	  <h3>Convection and hydrodynamics </h3>
+	  <p>Convection of $\phi$ due to velocity field $ \mathbf{u}$:
+	    <br>
+	    $\frac{\partial \phi}{\partial t}  \rightarrow  \frac{d \phi}{d t} $
+	    &nbsp;&nbsp;&nbsp;&nbsp;	    &nbsp;&nbsp;&nbsp;&nbsp;
+	    $\frac{d \phi }{d t} = \frac{\partial \phi}{\partial t} + \mathbf{u} \cdot \nabla \phi $
+	    <br>
+	    <br>
+	    Then, convection - diffusion is "simply"
+	    <br>
+	    $\frac{d \phi}{d t} =  D \nabla^2 \phi $
+	    <br>
+	    <br>
+	    and convected CH is "simply"
+	    <br>
+            $\frac{d \phi}{d t} =  \gamma \nabla^2 \mu , $	    
+	  </p>
+	  <br>
+	</section>
+
+
+	
+	<section>
+	  <h3>The momentum equation</h3>
+	  <p>Applying convection to velocity itself results in the
+	    Navier-Stokes equation:
+	    <br>
+	    <br>
+	    $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p + \mathbf{f}  $
+	    <br>
+	    <br>
+	    Similar to Newton's 2nd law (yet so different!):
+	    <br>
+	    $m \frac{d \mathbf{u} }{d t} =  - \alpha \mathbf{u} + \mathbf{f}  $
+	  </p>
+	  <br>
+	</section>
+
+	
+	<section>
+	  <h3>The two equations</h3>
+	  With the chemical potential
+	  <br>
+	  $ \mu =  - a \phi +  b \phi^3 - c \nabla^2\phi $
+	  <br>
+	  <br>
+	  $\frac{d \phi}{d t} =  \gamma  \nabla^2 \mu,$
+	  <br>
+	  <br>
+	  $\rho \frac{d \mathbf{u} }{d t} = \eta \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	</section>
+
+
+	<section>
+	  <h3>Parameter overload!</h3>
+	  <br>
+	  There's $a$, $b$, and $c$, which can be related to:
+	  $\sigma$, $\xi$, and $\langle\phi\rangle$.
+	  <br>
+	  <br>
+	  There's also $D$, $\eta$, $\rho$, length and time scales
+	  $\ldots$
+	  <br>
+	  But I can show that everything may be reduced to two parameters!
+	  <br>
+	  $ \mu =  - \phi +   \phi^3 -  \nabla^2\phi $
+	  <br>
+	  $\frac{d \phi}{d t} = D^*  \nabla^2 \mu,$
+	  <br>
+	  $\mathrm{Re} \frac{d \mathbf{u} }{d t} =  \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu  $
+	</section>
+
+
+	<section>
+	  <h3>Low Reynolds hydrodynamics</h3>
+
+	  The Reynolds number is very low in membranes, so we end up
+	  with the creeping flow (Stokes) equation:
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p - \phi \nabla \mu = 0 $
+	  <br>
+	  <br>
+	  Which can be solved for <em>any</em> force:
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p + f = 0 $
+	</section>
+
+	<section>
+	  <h3>Quasi-2D hydrodynamics</h3>
+	  There is indeed an additional solvent-mediated force !
+	  <br>
+	  $ \nabla^2 \mathbf{u} - \nabla p  - \phi \nabla \mu  - \frac{\xi}{L_\mathrm{SD}} 
+	  \int d^2\mathbf{r'} K(\mathbf{r}-\mathbf{r'}) \mathbf{u} (\mathbf{r'})  = 0 ,$
+	  <br>
+	  <br>
+	  whose range is given by the Saffman-Delbrück length:
+	  <br>
+	  $L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $
+	  <br>
+	  <br>
+	  this term, I still don't know how to model ...
+	</section>
+
+
+	<section>
+	  <h3>Cases</h3> There should be a table for simulation cases!
+	  All the details are given as figure captions...
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="4">Lengths</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$\xi$ (nm)      </th>
+		<th>$L$ ($\mu$m)     </th>
+		<th>$L_\mathrm{SD}$ (nm) </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $40$ </th>
+		<th> $30$ </th>
+		<th> $2500$ </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $20$ </th>
+		<th> $20$ </th>
+		<th> $25$ (!) </th>
+	      </tr>
+	      <tr>
+		<th> Figs 3 , 6 & 12 </th>
+		<th> $5$ </th>
+		<th> $5$ </th>
+		<th> $6.2$ (!) </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $40$ </th>
+		<th> $30$ </th>
+		<th> $\infty$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+		<br>
+		(The spacial resolution is always $L/1024$)
+	</section>
+	
+	<section>
+	  <h3>Figure 1</h3>
+	  <br>
+ 	  <img width="200"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+	  <br>
+          This case seems to be the only one with actual, realistic
+	  parameters !  For the rest of the cases, the solvent's
+	  viscosity is either $400\times$ that of water, or zero.
+	</section>
+
+
+	<section>
+	  <h3>Figure 1</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/1.svg" alt="Figure 1">
+	</section>
+
+	
+
+	<section>
+	  <h3>Figures 3&4</h3>
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 3">
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/4.svg" alt="Figure 4">	  
+	  <br>
+          $R_n \sim t^{1/2} $
+	  <br>
+          The article really concerns dynamic scaling, not so much
+          actual systems
+	</section>
+
+
+	<section>
+	  <h3>Figures 3&5</h3>
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/3.svg" alt="Figure 3">
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/5.svg" alt="Figure 5">	  
+	  <br>
+          $R \sim t^{1/2} $
+	</section>
+
+	<section>
+	  <h3>Figures 6 & 7</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/6.svg" alt="Figure 6">
+	  <img width="420"   style="background: white" data-src="./Camley_Brown_JCP/7.svg" alt="Figure 7">
+	  <br>
+          No scaling observed
+	      </section>
+
+	<section>
+	  <h3>Figures 8 & 9</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/8.svg" alt="Figure 8">
+	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/9.svg" alt="Figure 9">
+	  <br>
+          $R \sim t^{1/3} $
+	</section>
+
+	<section>
+	  <h3>Figures 10 & 11</h3>
+ 	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/10.svg" alt="Figure 10">
+	  <img width="400"   style="background: white" data-src="./Camley_Brown_JCP/11.svg" alt="Figure 11">
+	  <br>
+          $R \sim t^{1/2} $
+	</section>
+
+
+	<section>
+	  <h3>Criticism</h3>
+
+	  <ul>
+	    <li>No dimensional study</li>
+	    <li>One set of reasonable parameters, the rest have no
+	      justification (why not vary the temperature, add detergent
+	      ... )</li>
+	    <li>I am not sure thermal noise should be included at all</li>
+	    <li>As mentioned, the spatial resolution does not really
+	    cover the interfacial zones, of width $\xi$</li>
+	    <li>I think the temporal scale is also too coarse</li>
+	  </ul>
+	</section>
+
+	<section>
+	  <h3>Times</h3>
+	  The velocity time scale is set by $t_0 = \eta \xi / \sigma $
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="3">Times</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$t_0$ ($\mu$s)     </th>
+		<th> #steps = $t_0 / \Delta t$     </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $2\times 10^{-3}$ </th>
+		<th> $10^{-4}$ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $5\times 10^{-3}$ </th>
+		<th> $5\times 10^{-5}$ !! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 3 </th>
+		<th> $3\times 10^{-2}$ </th>
+		<th> $8\times 10^{-3}$ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $2$ </th>
+		<th> $0.2$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
+
+
+	<section>
+	  <h3>Diffusion times</h3>
+	  The diffusion time scale is set by
+	  $t_0 /D^* $. Some cases look better in this regard (not Figure
+	  1!)
+	  <table border="3">
+	    <thead>
+	      <tr>
+		<td colspan="3">Times</td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<th> case </th>
+		<th>$t_0/D^*$ ($\mu$s)     </th>
+		<th> #steps = $t_0/D / \Delta t$     </th>
+	      </tr>
+	      <tr>
+		<th> Fig 1 </th>
+		<th> $0.05$ </th>
+		<th> $5\times 10^{-3} $ ! </th>
+	      </tr>
+	      <tr>
+		<th> Fig 2 </th>
+		<th> $61$ </th>
+		<th> $0.62$  </th>
+	      </tr>
+	      <tr>
+		<th> Fig 3 </th>
+		<th> $0.8$ </th>
+		<th> $0.8$  </th>
+	      </tr>
+	      <tr>
+		<th> Fig 7 </th>
+		<th> $50$ </th>
+		<th> $5$  </th>
+	      </tr>
+	    </tbody>	    
+	  </table>
+	</section>
+
+
+	<section>
+	  <h2>Some results</h2>
+                <video width="600" controls="controls">
+                  <source data-src="./my_movie1.mp4" type="video/mp4">
+                </video>
+	</section>
+	
+	<section>
+	  <h1>Thanks</h1>
+	  <br>
+	  <br>
+	  <br>
+	  This presentation is at:
+	  <A HREF="https://ddcampayo.github.io"> https://ddcampayo.github.io</a>
+	  <br>
+	  <br>
+	  <br>
+	  Created with <A HREF="http://lab.hakim.se/reveal-js"> 
+	    reveal.js, the HTML Presentation Framework
+	  </a>
+	</section>
+	
+
+	<section>
+	  <h3>Figure 2</h3>
+ 	  <img width="400"  data-src="./Camley_Brown_JCP/2.svg" alt="Figure 2">
+	</section>
+
+	<section>
+	  <h3>Figure 12</h3>
+ 	  <img width="800"  data-src="./Camley_Brown_JCP/12.svg" alt="Figure 12">
+	</section>
+
+
+
+
+
+      </div>
+
+    </div>
+
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+
+    <script>
+
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      math: {
+      mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+//      mathjax: './MathJax/MathJax.js',
+      config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+//      config: 'TeX-AMS_SVG'  // See http://docs.mathjax.org/en/latest/config-files.html
+      },
+
+      zoomKey: 'shift',
+
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'plugin/math/math.js', async: true }
+      ]
+      });
+
+      Reveal.configure({
+        keyboard: {
+          39: 'next' // go to the next slide when right arrow key is pressed
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+	  <h2>Particle-in-cell idea</h2>
+	  <section data-transition="fade">
+	    <blockquote>
+	      &ldquo;You don't have to move <em>all</em> your particles, you may
+	      keep some fixed, as in the old Particle-in-Cell method&rdquo;
+	      <br>
+	      <br>
+	      &nbsp;&nbsp;&nbsp;&nbsp;
+	      J Monaghan, SPHeric 2015 at Parma
+	    </blockquote>
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_1.svg" alt="Motivation picture">
+	    <br>
+	    Starting with particles + velocity values
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_2.svg" alt="Motivation picture">
+	    <br>
+	    Let's <em>project</em> onto a fixed mesh
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_3.svg" alt="Motivation picture">
+	    <br>
+	    Using some triangulation (pFEM style)
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_4.svg" alt="Motivation picture">
+	    <br>
+	    The problem is on the mesh only
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_5.svg" alt="Motivation picture">
+	    <br>
+	    We compute new velocities (and pressure)
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_6.svg" alt="Motivation picture">
+	    <br>
+	    We project back onto the particles ...
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="400"  data-src="./motivation_7.svg" alt="Motivation picture">
+	    <br>
+	    Particles are finally moved, Lagrangian-ly
+	  </section>
+          <section data-transition="fade">
+	  <h2>Possible advantages</h2>
+	  <ul>
+	    <li	 class="fragment fade-up"> From particles: linear algebra may be done once !!</li>
+	    <li	 class="fragment fade-up"> From particles: easier boundary conditions and FSI</li>
+	    <li	 class="fragment fade-up"> From mesh: avoidance of false diffusion through particles </li>
+	  </ul>
+	  </section>
+	</section>
+
+	<section id="pFEM">
+	  <h2>pFEM simulations</h2>
+	  <table style="width:100%">
+	    <tr>
+	      <td align="center" valign="middle">
+		<video width="350" controls="controls">
+		  <source data-src="./movie_pfem.mp4" type="video/mp4">
+		</video>
+		<br>
+		p-FEM:
+		<br>
+		particle + FEM
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="350" controls="controls">
+		  <source data-src="./movie_pfem2.mp4" type="video/mp4">
+		</video>
+		<br>
+		proj-FEM:
+		<br>
+		particle + ( mesh + FEM )
+	      </td>
+	    </tr>
+	  </table>
+	</section>
+
+	<section id="pFEM">
+	  <h2>The problem with projection</h2>
+
+	  <p>Unfortunately, projection may spoil convergence
+	  <br>
+	  $\frac{d A}{d t} = Q$ &nbsp;&nbsp;&nbsp;&nbsp;
+	  $  \frac{d r }{d t} = u $
+	  </p>
+	  <br>
+	  <span class="fragment">
+	    $
+	    E=
+	    T
+            $
+            <span class="fragment highlight-red">
+             $
+	      (\Delta t)^2
+             $
+            </span>
+            $
+	    \left(
+	    \ddot{Q} +    \frac{Q'' u_0^2}{ \mathrm{Co}^2}
+	    \right)
+	    $
+	  </span>
+	  <span class="fragment">
+	    $
+	    +
+	    \underbrace{T
+            \color{red}{
+	    (\Delta t)}
+	    A''     \frac{ u_0^2 }{  \mathrm{Co}_h^2}
+	    \left(
+	    1+
+	    \frac{1}{ m^2}
+	    \right)
+	    }_\mathrm{proj}
+	    $
+	  </span>
+	  <br>
+	  <span class="fragment">
+	    But, this can be fixed!
+	  </span>
+	</section>
+
+	<section id="projection">
+	  <h2>Improving projection</h2>
+
+	  <p>The former holds for <em>linear</em> projection !</p>
+	  <span class="fragment">
+	    $
+	    E=
+	    T
+            \color{red}{
+	    (\Delta t)^2
+            }
+	    \left(
+	    \ddot{Q} +    \frac{Q'' u_0^2}{ \mathrm{Co}^2}
+	    \right)
+	    +
+	    \underbrace{T
+            \color{red}{
+	    (\Delta t)
+            }
+	    A''     \frac{ u_0^2 }{  \mathrm{Co}_h^2}
+	    \left(
+	    1+
+	    \frac{1}{ m^2}
+	    \right)
+	    }_\mathrm{proj}
+	    $
+	  </span>
+	  <br>
+	  <span class="fragment">
+            with a quadratic projection:
+	    <br>
+	    $
+	    E=
+	    T
+            \color{red}{
+	    (\Delta t)^2
+            }
+	    \left(
+	    \ddot{Q} +    \frac{Q'' u_0^2}{ \mathrm{Co}^2}
+	    \right)
+	    +
+	    \underbrace{T
+            \color{red}{
+	    (\Delta t)^2
+            }
+	    A''' u_0^3
+	    \left(
+	    \frac{1}{  \mathrm{Co}_H^3} +
+	    \frac{1}{  \mathrm{Co}_h^3} 
+	    \right)
+	    }_\mathrm{proj}
+	    $
+	    <!-- </p> -->
+	  </span>
+	  <br>
+	  <span class="fragment">
+	    ... or the offending term can be made small by
+	    particle crowding
+	  </span>
+	</section>
+	
+	<section id="Zalesak">
+	  <h2>Zalesak's disk</h2>
+	  <table  border="1"  style="width:100%">
+	    <tr>
+	      <td>  </td>
+	      <td align="center" valign="middle">
+		<small> Linear FE </small> </td>
+	      <td align="center" valign="middle">
+		<small> Quad mesh  </small> </td>
+	      <td align="center" valign="middle">
+		<small> Quad mesh + parts  </small></td>
+	    </tr>
+	    <tr>
+	      <td><small> Equal parts. mesh</small></td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_coarse.mp4" type="video/mp4">
+		</video>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_coarse_qmesh.mp4" type="video/mp4">
+		</video>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_coarse_qmesh_qpart.mp4" type="video/mp4">
+		</video>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td><small> Part crowding </small></td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_fine.mp4" type="video/mp4">
+		</video>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_fine_qmesh.mp4" type="video/mp4">
+		</video>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="200" controls="controls">
+		  <source data-src="./movie_fine_qmesh_qpart.mp4" type="video/mp4">
+		</video>
+	      </td>
+	    </tr>
+	  </table>
+	</section>
+
+
+
+	<section id="TG">
+	  <h2>Taylor-Green vortex sheet</h2>
+	  <table style="width:100%">
+	    <tr>
+	      <td align="center" valign="middle">
+		<video width="250" controls="controls">
+		  <source data-src="./movie_TG_pfem.mp4" type="video/mp4">
+		</video>
+		<br>
+		<small>
+		  pFEM
+		</small>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="250" controls="controls">
+		  <source data-src="./movie_TG_mesh.mp4" type="video/mp4">
+		</video>
+		<br>
+		<small>
+		projFEMq
+		</small>
+	      </td>
+	    </tr>
+	    <tr>
+	      <td align="center" valign="middle">
+		<video width="250" controls="controls">
+		  <source data-src="./movie_TG_quad.mp4" type="video/mp4">
+		</video>
+		<br>
+		<small>
+		  projFEMq
+		</small>
+	      </td>
+	      <td align="center" valign="middle">
+		<video width="250" controls="controls">
+		  <source data-src="./movie_TG_fem6.mp4" type="video/mp4">
+		</video>
+		<br>
+		<small>
+		  projFEM6
+		</small>
+	      </td>
+	    </tr>
+	  </table>
+	</section>
+
+
+	<section id="L2">
+	  <h2>Errors for Taylor-Green</h2>
+	  <h3>Velocity err vs $\Delta t$</h3>
+          <section data-transition="fade">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_1.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_2.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_3.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="500"  data-src="./L2x_v_vs_Dt_4.svg">
+	  </section>
+	</section>
+
+	<section id="L2-p">
+	  <h2>Errors for Taylor-Green</h2>
+	  <h3>Pressure err vs $\Delta t$</h3>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_1.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_2.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_3.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_Dt_4.svg">
+	  </section>
+	</section>
+
+	
+
+	<section id="L2-CPU">
+	  <h2>Errors for Taylor-Green</h2>
+	  <h3>Velocity err vs CPU time</h3>
+	  <br>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_1.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_2.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_3.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_4.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_v_vs_time_5.svg">
+	  </section>
+	</section>
+
+	
+
+	<section id="L2-p-CPU">
+	  <h2>Errors for Taylor-Green</h2>
+	  <h3>Pressure err vs CPU time</h3>
+	  <br>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_1.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_2.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_3.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_4.svg">
+	  </section>
+          <section data-transition="fade">
+ 	    <img width="600"  data-src="./L2x_p_vs_time_5.svg">
+	  </section>
+	</section>
+
+
+	<section id="RT">
+	  <h2>Rayleigh-Taylor instability</h2>
+          <section data-transition="fade">
+	  </section>
+          <section data-transition="fade">
+	  <table>  <!-- style="width:100%"> -->
+	    <tr>
+	      <td>
+		<video width="120" controls autoplay>
+		  <source data-src="./movie_RT_pfem.mp4" type="video/mp4">
+		</video>
+		<br>
+		pFEM
+	      </td>
+	      <td>
+		<video width="120" controls autoplay>
+		  <source data-src="./movie_RT.mp4" type="video/mp4">
+		</video>
+		<br>
+		projFEMq
+	      </td>
+	      <td>
+		<video width="120" controls autoplay>
+		  <source data-src="./movie_RT_projfem6.mp4" type="video/mp4">
+		</video>
+		<br>
+		projFEM6
+	      </td>
+	      <td>
+		<video width="120" controls autoplay>
+		  <source data-src="./movie_RT_OF.mp4" type="video/mp4">
+		</video>
+		<br>
+		OpenFOAM
+	      </td>
+	    </tr>
+	  </table>
+	  </section>
+	</section>
+
+
+	<section id="KH">
+	  <h2>Extra: Kelvin-Helmholtz instability</h2>
+          <section data-transition="fade">
+	  </section>
+          <section data-transition="fade">
+	    <br>
+	    <br>
+	    <table style="width:100%">
+	      <tr>
+		<td>
+		  <video width="400" controls autoplay>
+		    <source data-src="./movie_KH_pfem.mp4" type="video/mp4">
+		  </video>
+		  <br>
+		  <small> pFEM</small>
+		</td>
+		<td>
+		  <video width="400" controls autoplay>
+		    <source data-src="./movie_KH_embed.mp4" type="video/mp4">
+		  </video>
+		  <br>
+		  <small> projFEMq</small>
+		</td>
+	      </tr>
+	    </table>
+	  </section>
+	</section>
+
+	<section id="Conclusions">
+	  <h2>Conclusions</h2>
+	  <ul>
+	    <li	 class="fragment fade-up"> Linear projection is not a good idea ... </li>
+	    <li	 class="fragment fade-up"> but quadratic projection is.</li>
+	    <li	 class="fragment fade-up"> Future: Other boundaries, free surface.</li>
+	    <li	 class="fragment fade-up"> Future: quadratic FEM + better time integrator.</li>
+	  </ul>
+	</section>
+
+	<!-- <section id="Thanks" data-background="./OMAE.svg"> -->
+	<section id="Thanks">
+	  <h2>Thank you for your attention</h2>
+ 	    <img width="700"  data-src="./OMAE.svg">
+	</section>
+
+	<section id="extras">
+	  <h2>CGAL programming</h2>
+
+           <pre><code class="hljs" data-trim contenteditable>
+void areas(Triangulation& T) {
+
+  for(F_f_it fc=T.finite_faces_begin();
+      fc!=T.finite_faces_end();
+      fc++) {
+
+    Periodic_triangle pt=T.periodic_triangle(fc);
+
+    Triangle t=T.triangle(pt);
+
+    fc->area=t.area();
+
+  }
+
+  return;
+}
+          </code></pre>
+	</section>
+
