@@ -49,110 +49,108 @@
 					</p>
 				</section>
 				
-        <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## FVM in a nutshell
 
-        * Divide the domain into _control volumes_. 
-        *Integrate the differential equation over the control volume and apply the divergence theorem.
-        * To evaluate derivative terms, values at the control volume faces are _interpolated_
-        *Result is a set of linear algebraic equations: one for each control volume.
-        *Solve iteratively or simultaneously.
+				    * Divide the domain into _control volumes_. 
+				    *Integrate the differential equation over the control volume and apply the divergence theorem.
+				    * To evaluate derivative terms, values at the control volume faces are _interpolated_
+				    *Result is a set of linear algebraic equations: one for each control volume.
+				    *Solve iteratively or simultaneously.
 
 				  </script>
 				</section>
        
-        <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## Cells and nodes
         
-        Using finite volume method, the solution domain is subdivided into a finite number of small control volumes (cells) by a grid.
-The grid defines the boundaries of the control volumes while the computational node lies at the center of the control volume.
-The advantage of FVM is that the integral conservation is satisfied exactly over the control volume.
+				    Using finite volume method, the solution domain is subdivided into a finite number of small control volumes (cells) by a grid.
+
+				    The grid defines the boundaries of the control volumes while the computational node lies at the center of the control volume.
+
+				    The advantage of FVM is that the integral conservation is satisfied exactly over the control volume.
 
 			  </script>
 				</section>
        
         
-       <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ##  Typical control volume
         
-        The net flux through the control volume boundary is the sum of integrals over the four control volume faces (six in 3D). The control volumes do not overlap.
-The value of the integrand is not available at the control volume faces and is determined by interpolation.
+				    The net flux through the control volume boundary is the sum of integrals over the four control volume faces (six in 3D). The control volumes do not overlap.
+				    The value of the integrand is not available at the control volume faces and is determined by interpolation.
 
         			  </script>
 				</section>
        
-       <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ##  Discretization : steady 1D diffusion
         
-        To illustrate how the conservation equations used in CFD can be discretized we will look at an example involving the diffusion of a chemical species
-The species transport equation (constant density, incompressible flow) is given by: 
+				    To illustrate how the conservation equations used in CFD can be discretized we will look at an example involving the diffusion of a chemical species
+				    The species transport equation (constant density, incompressible flow) is given by: 
 
-       \[
-\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
-\]
+				    $$
+				    \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
+				    $$
 
        
-        Here c is the concentration of the chemical species, D is the diffusion coefficient, and S is a source term
-			  </script>
-				</section>
-       
-<section data-markdown>
-				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
-        
-        \[
-\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
-\]
-
-        \[
-\int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV + \int S dV = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w  + \overline S \Delta V = 0
-\]
-
-        \[
-\left( {DA\frac{{dc}}{{dx}}} \right)_e  \buildrel\textstyle.\over= D_e A_e \frac{{c_E  - c_P }}{{\delta x_{PE} }}
-\]
-
-        
-        \[
-D_e  \buildrel\textstyle.\over= \frac{{D_E  + D_P }}{2}
-\]
-
-        
-        \[
-\overline S \Delta V: = S_u 
-\]
-			  </script>
-				</section>
-       
-<section data-markdown>
-				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
-        
-        Finally:
-        
-        \[
-a_P c_P  = a_W c_W  + a_E c_E  + S_u 
-\]
-
-        
-        \[
-a_W  = D_w A_w /\delta x_{WP} \qquad a_E  = D_e A_e /\delta x_{PE} \qquad a_P  = a_W  + a_E  - S_P 
-\]
-
-        
-        
-        
-        
-      
+				    Here c is the concentration of the chemical species, D is the diffusion coefficient, and S is a source term
 				  </script>
+				</section>
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    ##  Discretization : steady 1D diffusion
+        
+				    $$
+				    \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
+				    $$
+
+				    $$
+				    \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV + \int S dV = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w  + \overline S \Delta V = 0
+				    $$
+
+				    $$
+				    \left( {DA\frac{{dc}}{{dx}}} \right)_e  \buildrel\textstyle.\over= D_e A_e \frac{{c_E  - c_P }}{{\delta x_{PE} }}
+				    $$
+
+				    
+				    $$
+				    D_e  \buildrel\textstyle.\over= \frac{{D_E  + D_P }}{2}
+				    $$
+
+        
+				    $$
+				    \overline S \Delta V: = S_u 
+				    $$
+				  </script>
+				</section>
+       
+				<section data-markdown>
+				  <script type="text/template">
+				    ##  Discretization : steady 1D diffusion
+        
+				    Finally:
+        
+				    $$
+				    a_P c_P  = a_W c_W  + a_E c_E  + S_u 
+				    $$
+
+        
+				    $$
+				    a_W  = D_w A_w /\delta x_{WP} \qquad a_E  = D_e A_e /\delta x_{PE} \qquad a_P  = a_W  + a_E  - S_P 
+				    $$
+
+        
+       				  </script>
 				</section>
   
         
-        <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## 1-D Linear Convection - Diffusion equation
 				    
@@ -165,102 +163,103 @@ a_W  = D_w A_w /\delta x_{WP} \qquad a_E  = D_e A_e /\delta x_{PE} \qquad a_P  =
 				  </script>
 				</section>
 
-		        <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## 1-D Linear Convection - Diffusion equation		
-				\[
-\frac{d}{{dx}}\left( {\rho uc} \right) = \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)
-\]
+				    $$
+				    \frac{d}{{dx}}\left( {\rho uc} \right) = \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)
+				    $$
 				
-				\[
-\frac{d}{{dx}}\left( {\rho u} \right) = 0
-\]
+				    $$
+				    \frac{d}{{dx}}\left( {\rho u} \right) = 0
+				    $$
 
 				
-				\[
-\int {\frac{{d(\rho uc)}}{{dx}}} dV = \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV \to \left( {\rho ucA} \right)_e  - \left( {\rho ucA} \right)_w  = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w 
-\]
+				    $$
+				    \int {\frac{{d(\rho uc)}}{{dx}}} dV = \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV \to \left( {\rho ucA} \right)_e  - \left( {\rho ucA} \right)_w  = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w 
+				    $$
 
-				\[
-c_e  \buildrel\textstyle.\over= \frac{{c_E  + c_P }}{2}
-\]
+				    $$
+				    c_e  \buildrel\textstyle.\over= \frac{{c_E  + c_P }}{2}
+				    $$
 
-				\[
-c_w  \buildrel\textstyle.\over= \frac{{c_W  + c_P }}{2}
-\]
-
-				
-				
-				
-				
-				\[
-\left( {\rho uA} \right)_e  - \left( {\rho uA} \right)_w  = 0
-\]
+				    $$
+				    c_w  \buildrel\textstyle.\over= \frac{{c_W  + c_P }}{2}
+				    $$
 
 				
-				\[
-\left( {DA\frac{{\partial c}}{{\partial x_i }}} \right)_e  \buildrel\textstyle.\over= D_e A\frac{{c_E  - c_P }}{{\delta x_{PE} }}
-\]
+				
+				
+				
+				    $$
+				    \left( {\rho uA} \right)_e  - \left( {\rho uA} \right)_w  = 0
+				    $$
+
+				
+				    $$
+				    \left( {DA\frac{{\partial c}}{{\partial x_i }}} \right)_e  \buildrel\textstyle.\over= D_e A\frac{{c_E  - c_P }}{{\delta x_{PE} }}
+				    $$
 
 				  </script>
 				</section>
-        <section data-markdown>
+
+				<section data-markdown>
 				  <script type="text/template">
 				    ## central differencing scheme			
 				
-				\[
-a_P c_P  = a_W c_W  + a_E c_E 
-\]
+				    $$
+				    a_P c_P  = a_W c_W  + a_E c_E 
+				    $$
 
-				which is known to fail badly in many cases !!!
-
-				
-				\[
-a_W  = D_W /\delta x_{WP}  + \varphi _w \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w )
-\]
+				    which is known to fail badly in many cases !!!
 
 				
-				\[
-\varphi _w : = (\rho u)_w 
-\]
-\[
-\varphi _e : = (\rho u)_e 
-\]
+				    $$
+				    a_W  = D_W /\delta x_{WP}  + \varphi _w \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w )
+				    $$
+
+				
+				    $$
+				    \varphi _w : = (\rho u)_w 
+				    $$
+				    $$
+				    \varphi _e : = (\rho u)_e 
+				    $$
 
 
 				
-						  </script>
+				  </script>
 				</section>		
 				
 				
-		  <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## Central differencing scheme failure
 				    
 				    reasons can be algebraic 
 				    
-				    \[
-D/\delta x - \varphi  > 0\qquad D/\delta x > \varphi \qquad \frac{\varphi }{{D/\delta x}} < 1
-\]
+				    $$
+				    D/\delta x - \varphi  \gt 0\qquad D/\delta x \gt \varphi \qquad \frac{\varphi }{{D/\delta x}} \gt 1
+				    $$
 
 
 				
-						  </script>
+				  </script>
 				</section>
 				
 				
-				  <section data-markdown>
+				<section data-markdown>
 				  <script type="text/template">
 				    ## Central differencing scheme failure
 				    
 				    Physical: Peclet number
-
-\[
-\frac{\varphi }{{D/\delta x}} < 1\qquad {\rm{Pe}}: = \frac{\varphi }{{D/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
-\]
+				    
+				    $$
+				    \frac{\varphi }{{D/\delta x}} \lt 1\qquad {\rm{Pe}}: = \frac{\varphi }{{D/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
+				    $$
 
 				
-									  </script>
+				  </script>
 				</section>
 				
 				
@@ -273,7 +272,7 @@ D/\delta x - \varphi  > 0\qquad D/\delta x > \varphi \qquad \frac{\varphi }{{D/\
 
 				    [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 				    
-				    				    [Bakker's course](http://www.bakker.org/dartmouth06/engs150/)
+				    [Bakker's course](http://www.bakker.org/dartmouth06/engs150/)
 
 				  </script>
 				</section>
