@@ -53,11 +53,12 @@
 				  <script type="text/template">
 				    ## FVM in a nutshell
 
-				    * Divide the domain into _control volumes_. 
-				    *Integrate the differential equation over the control volume and apply the divergence theorem.
-				    * To evaluate derivative terms, values at the control volume faces are _interpolated_
-				    *Result is a set of linear algebraic equations: one for each control volume.
-				    *Solve iteratively or simultaneously.
+				    <img src="FVM_meshes.png"  style="background:white" width="40%">
+								    
+				    * Divide the domain into _control volumes_.
+				    * _Integrate_ the differential equation over control volumes,  apply divergence theorem
+				    * For derivatives, values at the control volume faces are _interpolated_
+				    * Result: set of linear algebraic equations, one for each control volume (to be solved iteratively or simultaneously).
 
 				  </script>
 				</section>
@@ -66,13 +67,15 @@
 				  <script type="text/template">
 				    ## Cells and nodes
         
-				    Using finite volume method, the solution domain is subdivided into a finite number of small control volumes (cells) by a grid.
+ 				    <img src="FVM_cells.png"  style="background:white" width="40%">
 
-				    The grid defines the boundaries of the control volumes while the computational node lies at the center of the control volume.
+				    * The solution domain is subdivided into a finite number of small control volumes (cells) by a mesh
 
-				    The advantage of FVM is that the integral conservation is satisfied exactly over the control volume.
+				    * The mesh defines the boundaries of the control volumes, the computational nodes lie at the centers
 
-			  </script>
+				    * Advantage of FVM: integral conservation is satisfied exactly
+
+				  </script>
 				</section>
        
         
@@ -80,9 +83,11 @@
 				  <script type="text/template">
 				    ##  Typical control volume
         
-				    The net flux through the control volume boundary is the sum of integrals over the four control volume faces (six in 3D). The control volumes do not overlap.
-				    The value of the integrand is not available at the control volume faces and is determined by interpolation.
+				    * The net flux through the control volume boundary is the
+				    sum of integrals over the four control volume faces (six in 3D). The control volumes do not overlap.
+				    * The value of the integrand is not available at the control volume faces and is determined by interpolation.
 
+				    <img src="FVM_2D_cells.png"  style="background:white" width="40%">
         			  </script>
 				</section>
        
@@ -90,15 +95,15 @@
 				  <script type="text/template">
 				    ##  Discretization : steady 1D diffusion
         
-				    To illustrate how the conservation equations used in CFD can be discretized we will look at an example involving the diffusion of a chemical species
-				    The species transport equation (constant density, incompressible flow) is given by: 
+				    To illustrate how the conservation equations used in CFD can be discretized, we will look the diffusion of a chemical species
+				    (constant density, incompressible flow), given by: 
 
 				    $$
 				    \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
 				    $$
 
        
-				    Here c is the concentration of the chemical species, D is the diffusion coefficient, and S is a source term
+				    Here $c$ is the concentration of the chemical species, $D$ is the diffusion coefficient, and $S$ is a source term
 				  </script>
 				</section>
 				
@@ -113,26 +118,31 @@
 				    $$
 				    \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV + \int S dV = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w  + \overline S \Delta V = 0
 				    $$
-
-				    $$
-				    \left( {DA\frac{{dc}}{{dx}}} \right)_e  \buildrel\textstyle.\over= D_e A_e \frac{{c_E  - c_P }}{{\delta x_{PE} }}
-				    $$
+				    <img src="FVM_1D_cells.png"  style="background:white" width="40%">
+				  </script>
+				</section>
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    ##  Discretization : steady 1D diffusion
+				    <img src="FVM_1D_cells.png"  style="background:white" width="40%">
+				    ``$$
+				    \left( DA\frac{dc}{dx} \right)_e  \doteq D_e A_e \frac{c_E  - c_P }{\delta x_{PE}}
+				    $$``
 
 				    
-				    $$
-				    D_e  \buildrel\textstyle.\over= \frac{{D_E  + D_P }}{2}
-				    $$
-
-        
-				    $$
+				    $
+				    D_e  \doteq \frac{{D_E  + D_P }}{2}
+				    $        
+				    $
 				    \overline S \Delta V: = S_u 
-				    $$
+				    $
 				  </script>
 				</section>
        
 				<section data-markdown>
 				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
+				    ###  Discretization : steady 1D diffusion
         
 				    Finally:
         
@@ -141,10 +151,12 @@
 				    $$
 
         
-				    $$
-				    a_W  = D_w A_w /\delta x_{WP} \qquad a_E  = D_e A_e /\delta x_{PE} \qquad a_P  = a_W  + a_E  - S_P 
-				    $$
-
+				    ``$$
+				    a_W  = D_w A_w /\delta x_{WP} \quad a_E  = D_e A_e /\delta x_{PE}
+				    $$``
+				    ``$$
+				    \quad a_P  = a_W  + a_E  - S_P 
+				    $$``
         
        				  </script>
 				</section>
@@ -211,12 +223,10 @@
 				    a_P c_P  = a_W c_W  + a_E c_E 
 				    $$
 
-				    which is known to fail badly in many cases !!!
-
 				
-				    $$
+				    ``$$
 				    a_W  = D_W /\delta x_{WP}  + \varphi _w \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w )
-				    $$
+				    $$``
 
 				
 				    $$
@@ -225,6 +235,9 @@
 				    $$
 				    \varphi _e : = (\rho u)_e 
 				    $$
+
+				    which is known to fail badly in many cases !!!
+				    
 
 
 				
@@ -235,6 +248,8 @@
 				<section data-markdown>
 				  <script type="text/template">
 				    ## Central differencing scheme failure
+
+				    <img src="FVM_meshes.png"  style="background:white" width="40%">
 				    
 				    reasons can be algebraic 
 				    
@@ -258,6 +273,8 @@
 				    \frac{\varphi }{{D/\delta x}} \lt 1\qquad {\rm{Pe}}: = \frac{\varphi }{{D/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
 				    $$
 
+				    <img src="FVM_peclet.png"  style="background:white" width="40%">
+				    
 				
 				  </script>
 				</section>
