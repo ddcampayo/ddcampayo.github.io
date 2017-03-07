@@ -165,12 +165,116 @@ a_W  = D_w A_w /\delta x_{WP} \qquad a_E  = D_e A_e /\delta x_{PE} \qquad a_P  =
 				  </script>
 				</section>
 
+		        <section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Linear Convection - Diffusion equation		
+				\[
+\frac{d}{{dx}}\left( {\rho uc} \right) = \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)
+\]
+				
+				\[
+\frac{d}{{dx}}\left( {\rho u} \right) = 0
+\]
+
+				
+				\[
+\int {\frac{{d(\rho uc)}}{{dx}}} dV = \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV \to \left( {\rho ucA} \right)_e  - \left( {\rho ucA} \right)_w  = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w 
+\]
+
+				\[
+c_e  \buildrel\textstyle.\over= \frac{{c_E  + c_P }}{2}
+\]
+
+				\[
+c_w  \buildrel\textstyle.\over= \frac{{c_W  + c_P }}{2}
+\]
+
+				
+				
+				
+				
+				\[
+\left( {\rho uA} \right)_e  - \left( {\rho uA} \right)_w  = 0
+\]
+
+				
+				\[
+\left( {DA\frac{{\partial c}}{{\partial x_i }}} \right)_e  \buildrel\textstyle.\over= D_e A\frac{{c_E  - c_P }}{{\delta x_{PE} }}
+\]
+
+				  </script>
+				</section>
+        <section data-markdown>
+				  <script type="text/template">
+				    ## central differencing scheme			
+				
+				\[
+a_P c_P  = a_W c_W  + a_E c_E 
+\]
+
+				which is known to fail badly in many cases !!!
+
+				
+				\[
+a_W  = D_W /\delta x_{WP}  + \varphi _w \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w )
+\]
+
+				
+				\[
+\varphi _w : = (\rho u)_w 
+\]
+\[
+\varphi _e : = (\rho u)_e 
+\]
+
+
+				
+						  </script>
+				</section>		
+				
+				
+		  <section data-markdown>
+				  <script type="text/template">
+				    ## Central differencing scheme failure
+				    
+				    reasons can be algebraic 
+				    
+				    \[
+D/\delta x - \varphi  > 0\qquad D/\delta x > \varphi \qquad \frac{\varphi }{{D/\delta x}} < 1
+\]
+
+
+				
+						  </script>
+				</section>
+				
+				
+				  <section data-markdown>
+				  <script type="text/template">
+				    ## Central differencing scheme failure
+				    
+				    Physical: Peclet number
+
+\[
+\frac{\varphi }{{D/\delta x}} < 1\qquad {\rm{Pe}}: = \frac{\varphi }{{D/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
+\]
+
+				
+									  </script>
+				</section>
+				
+				
+				
+
 				<section data-markdown>
 				  <script type="text/template">
 				    ## References
 
 
 				    [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+				    
+				    				    [Bakker's course](http://www.bakker.org/dartmouth06/engs150/)
+
 				  </script>
 				</section>
 
