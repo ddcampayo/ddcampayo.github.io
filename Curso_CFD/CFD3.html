@@ -56,8 +56,8 @@
 				    <img src="FVM_meshes.png"  style="background:white" width="40%">
 								    
 				    * Divide the domain into _control volumes_.
-				    * _Integrate_ the differential equation over control volumes,  apply divergence theorem
-				    * For derivatives, values at the control volume faces are _interpolated_
+				    * _Integrate_ the differential equation over them, apply divergence theorem
+				    * Values at the control volume faces are usually _interpolated_
 				    * Result: set of linear algebraic equations, one for each control volume (to be solved iteratively or simultaneously).
 
 				  </script>
@@ -71,7 +71,7 @@
 
 				    * The solution domain is subdivided into a finite number of small control volumes (cells) by a mesh
 
-				    * The mesh defines the boundaries of the control volumes, the computational nodes lie at the centers
+				    * It defines the boundaries of the control volumes, the computational nodes lie at the centers
 
 				    * Advantage of FVM: integral conservation is satisfied exactly
 
@@ -115,8 +115,11 @@
 				    \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
 				    $$
 
+				    ``$$\small
+				    \int_\mathrm{CV} {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)}  = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w
+				    $$``
 				    $$
-				    \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV + \int S dV = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w  + \overline S \Delta V = 0
+				    \int_\mathrm{CV} S = \overline S \Delta V
 				    $$
 				    <img src="FVM_1D_cells.png"  style="background:white" width="40%">
 				  </script>
@@ -152,7 +155,7 @@
 
         
 				    ``$$
-				    a_W  = D_w A_w /\delta x_{WP} \quad a_E  = D_e A_e /\delta x_{PE}
+				    a_W  = \frac{D_w A_w }{\delta x_{WP}} \quad a_E  =  \frac{D_e A_e }{\delta x_{PE}}
 				    $$``
 				    ``$$
 				    \quad a_P  = a_W  + a_E  - S_P 
@@ -160,36 +163,82 @@
         
        				  </script>
 				</section>
-  
+				
+				<section>
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D diffusion: results
+        
+				      <img src="Versteeg_4.5.png"  style="background:white" width="40%">
+				    
+       				    </script>
+				  </section>
+
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D diffusion: results
+
+				      <img src="Versteeg_4.8.png"  style="background:white" width="40%">
+
+				      				    
+       				    </script>
+				  </section>
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D diffusion: results
+
+				      <img src="Versteeg_4.11.png"  style="background:white" width="40%">
+
+				    
+       				    </script>
+				  </section>
+				</section>
+				
         
 				<section data-markdown>
 				  <script type="text/template">
 				    ## 1-D Linear Convection - Diffusion equation
 				    
 
-				    $$\frac{\partial \phi}{\partial t} + u \frac{\partial \phi}{\partial x} =
+				    $$\frac{\partial c}{\partial t} + \frac{\partial ( \rho u c ) }{\partial x} =
 				    \nu \frac{\partial^2 \phi}{\partial x^2}
 				    $$
 
+				    $$
+				    \frac{\partial \rho}{\partial t} +
+				    \frac{d}{{dx}}\left( {\rho u} \right) = 0
+				    $$
 
+				    
 				  </script>
 				</section>
 
 				<section data-markdown>
 				  <script type="text/template">
-				    ## 1-D Linear Convection - Diffusion equation		
+				    ## 1-D Steady Linear Convection - Diffusion equation		
 				    $$
 				    \frac{d}{{dx}}\left( {\rho uc} \right) = \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)
 				    $$
-				
-				    $$
-				    \frac{d}{{dx}}\left( {\rho u} \right) = 0
-				    $$
+				    <!---
+					$$
+					\frac{d}{{dx}}\left( {\rho u} \right) = 0
+					$$
+				      -->
 
 				
 				    $$
-				    \int {\frac{{d(\rho uc)}}{{dx}}} dV = \int {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV \to \left( {\rho ucA} \right)_e  - \left( {\rho ucA} \right)_w  = \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w 
+				    \int_\mathrm{CV} {\frac{{d(\rho uc)}}{{dx}}} =  \left( {\rho ucA} \right)_e  - \left( {\rho ucA} \right)_w
 				    $$
+
+
+				    <!---
+				    $$
+				    \int_\mathrm{CV} {\frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)} dV =
+				    \left( {DA\frac{{dc}}{{dx}}} \right)_e  - \left( {DA\frac{{dc}}{{dx}}} \right)_w
+				    $$
+				      -->
 
 				    $$
 				    c_e  \buildrel\textstyle.\over= \frac{{c_E  + c_P }}{2}
@@ -200,17 +249,28 @@
 				    $$
 
 				
-				
-				
-				
+								    
+				  </script>
+				</section>
+
+				<section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Steady Linear Convection - Diffusion equation		
+
 				    $$
-				    \left( {\rho uA} \right)_e  - \left( {\rho uA} \right)_w  = 0
+				    \frac{d}{{dx}}\left( {\rho u} \right) = 0
 				    $$
 
 				
-				    $$
+				    ``$$
+				    \underbrace{\left( {\rho uA} \right)_e}_{\varphi_e}-
+				    \underbrace{\left( {\rho uA} \right)_w}_{\varphi_w}   = 0
+				    $$``
+
+				
+				    ``$$
 				    \left( {DA\frac{{\partial c}}{{\partial x_i }}} \right)_e  \buildrel\textstyle.\over= D_e A\frac{{c_E  - c_P }}{{\delta x_{PE} }}
-				    $$
+				    $$``
 
 				  </script>
 				</section>
@@ -223,18 +283,30 @@
 				    a_P c_P  = a_W c_W  + a_E c_E 
 				    $$
 
-				
+				    <!-- ``$$ -->
+				    <!-- a_W  = \frac{D_w A_w }{\delta x_{WP}} \quad a_E  =  \frac{D_e A_e }{\delta x_{PE}} -->
+				    <!-- $$`` -->
+
+				    
 				    ``$$
-				    a_W  = D_W /\delta x_{WP}  + \varphi _w \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w )
+				    a_W  = \frac{D_w A_w }{\delta x_{WP}} + \frac12 \varphi _w
 				    $$``
 
-				
+				    				    
+				    ``$$
+				    a_E  = \frac{D_e A_e }{\delta x_{PE}} - \frac12 \varphi _e
+				    $$``
+
+				    
+				    <!-- D_W /\delta x_{WP}  + \qquad a_E  = D_E /\delta x_{PE}  - \varphi _e \qquad a_P  = a_W  + a_E  + (\varphi _e  - \varphi _w ) -->
+
+		
 				    $$
-				    \varphi _w : = (\rho u)_w 
+				    \varphi _w : = (\rho u A)_w  \qquad  \varphi _e : = (\rho u)_e
 				    $$
-				    $$
-				    \varphi _e : = (\rho u)_e 
-				    $$
+				    <!-- $$ -->
+				    <!--  -->
+				    <!-- $$ -->
 
 				    which is known to fail badly in many cases !!!
 				    
@@ -244,6 +316,39 @@
 				  </script>
 				</section>		
 				
+				<section>
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D conv-diffusion: results
+        
+				      <img src="Versteeg_5.4.png"  style="background:white" width="40%">
+				    
+       				    </script>
+				  </section>
+
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D conv-diffusion: What ???!?
+
+				      <img src="Versteeg_5.5.png"  style="background:white" width="40%">
+
+				      				    
+       				    </script>
+				  </section>
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      ###  Steady 1D conv-diffusion: results
+
+				      <img src="Versteeg_5.6.png"  style="background:white" width="40%">
+
+				    
+       				    </script>
+				  </section>
+				</section>
+
+
 				
 				<section data-markdown>
 				  <script type="text/template">
