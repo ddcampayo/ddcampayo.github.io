@@ -277,6 +277,21 @@
 
 				<section data-markdown>
 				  <script type="text/template">
+				    #### Plotting $\varphi$ in OpenFOAM
+
+                                    After running the case, run:
+```
+foamToVTK -surfaceFields
+```
+				    Then, open _paraFoam_, open the case normally (to have the mesh ready), then _Open_ the case _VTK/surfaceFields/cavity_..vtk_.
+
+				    Next, apply a _Glyph_ filter, with _phi_ as _Vectors_, and _Scale Mode_ set to _vector_, then click on the _Reset_ arrow.
+				    </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
 				    #### central differencing scheme			
 				
 				    $$
@@ -373,10 +388,10 @@
 				  <script type="text/template">
 				    #### Central differencing scheme failure
 				    
-				    Physical: Peclet number
+				    Physical: Péclet number
 				    
 				    $$
-				    \frac{\varphi }{{DA/\delta x}} \lt 2 \qquad {\rm{Pe}}: = \frac{\varphi }{{DA/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
+				    \frac{\varphi }{{DA/\delta x}} \lt 2 \qquad {\rm{Pe}}: = \frac{\varphi }{{DA/\delta x}} = \frac{{\rho u}}{{D/\delta x}} = \frac{{u \delta x}}{{D/\rho}}
 				    $$
 
 				    <img src="FVM_peclet.png"  style="background:white" width="40%">
@@ -384,6 +399,37 @@
 				
 				  </script>
 				</section>
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Péclet number
+				    
+				    <!-- $$ -->
+				    <!-- {\rm{Pe}}: = \frac{{u L}}{D'} -->
+				    <!-- $$ -->
+
+				    Reasoning: convection time to cover a length $L$:
+				    $$
+				    u = \frac L{ t_u } \to
+				    t_u = \frac Lu
+				    $$
+
+				    Diffusion time to cover a length $L$:
+				    $$
+				    L=\sqrt{D' t_D} \to
+				    t_D = \frac{L^2}{D'}
+				    $$
+
+				    Their ratio is
+				    $$
+				    \frac{t_D}{t_u} = \frac{L u}{D'} =: \text{Pe}
+				    $$
+
+				    
+				
+				  </script>
+				</section>
+
 				
 				<section data-markdown>
 				  <script type="text/template">
@@ -582,6 +628,64 @@
 				  </script>
 				</section>
 
+
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Residuals in OpenFOAM
+
+Paste this into a file called _Residuals_
+```
+set logscale y
+set title "Residuals"
+set ylabel 'Residual'
+set xlabel 'Iteration'
+plot "< cat log | grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines,\
+"< cat log | grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines,\
+"< cat log | grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines,\
+"< cat log | grep 'Solving for omega' | cut -d' ' -f9 | tr -d ','" title 'omega' with lines,\
+"< cat log | grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines,\
+"< cat log | grep 'Solving for p' | cut -d' ' -f9 | tr -d ','" title 'p' with lines
+pause 1
+reread
+```
+
+Then, run
+
+```
+solver > log &
+gnuplot Residuals - 
+```
+
+				    </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Residuals in OpenFOAM 2
+
+				    Insert this in _controlDict_:
+```
+functions 
+    { 
+    #includeFunc  residuals 
+    …  other function objects here …  
+    }
+```
+
+Then, run
+
+```
+solver > log &
+foamMonitor -l postProcessing/residuals/407/residuals.dat
+```
+
+				    </script>
+				</section>
+
+
+				
 				
 				
 				<section data-markdown>
