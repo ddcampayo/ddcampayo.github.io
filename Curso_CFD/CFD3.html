@@ -437,3 +437,91 @@
 
 	</body>
 </html>
+
+
+
+
+\[
+\frac{{\partial c}}{{\partial t}} + \frac{\partial }{{\partial x_i }}(u_i c) = \frac{\partial }{{\partial x_i }}\left( {{\bf{D}}\frac{{\partial c}}{{\partial x_i }}} \right) + S
+\]
+
+
+\[
+\begin{array}{l}
+ A_e u_e c_e  - A_w u_w c_w  + A_n v_n c_n  - A_s v_s c_s  =  \\ 
+ {\bf{D}}A_e \left. {\frac{{dc}}{{dx}}} \right|_e  - {\bf{D}}A_w \left. {\frac{{dc}}{{dx}}} \right|_w  + {\bf{D}}A_n \left. {\frac{{dc}}{{dy}}} \right|_n  - {\bf{D}}A_s \left. {\frac{{dc}}{{dy}}} \right|_s  + S_p \; \\ 
+ \end{array}
+\]
+
+
+
+\[
+\begin{array}{l}
+ {\bf{Notation}} \\ 
+ A_w ,A_n ,A_e ,A_s :\;\;{\rm{areas}}\;{\rm{of}}\;{\rm{the}}\;{\rm{faces}} \\ 
+ c_w ,c_n ,c_e ,c_s :\;\;{\rm{concentrations at}}\;{\rm{the}}\;{\rm{faces}} \\ 
+ c_W ,c_N ,c_E ,c_S :\;\;{\rm{concentrations at}}\;{\rm{the}}\;{\rm{cell}}\;{\rm{centers}} \\ 
+ u_w ,u_n ,u_e ,u_s ,v_w ,v_n ,v_e ,v_s :\;\;{\rm{velocities at}}\;{\rm{the}}\;{\rm{faces}} \\ 
+ u_W ,u_N ,u_E ,u_S ,v_W ,v_N ,v_E ,v_S :\;\;{\rm{velocities at}}\;{\rm{the}}\;{\rm{cell}}\;{\rm{centers}} \\ 
+ S_P {\rm{: source in cell P}} \\ 
+ {\bf{D}}{\rm{: diffusion coefficient}} \\ 
+ \end{array}
+\]
+
+
+
+\[
+\begin{array}{l}
+ A_e u_P c_P  - A_w u_W c_W  + A_n v_P c_P  - A_s v_S c_S \;\; = \;\;{\bf{D}}A_e (c_E  - c_P )/\delta x_e  \\ 
+  - {\bf{D}}A_w (c_P  - c_W )/\delta x_w  + {\bf{D}}A_n (c_N  - c_P )/\delta y_n  - {\bf{D}}A_s (c_P  - c_S )/\delta y_s  + S_P  \\ 
+ \end{array}
+\]
+
+
+
+\[
+\begin{array}{l}
+ c_P (A_n v_P  + A_e u_P  + {\bf{D}}A_w /\delta x_w  + {\bf{D}}A_n /\delta y_p  + {\bf{D}}A_e /\delta x_e  + {\bf{D}}A_s /\delta y_s )\;\; = \;\;c_W (A_w u_W  + {\bf{D}}A_w /\delta x_w ) +  \\ 
+ \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;c_N ({\bf{D}}A_n /\delta y_n ) +  \\ 
+ \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;c_E ({\bf{D}}A_e /\delta x_e ) +  \\ 
+ \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;c_S (A_s v_S  + {\bf{D}}A_s /\delta y_s ) +  \\ 
+ \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;S_P  \\ 
+ \end{array}
+\]
+
+
+\[
+\begin{array}{l}
+ a_P c_P  = \;\;a_W c_W  + a_N c_N  + a_E c_E  + a_S c_S  + b \\ 
+ \;\;\;\;\;\;\;\; = \;\;\sum\limits_{nb} {a_{nb} c_{nb} }  + b \\ 
+ \end{array}
+\]
+
+
+
+\[
+a_P \varphi _P  = \sum\limits_{nb} {a_{nb} \varphi _{nb} }  + b
+\]
+
+
+\[
+\varphi _P^{new,\;used} \;\; = \;\;\varphi _P^{old} \; + \;U(\varphi _P^{new,\;predicted}  - \varphi _P^{old} )
+\]
+
+
+\[
+R_P \; = \;\left| {a_P \phi _P  - \sum\nolimits_{nb} {a_{nb} \phi _{nb} }  - b} \right|
+\]
+
+
+\[
+R_{P,scaled} \; = \;\frac{{\left| {a_P \phi _P  - \sum\nolimits_{nb} {a_{nb} \phi _{nb} }  - b} \right|}}{{\left| {a_P \phi _P } \right|}}
+\]
+
+
+\[
+R^\phi  \; = \;\frac{{\sum\limits_{all\;cells} {\left| {a_P \phi _P  - \sum\nolimits_{nb} {a_{nb} \phi _{nb} }  - b} \right|} }}{{\sum\limits_{all\;cells} {\left| {a_P \phi _P } \right|} }}
+\]
+
+
+
