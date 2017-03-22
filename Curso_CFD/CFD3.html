@@ -51,7 +51,7 @@
 				
 				<section data-markdown>
 				  <script type="text/template">
-				    ## FVM in a nutshell
+				    #### FVM in a nutshell
 
 				    <img src="FVM_meshes.png"  style="background:white" width="40%">
 								    
@@ -65,7 +65,7 @@
        
 				<section data-markdown>
 				  <script type="text/template">
-				    ## Cells and nodes
+				    #### Cells and nodes
         
  				    <img src="FVM_cells.png"  style="background:white" width="40%">
 
@@ -81,7 +81,7 @@
         
 				<section data-markdown>
 				  <script type="text/template">
-				    ##  Typical control volume
+				    ####  Typical control volume
         
 				    * The net flux through the control volume boundary is the
 				    sum of integrals over the four control volume faces (six in 3D). The control volumes do not overlap.
@@ -93,7 +93,7 @@
        
 				<section data-markdown>
 				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
+				    ####  Discretization : steady 1D diffusion
         
 				    To illustrate how the conservation equations used in CFD can be discretized, we will look the diffusion of a chemical species
 				    (constant density, incompressible flow), given by: 
@@ -109,7 +109,7 @@
 				
 				<section data-markdown>
 				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
+				    ####  Discretization : steady 1D diffusion
         
 				    $$
 				    \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right) + S = 0
@@ -127,7 +127,7 @@
 				
 				<section data-markdown>
 				  <script type="text/template">
-				    ##  Discretization : steady 1D diffusion
+				    ####  Discretization : steady 1D diffusion
 				    <img src="FVM_1D_cells.png"  style="background:white" width="40%">
 				    ``$$
 				    \left( DA\frac{dc}{dx} \right)_e  \doteq D_e A_e \frac{c_E  - c_P }{\delta x_{PE}}
@@ -138,14 +138,14 @@
 				    D_e  \doteq \frac{{D_E  + D_P }}{2}
 				    $        
 				    $
-				    \overline S \Delta V: = S_u 
+				    \overline S \Delta V: = S_u + S_P c_P 
 				    $
 				  </script>
 				</section>
        
 				<section data-markdown>
 				  <script type="text/template">
-				    ###  Discretization : steady 1D diffusion
+				    #####  Discretization : steady 1D diffusion
         
 				    Finally:
         
@@ -167,7 +167,7 @@
 				<section>
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D diffusion: results
+				      #####  Steady 1D diffusion: results
         
 				      <img src="Versteeg_4.5.png"  style="background:white" width="40%">
 				    
@@ -177,7 +177,7 @@
 
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D diffusion: results
+				      #####  Steady 1D diffusion: results
 
 				      <img src="Versteeg_4.8.png"  style="background:white" width="40%">
 
@@ -187,7 +187,7 @@
 
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D diffusion: results
+				      #####  Steady 1D diffusion: results
 
 				      <img src="Versteeg_4.11.png"  style="background:white" width="40%">
 
@@ -199,11 +199,11 @@
         
 				<section data-markdown>
 				  <script type="text/template">
-				    ## 1-D Linear Convection - Diffusion equation
+				    #### 1-D Linear Convection - Diffusion equation
 				    
 
 				    $$\frac{\partial c}{\partial t} + \frac{\partial ( \rho u c ) }{\partial x} =
-				    \nu \frac{\partial^2 \phi}{\partial x^2}
+				    \frac{\partial }{\partial x} \left( D \frac{\partial c}{\partial x} \right)
 				    $$
 
 				    $$
@@ -217,7 +217,7 @@
 
 				<section data-markdown>
 				  <script type="text/template">
-				    ## 1-D Steady Linear Convection - Diffusion equation		
+				    #### 1-D Steady Linear Convection - Diffusion equation		
 				    $$
 				    \frac{d}{{dx}}\left( {\rho uc} \right) = \frac{d}{{dx}}\left( {D\frac{{dc}}{{dx}}} \right)
 				    $$
@@ -255,7 +255,7 @@
 
 				<section data-markdown>
 				  <script type="text/template">
-				    ## 1-D Steady Linear Convection - Diffusion equation		
+				    #### 1-D Steady Linear Convection - Diffusion equation		
 
 				    $$
 				    \frac{d}{{dx}}\left( {\rho u} \right) = 0
@@ -277,7 +277,22 @@
 
 				<section data-markdown>
 				  <script type="text/template">
-				    ## central differencing scheme			
+				    #### Plotting $\varphi$ in OpenFOAM
+
+                                    After running the case, run:
+```
+foamToVTK -surfaceFields
+```
+				    Then, open _paraFoam_, open the case normally (to have the mesh ready), then _Open_ the case _VTK/surfaceFields/cavity_..vtk_.
+
+				    Next, apply a _Glyph_ filter, with _phi_ as _Vectors_, and _Scale Mode_ set to _vector_, then click on the _Reset_ arrow.
+				    </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### central differencing scheme			
 				
 				    $$
 				    a_P c_P  = a_W c_W  + a_E c_E 
@@ -302,13 +317,13 @@
 
 		
 				    $$
-				    \varphi _w : = (\rho u A)_w  \qquad  \varphi _e : = (\rho u)_e
+				    \varphi _w : = (\rho u A)_w  \qquad  \varphi _e : = (\rho u A)_e
 				    $$
 				    <!-- $$ -->
 				    <!--  -->
 				    <!-- $$ -->
 
-				    which is known to fail badly in many cases !!!
+				    <!-- which is known to fail badly in many cases !!! -->
 				    
 
 
@@ -319,7 +334,7 @@
 				<section>
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D conv-diffusion: results
+				      #####  Steady 1D conv-diffusion: results
         
 				      <img src="Versteeg_5.4.png"  style="background:white" width="40%">
 				    
@@ -329,7 +344,7 @@
 
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D conv-diffusion: What ???!?
+				      #####  Steady 1D conv-diffusion: What ???!?
 
 				      <img src="Versteeg_5.5.png"  style="background:white" width="40%">
 
@@ -339,7 +354,7 @@
 
 				  <section data-markdown>
 				    <script type="text/template">
-				      ###  Steady 1D conv-diffusion: results
+				      #####  Steady 1D conv-diffusion: results
 
 				      <img src="Versteeg_5.6.png"  style="background:white" width="40%">
 
@@ -352,14 +367,15 @@
 				
 				<section data-markdown>
 				  <script type="text/template">
-				    ## Central differencing scheme failure
+				    #### Central differencing scheme failure
 
 				    <img src="FVM_meshes.png"  style="background:white" width="40%">
 				    
 				    reasons can be algebraic 
 				    
 				    $$
-				    D/\delta x - \varphi  \gt 0\qquad D/\delta x \gt \varphi \qquad \frac{\varphi }{{D/\delta x}} \gt 1
+				    DA/\delta x - \varphi/2 \gt 0\qquad DA/\delta x \gt \varphi/2
+				    \qquad \frac{\varphi }{{2 DA/\delta x}} \lt 2
 				    $$
 
 
@@ -370,12 +386,12 @@
 				
 				<section data-markdown>
 				  <script type="text/template">
-				    ## Central differencing scheme failure
+				    #### Central differencing scheme failure
 				    
-				    Physical: Peclet number
+				    Physical: Péclet number
 				    
 				    $$
-				    \frac{\varphi }{{D/\delta x}} \lt 1\qquad {\rm{Pe}}: = \frac{\varphi }{{D/\delta x}} = \frac{{\rho u}}{{D/\delta x}}
+				    \frac{\varphi }{{DA/\delta x}} \lt 2 \qquad {\rm{Pe}}: = \frac{\varphi }{{DA/\delta x}} = \frac{{\rho u}}{{D/\delta x}} = \frac{{u \delta x}}{{D/\rho}}
 				    $$
 
 				    <img src="FVM_peclet.png"  style="background:white" width="40%">
@@ -383,19 +399,306 @@
 				
 				  </script>
 				</section>
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Péclet number
+				    
+				    <!-- $$ -->
+				    <!-- {\rm{Pe}}: = \frac{{u L}}{D'} -->
+				    <!-- $$ -->
+
+				    Reasoning: convection time to cover a length $L$:
+				    $$
+				    u = \frac L{ t_u } \to
+				    t_u = \frac Lu
+				    $$
+
+				    Diffusion time to cover a length $L$:
+				    $$
+				    L=\sqrt{D' t_D} \to
+				    t_D = \frac{L^2}{D'}
+				    $$
+
+				    Their ratio is
+				    $$
+				    \frac{t_D}{t_u} = \frac{L u}{D'} =: \text{Pe}
+				    $$
+
+				    
 				
+				  </script>
+				</section>
+
 				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### 2D example
+
+				    <img src="FVM_2D_example1.png"  style="background:white" width="40%">
+
+
+				    	
+				    ``\[
+				    \frac{{\partial c}}{{\partial t}} + \frac{\partial }{{\partial x_i }}(u_i c) = \frac{\partial }{{\partial x_i }}\left( {{D}\frac{{\partial c}}{{\partial x_i }}} \right) + S
+				    \]``
+
+			   
+				
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### 2D example: notation
+
+				    <img src="FVM_2D_example1.png"  style="background:white" width="20%">
+
+
+				    ``\[\tiny
+				    \begin{array}{l}
+				    A_w ,A_n ,A_e ,A_s :\;\;{\text{areas of faces}} \\ 
+				    c_w ,c_n ,c_e ,c_s :\;\;{\text{concentrations at faces}} \\ 
+				    c_W ,c_N ,c_E ,c_S :\;\;{\text{concentrations at centers}} \\ 
+				    u_w ,u_n ,u_e ,u_s ,v_w ,v_n ,v_e ,v_s :\;\;{\text{velocities at faces}} \\ 
+				    u_W ,u_N ,u_E ,u_S ,v_W ,v_N ,v_E ,v_S :\;\;{\text{velocities at centers}} \\ 
+				    S_P {\text{: source in cell P}} \\ 
+				    {D}{\text{: diffusion coefficient}} \\ 
+				    \end{array}
+				    \]``
+
+				
+				  </script>
+				</section>
+
 				
 
 				<section data-markdown>
 				  <script type="text/template">
-				    ## References
+				    #### 2D example: integration on control volume
+
+				    <img src="FVM_2D_example1.png"  style="background:white" width="20%">
+
+
+				    	
+				    ``\[
+				    \frac{\partial }{{\partial x_i }}(u_i c) = \frac{\partial }{{\partial x_i }}\left( {{D}\frac{{\partial c}}{{\partial x_i }}} \right) + S
+				    \]``
+
+			   
+				    ``\[
+				    \begin{array}{l}
+				    A_e u_e c_e  - A_w u_w c_w  + A_n v_n c_n  - A_s v_s c_s  =  \\ 
+				    {D}A_e \left. {\frac{{dc}}{{dx}}} \right|_e  - {D}A_w \left. {\frac{{dc}}{{dx}}} \right|_w  + {D}A_n \left. {\frac{{dc}}{{dy}}} \right|_n  - {D}A_s \left. {\frac{{dc}}{{dy}}} \right|_s  + S_p \; \\ 
+				    \end{array}
+				    \]``
+
+
+				
+				  </script>
+				</section>
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### 2D example: diffusion terms
+
+				    <img src="FVM_2D_example1.png"  style="background:white" width="20%">
+
+				    ``\[
+				    \begin{array}{l}
+				    {D}A_e \left. {\frac{{dc}}{{dx}}} \right|_e  - {D}A_w \left. {\frac{{dc}}{{dx}}} \right|_w  + {D}A_n \left. {\frac{{dc}}{{dy}}} \right|_n  - {D}A_s \left. {\frac{{dc}}{{dy}}} \right|_s  + S_p \approx \\
+				    = {D}A_e (c_E  - c_P )/\delta x_e - {D}A_w (c_P  - c_W )/\delta x_w  + \\
+				    {D}A_n (c_N  - c_P )/\delta y_n  - {D}A_s (c_P  - c_S )/\delta y_s  + S_P 
+				    \end{array}
+				    \]``
+
+
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### 2D example: convective terms, upwind
+
+				    <img src="FVM_2D_example1.png"  style="background:white" width="40%">
+
+				    ``\[
+				    \begin{array}{l}
+				    A_e u_e c_e  - A_w u_w c_w  + A_n v_n c_n  - A_s v_s c_s  \approx \\
+				    A_e u_P c_P  - A_w u_W c_W  + A_n v_P c_P  - A_s v_S c_S
+				    \end{array}
+				    \]``
+
+				
+				  </script>
+				</section>
+
+				<!-- <section data-markdown> -->
+				<!--   <script type="text/template"> -->
+				<!--     #### 2D example -->
+
+				<!--     ``\[ -->
+				<!--     \begin{array}{l} -->
+				<!--     A_e u_e c_e  - A_w u_w c_w  + A_n v_n c_n  - A_s v_s c_s  =  \\  -->
+				<!--     {D}A_e \left. {\frac{{dc}}{{dx}}} \right|_e  - {D}A_w \left. {\frac{{dc}}{{dx}}} \right|_w  + {D}A_n \left. {\frac{{dc}}{{dy}}} \right|_n  - {D}A_s \left. {\frac{{dc}}{{dy}}} \right|_s  + S_p \; \\  -->
+				<!--     \end{array} -->
+				<!--     \]`` -->
+
+				
+				<!--     ``\[ -->
+				<!--     \begin{array}{l} -->
+				<!--     = {D}A_e (c_E  - c_P )/\delta x_e - {D}A_w (c_P  - c_W )/\delta x_w  + \\ -->
+				<!--     {D}A_n (c_N  - c_P )/\delta y_n  - {D}A_s (c_P  - c_S )/\delta y_s  + S_P  -->
+				<!--     \end{array} -->
+				<!--     \]`` -->
+
+
+				<!--   </script> -->
+				<!-- </section> -->
+
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### 2D example: final, and general
+				    `` \begin{align}
+				    & \tiny (A_n v_P  + A_e u_P  + {D}A_w /\delta x_w  + {D}A_n /\delta y_p  + {D}A_e /\delta x_e  + {D}A_s /\delta y_s ) c_P  = \\
+				    & \tiny (A_w u_W  + {D}A_w /\delta x_w )  c_W + 
+				     ({D}A_n /\delta y_n ) c_N +  \\ 
+				    & \tiny({D}A_e /\delta x_e )  c_E  +  
+				     (A_s v_S  + {D}A_s /\delta y_s ) c_S + 
+				    S_P  
+				    \end{align}``
+
+				    ``\begin{align}
+				    a_P c_P & = a_W c_W  + a_N c_N  + a_E c_E  + a_S c_S  + b \\ 
+				    &= \sum\limits_{n \in \text{neigh}} {a_n c_n }  + b \\ 
+				    \end{align}``
+
+
+				  </script>
+				</section>
+
+
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Solution methods: relaxation
+
+
+				    
+				    ``\[
+				    a_P c _P  = \sum\limits_{n \in \text{neigh}} {a_n c_n }  + b
+				    \]``
+
+				    
+				    ``\[
+				    c _P^{new,\;used} \;\; = \;\;c _P^{old} \; + \;U(c _P^{new,\;predicted}  - c _P^{old} )
+				    \]``
+
+				    
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Solution methods: residuals
+				    
+				    ``\[
+				    R_P \; = \;\left| {a_P c _P  - \sum_{n \in n} {a_n c_n }  - b} \right|
+				    \]``
+
+
+				    ``\[
+				    R_{P,scaled} \; = \;\frac{{\left| {a_P c _P  - \sum_{n \in \text{neigh}} {a_n c _n }  - b} \right|}}{{\left| {a_P c _P } \right|}}
+				    \]``
+
+
+
+				    ``\[
+				    R  \; = \;\frac{{\sum\limits_{all\;cells} {\left| {a_P c _P  - \sum_{n \in \text{neigh}} {a_n c _n }  - b} \right|} }}{{\sum\limits_{all\;cells} {\left| {a_P c _P } \right|} }}
+				    \]``
+
+
+
+				    
+				  </script>
+				</section>
+
+
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Residuals in OpenFOAM
+
+Paste this into a file called _Residuals_
+```
+set logscale y
+set title "Residuals"
+set ylabel 'Residual'
+set xlabel 'Iteration'
+plot "< cat log | grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines,\
+"< cat log | grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines,\
+"< cat log | grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines,\
+"< cat log | grep 'Solving for omega' | cut -d' ' -f9 | tr -d ','" title 'omega' with lines,\
+"< cat log | grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines,\
+"< cat log | grep 'Solving for p' | cut -d' ' -f9 | tr -d ','" title 'p' with lines
+pause 1
+reread
+```
+
+Then, run
+
+```
+solver > log &
+gnuplot Residuals - 
+```
+
+				    </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Residuals in OpenFOAM 2
+
+				    Insert this in _controlDict_:
+```
+functions 
+    { 
+    #includeFunc  residuals 
+    …  other function objects here …  
+    }
+```
+
+Then, run
+
+```
+solver > log &
+foamMonitor -l postProcessing/residuals/407/residuals.dat
+```
+
+				    </script>
+				</section>
+
+
+				
+				
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### References
 
 
 				    [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 				    
 				    [Bakker's course](http://www.bakker.org/dartmouth06/engs150/)
 
+				    [H. Versteeg's and W. Malalasekera's book](https://www.pearsonhighered.com/program/Versteeg-An-Introduction-to-Computational-Fluid-Dynamics-The-Finite-Volume-Method-2nd-Edition/PGM299497.html)
+				    
 				  </script>
 				</section>
 
@@ -437,3 +740,5 @@
 
 	</body>
 </html>
+
+
