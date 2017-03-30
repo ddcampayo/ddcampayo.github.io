@@ -19,7 +19,7 @@ convertToMeters 1;
 a 120;       // Number of elements in x direction
 b  40;       // Number of elements in y direction
 c   1;       // Number of elements in z direction
-xi  -2;      // Minimum x coordinate   
+xi  -4;      // Minimum x coordinate   
 xf  10;      // Maximum x coordinate
 yi -2;      // Minimum y coordinate
 yf  2;      // Maximum y coordinate

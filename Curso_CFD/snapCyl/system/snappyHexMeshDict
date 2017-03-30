@@ -5,6 +5,8 @@
 |   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
+// From: /opt/openfoam4/applications/utilities/mesh/generation/snappyHexMesh/snappyHexMeshDict
+
 FoamFile
 {
     version     2.0;
@@ -17,7 +19,7 @@ FoamFile
 // Which of the steps to run
 castellatedMesh true;
 snap            true;
-addLayers       false;
+addLayers       true;
 
 
 //Optional: single region surfaces get patch names according to
@@ -39,40 +41,13 @@ addLayers       false;
 // - to 'snap' the mesh boundary to the surface
 geometry
 {
-    box1x1x1
+
+    cylinder
     {
-        type searchableBox;
-        min (1.5 1 -0.5);
-        max (3.5 2 0.5);
-    }
-
-    sphere.stl
-    {
-        type triSurfaceMesh;
-
-        //tolerance   1E-5;   // optional:non-default tolerance on intersections
-        //maxTreeDepth 10;    // optional:depth of octree. Decrease only in case
-                              // of memory limitations.
-
-        // Per region the patchname. If not provided will be <surface>_<region>.
-        // Note: this name cannot be used to identity this region in any
-        //       other part of this dictionary; it is only a name
-        //       for the combination of surface+region (which is only used
-        //       when creating patches)
-        regions
-        {
-            secondSolid
-            {
-                name mySecondPatch;
-            }
-        }
-    }
-
-    sphere2
-    {
-        type searchableSphere;
-        centre  (1.5 1.5 1.5);
-        radius  1.03;
+        type searchableCylinder;
+        point1  ( 0   0 -2 );
+        point2  ( 0   0  4 );
+        radius  1.0;
     }
 };
 
@@ -146,19 +121,10 @@ castellatedMeshControls
 
     refinementSurfaces
     {
-        sphere.stl
+        cylinder
         {
             // Surface-wise min and max refinement level
             level (2 2);
-
-            // Optional region-wise level specification
-            regions
-            {
-                secondSolid
-                {
-                    level (3 3);
-                }
-            }
 
             // Optional specification of patch type (default is wall). No
             // constraint types (cyclic, symmetry) etc. are allowed.
@@ -237,11 +203,11 @@ castellatedMeshControls
 
     refinementRegions
     {
-        box1x1x1
-        {
-            mode inside;
-            levels ((1.0 4));
-        }
+//        cylinder
+//        {
+//            mode outside;
+//            levels ((0.1 1));
+//        }
         //sphere.stl
         //{
         //    mode distance;
@@ -338,7 +304,7 @@ addLayersControls
         // Wanted thickness of the layer furthest away from the wall.
         // If relativeSizes this is relative to undistorted size of cell
         // outside layer.
-        finalLayerThickness 0.3;
+        finalLayerThickness 1.0;
 
         // Wanted thickness of the layer next to the wall.
         // If relativeSizes this is relative to undistorted size of cell
@@ -355,7 +321,7 @@ addLayersControls
     // cannot be above minThickness do not add layer.
     // If relativeSizes this is relative to undistorted size of cell
     // outside layer..
-    minThickness 0.25;
+    minThickness 0.01;
 
 
     // Per final patch (so not geometry!) the layer information
@@ -365,14 +331,16 @@ addLayersControls
     //          - angle to nearest surface < slipFeatureAngle (see below)
     layers
     {
-        sphere.stl_firstSolid
+       cylinder
         {
-            nSurfaceLayers 1;
-
+            nSurfaceLayers 3;
+            expansionRatio      1.2;
+            finalLayerThickness 1.0;
+            minThickness        0.1;
         }
         maxY
         {
-            nSurfaceLayers 1;
+            nSurfaceLayers 3;
             // Per patch layer data
             expansionRatio      1.3;
             finalLayerThickness 0.3;

@@ -15,49 +15,56 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-6
+7
 (
-    w1
+    top
     {
         type            wall;
         inGroups        1(wall);
         nFaces          120;
-        startFace       9440;
+        startFace       11409;
     }
-    w2
+    left
     {
         type            wall;
         inGroups        1(wall);
         nFaces          40;
-        startFace       9560;
+        startFace       11529;
     }
-    w3
+    right
     {
         type            wall;
         inGroups        1(wall);
         nFaces          40;
-        startFace       9600;
+        startFace       11569;
     }
-    w4
+    bottom
     {
         type            wall;
         inGroups        1(wall);
         nFaces          120;
-        startFace       9640;
+        startFace       11609;
     }
-    w5
+    back
     {
         type            empty;
         inGroups        1(empty);
-        nFaces          4800;
-        startFace       9760;
+        nFaces          5798;
+        startFace       11729;
     }
-    w6
+    front
     {
         type            empty;
         inGroups        1(empty);
-        nFaces          4800;
-        startFace       14560;
+        nFaces          5798;
+        startFace       17527;
+    }
+    cylinder
+    {
+        type            patch;
+        inGroups        1(meshedPatches);
+        nFaces          244;
+        startFace       23325;
     }
 )
 
