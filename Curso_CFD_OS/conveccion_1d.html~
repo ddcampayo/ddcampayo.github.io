@@ -43,32 +43,60 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Convección (o advección) en 1D</h2>
 
 			    
 			    
 			    <p>
-			      <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
 			      </small>
 			    </p>
 			  </section>
 
-			  <section>
-			    <h2>Semana 2</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d.html">Convección en 1D (teoría) </a></li>
-			      <li><a href="./pasos.html">Configuración previa</a></li>
-			      <li><a href="./intro_plot.ipynb">Introducción a ipython (ipynb)</a></li>
-			      <li><a href="./conveccion_1d.ipynb">Convección en 1D (ipynb)</a></li>
-			    </ul>
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Discretización
+
+			      Muy a menudo, se parte de las EDPs, conocidas, y estas
+			      se discretizan
+
+			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$			      
+
+			      Sin embargo, este es un proceso de ida y vuelta, porque
+			      las EDPs se deducen a nivel discreto
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Convección en 1D
+
+			      Se suponen cambios sólo en la dirección $x$
+
+			      
+			      
+			    </script>
 			  </section>
 
 
-
 				    
+
+
 			  <section data-markdown>
 			    <script type="text/template">
 			      ## Referencias
-			      
+
+
 			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 			    </script>
 			  </section>
