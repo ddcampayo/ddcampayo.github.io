@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CFD</title>
+
+		<meta name="description" content="CFD">
+		<meta name="author" content="Daniel Duque">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Difusión en 1D</h2>
+
+			    
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Difusión en 1D
+
+			      Igual que con la convección, podemos intentar discretizar la ecuación:
+			      
+			      $$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$
+
+			      o podemos remontarnos a la deducción de la misma
+			      
+			    </script>
+			  </section>
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Deducción
+
+			      Se suponen cambios de un campo $u$ sólo
+			      en la dirección $x$
+
+			      ![Esquema de convección en 1D](./conveccion_1d.png)
+
+			      El cambio en la cantidad total $A \Delta x \, u_i$ será:
+
+			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, convección
+
+			      Antes los flujos por las caras venían dados por:
+			     
+			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2}  $$``
+			      
+			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2}  $$``
+
+			      (Recordemos que había que aproximar
+			      ``$u_{i-1/2}$`` y $u_{i+1/2}$, que son
+			      desconocidas, y vimos con python el
+			      "centered diff", el "upwind" y el
+			      "downwind")
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, difusión de Fick
+
+			      Ahora los flujos vienen de una ley física, la ley de Fick:
+			      
+			      ``$$ \Phi = - D \frac{\partial u}{\partial x}  .$$``
+
+			      Lo que expresa es que la difusión tiende a "allanar" los campos, creando un flujo desde zonas con valores altos a otras con valores bajos.
+
+			      (En realidad, Fick es para concentración; para temperatura se llama "ley de Fourier".)
+			    </script>
+			  </section>
+
+			      
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, difusión
+
+			      Así pues, parece natural
+			     
+			      ``$$ \Phi_{i-1/2} \approx  - A D   \frac{ u_i - u_{i-1/2}}{\Delta x}  $$``
+
+			      ``$$ \Phi_{i+1/2} \approx  - A D   \frac{ u_{i+1} - u_i  }{\Delta x}  $$``
+
+			      Los cuales, enchufados en
+			      
+			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  \ldots ... $$``
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Ecuación de difusión
+
+			      ... LLevan a:
+			      
+			      ``$$\frac{d  u_i }{d t}  =  D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
+
+			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
+			      
+			      ``$$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$ ``
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo
+
+			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
+
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) $$``
+
+			      O, implícitamente:
+
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (u^{n+1}_{i-1} - 2 u^{n+1}_i  +  u^{n+1}_{i+1} ) $$``
+
+			      			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo final
+
+			      ... O incluso métodos mixtos, como el famoso de Crank-Nicolson ``$$\bar{u}_i = (u^{n+1}_i+u^n_i)/2$$``
+			      
+			      
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (\bar{u}_{i-1} - 2 \bar{u}_i  +  \bar{u}_{i+1} ) $$``
+			      
+			      Además, siempre aparece un nuevo "número de Courant difusivo":
+
+			      ``$$\mathrm{Co} :=  D \frac{\Delta t}{\Delta x^2 } $$``
+
+			      Hala, a implementar todo esto
+			    </script>
+			  </section>
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ## Referencias
+
+
+			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+			    </script>
+			  </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+    // other options ...
+
+			math: {
+			mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+//			{ src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML', async: true }
+			{ src: '../plugin/math/math.js', async: true }
+			]
+
+			});
+
+		</script>
+
+	</body>
+</html>
