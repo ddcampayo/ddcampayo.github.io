@@ -43,7 +43,7 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
-			    <h2>Convección (o advección) en 1D</h2>
+			    <h2>Difusión en 1D</h2>
 
 			    
 			    
@@ -64,20 +64,19 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### Discretización
+			      ####  Difusión en 1D
 
-			      Muy a menudo, se parte de las EDPs, conocidas, por ejempo:
+			      Igual que con la convección, podemos intentar discretizar la ecuación:
+			      
+			      $$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$
 
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$
-
-			      Estas se *discretizan*: sustituyendo las derivadas por diferencias.
-
-			      Sin embargo, este es un proceso de ida y vuelta, porque
-			      las EDPs se deducen a nivel discreto.
+			      o podemos remontarnos a la deducción de la misma
 			      
 			    </script>
 			  </section>
 
+
+			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ### Deducción
@@ -89,80 +88,117 @@
 
 			      El cambio en la cantidad total $A \Delta x \, u_i$ será:
 
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) = A c \, u_{i-1/2} - A c \,  u_{i+1/2}  $$``
-			      
-			    </script>
-			  </section>
-
-
-			  
-			  <section data-markdown>
-			    <script type="text/template">
-			      ### Interpolación en las caras
-
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) = A c \, u_{i-1/2} - A c \,  u_{i+1/2}  $$``
-
-			      Un problema obvio es que no conocemos el campo en los puntos intermedios. Así que
-			      podemos suponer una interpolación lineal:
-
-			      ``$$ u_{i-1/2} \approx \frac {  u_{i-1/2}  + u_i}{2} $$``
-
-			      ``$$ u_{i+1/2} \approx \frac {  u_{i}  + u_{i+1}}{2} $$``
+			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
 			      
 			    </script>
 			  </section>
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### La EDP
+			      ### Flujos, convección
 
-			      De este modo,
+			      Antes los flujos por las caras venían dados por:
+			     
+			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2}  $$``
 			      
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) = A c \frac{ \, u_{i-1} -  u_{i+1} }{2}  $$``
+			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2}  $$``
 
-			      ``$$\frac{d u_i }{d t}  =   - c  \frac{ \, u_{i+1} -  u_{i-1} }{2 \Delta x}  $$``
-
-			      La parte derecha se puede identificar como la derivada espacial (centrada):
+			      (Recordemos que había que aproximar
+			      ``$u_{i-1/2}$`` y $u_{i+1/2}$, que son
+			      desconocidas, y vimos con python el
+			      "centered diff", el "upwind" y el
+			      "downwind")
 			      
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, difusión de Fick
+
+			      Ahora los flujos vienen de una ley física, la ley de Fick:
+			      
+			      ``$$ \Phi = - D \frac{\partial u}{\partial x}  .$$``
+
+			      Lo que expresa es que la difusión tiende a "allanar" los campos, creando un flujo desde zonas con valores altos a otras con valores bajos.
+
+			      (En realidad, Fick es para concentración; para temperatura se llama "ley de Fourier".)
+			    </script>
+			  </section>
+
+			      
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, difusión
+
+			      Así pues, parece natural
+			     
+			      ``$$ \Phi_{i-1/2} \approx  - A D   \frac{ u_i - u_{i-1/2}}{\Delta x}  $$``
+
+			      ``$$ \Phi_{i+1/2} \approx  - A D   \frac{ u_{i+1} - u_i  }{\Delta x}  $$``
+
+			      Los cuales, enchufados en
+			      
+			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  \ldots ... $$``
 			      
 			    </script>
 			  </section>
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### Discretización del tiempo
+			      ### Ecuación de difusión
 
-			      Para nosotros, es más útil la expresión discreta:
-
-			      ``$$\frac{d u_i }{d t}  =   - c  \frac{ \, u_{i+1} -  u_{i-1} }{2 \Delta x}  $$``
-
-			      De hecho, habría que discretizar la derivada temporal también. Lo más sencillo
-			      es el método explícito de Euler:
-
-			      ``$$\frac{d u_i }{d t}  \approx  \frac{ u^{n+1}_i - u^{n}_i  }{\Delta t}   $$ ``
-
-			      Donde el tiempo es $t= n \Delta t$.
+			      ... LLevan a:
 			      
+			      ``$$\frac{d  u_i }{d t}  =  D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
+
+			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
+			      
+			      ``$$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$ ``
+
 			      
 			    </script>
 			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo
+
+			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
+
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) $$``
+
+			      O, implícitamente:
+
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (u^{n+1}_{i-1} - 2 u^{n+1}_i  +  u^{n+1}_{i+1} ) $$``
+
+			      			      
+			    </script>
+			  </section>
+
 
 			  <section data-markdown>
 			    <script type="text/template">
 			      ### Algoritmo final
 
-			      Finalmente:
+			      ... O incluso métodos mixtos, como el famoso de Crank-Nicolson ``$$\bar{u}_i = (u^{n+1}_i+u^n_i)/2$$``
 			      
-			      ``$$u_i^{n+1} = u_i^n - c \frac{\Delta t}{2 \Delta x}(u_{i+1}^n-u_{i-1}^n)$$``
+			      
+			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (\bar{u}_{i-1} - 2 \bar{u}_i  +  \bar{u}_{i+1} ) $$``
+			      
+			      Además, siempre aparece un nuevo "número de Courant difusivo":
 
-			      Atención a la combinación  $c \frac{\Delta t}{ \Delta x}$, es el
-			      *número de Courant*.
+			      ``$$\mathrm{Co} :=  D \frac{\Delta t}{\Delta x^2 } $$``
 
-			      Ahora, ¡a programarlo!
-
+			      Hala, a implementar todo esto
 			    </script>
 			  </section>
+
+
 			  
 			  <section data-markdown>
 			    <script type="text/template">
