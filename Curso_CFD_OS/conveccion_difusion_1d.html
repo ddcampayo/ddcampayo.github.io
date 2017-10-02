@@ -43,7 +43,7 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
-			    <h2>Difusión en 1D</h2>
+			    <h2>Convección-difusión en 1D</h2>
 
 			    
 			    
@@ -64,13 +64,13 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Difusión en 1D
+			      ####  Convección + difusión en 1D
 
-			      Igual que con la convección, podemos intentar discretizar la ecuación:
+			      Igual que con la antes, podemos intentar discretizar la ecuación:
 			      
-			      $$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$
+			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
 
-			      o podemos remontarnos a la deducción de la misma
+			      ... o podemos remontarnos a la deducción de la misma
 			      
 			    </script>
 			  </section>
@@ -95,19 +95,17 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### Flujos, convección
+			      ### Flujos, convección y difusión
 
-			      Antes los flujos por las caras venían dados por:
+			      Es muy fácil: ahora los flujos vienen dados por una combinación
+			      de convección y difusión:
 			     
-			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2}  $$``
+			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i-1/2}   $$``
 			      
-			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2}  $$``
+			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i+1/2}  $$``
 
-			      (Recordemos que había que aproximar
-			      ``$u_{i-1/2}$`` y $u_{i+1/2}$, que son
-			      desconocidas, y vimos con python el
-			      "centered diff", el "upwind" y el
-			      "downwind")
+			      Y, como antes, hay que aproximar
+			      ``$u_{i-1/2}$`` y $u_{i+1/2}$ y sus derivadas
 			      
 			    </script>
 			  </section>
@@ -115,68 +113,18 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### Flujos, difusión de Fick
+			      ### Ecuación de convección-difusión
 
-			      Ahora los flujos vienen de una ley física, la ley de Fick:
+			      Se acaba llegando a cosas como:
 			      
-			      ``$$ \Phi = - D \frac{\partial u}{\partial x}  .$$``
-
-			      Lo que expresa es que la difusión tiende a "allanar" los campos, creando un flujo desde zonas con valores altos a otras con valores bajos.
-
-			      (En realidad, Fick es para concentración; para temperatura se llama "ley de Fourier".)
-			    </script>
-			  </section>
-
-			      
-
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ### Flujos, difusión
-
-			      Así pues, parece natural
-			     
-			      ``$$ \Phi_{i-1/2} \approx  - A D   \frac{ u_i - u_{i-1/2}}{\Delta x}  $$``
-
-			      ``$$ \Phi_{i+1/2} \approx  - A D   \frac{ u_{i+1} - u_i  }{\Delta x}  $$``
-
-			      Los cuales, enchufados en
-			      
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  \ldots ... $$``
-			      
-			    </script>
-			  </section>
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ### Ecuación de difusión
-
-			      ... LLevan a:
-			      
-			      ``$$\frac{d  u_i }{d t}  =  D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
+			      ``$$\frac{d  u_i }{d t} + c \frac{u_{i}^n-u_{i-1}^n }{\Delta x} =
+			      D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
 
 			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
 			      
-			      ``$$\frac{\partial u}{\partial t} = D \frac{\partial^2 u}{\partial x^2} $$ ``
+			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
 
 			      
-			    </script>
-			  </section>
-
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ### Algoritmo
-
-			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
-
-			      ``$$u_i^{n+1} = u_i^n + D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) $$``
-
-			      O, implícitamente:
-
-			      ``$$u_i^{n+1} = u_i^n + D \frac{\Delta t}{\Delta x^2 } (u^{n+1}_{i-1} - 2 u^{n+1}_i  +  u^{n+1}_{i+1} ) $$``
-
-			      			      
 			    </script>
 			  </section>
 
@@ -185,19 +133,30 @@
 			    <script type="text/template">
 			      ### Algoritmo final
 
-			      ... O incluso métodos mixtos, como el famoso de Crank-Nicolson ``$$\bar{u}_i = (u^{n+1}_i+u^n_i)/2$$``
-			      
-			      
-			      ``$$u_i^{n+1} = u_i^n - D \frac{\Delta t}{\Delta x^2 } (\bar{u}_{i-1} - 2 \bar{u}_i  +  \bar{u}_{i+1} ) $$``
-			      
-			      Además, siempre aparece un nuevo "número de Courant difusivo":
+			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
 
-			      ``$$\mathrm{Co} :=  D \frac{\Delta t}{\Delta x^2 } $$``
+			      ``\begin{align} u_i^{n+1} = u_i^n & -  
+			      c \frac{\Delta t}{\Delta x} ( u_{i}^n-u_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
 
-			      Hala, a implementar todo esto
+			      			      
 			    </script>
 			  </section>
 
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### ¿Y los fluidos?
+
+			      De momento, 
+			      
+			      $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}  = \nu \frac{\partial^2 u}{\partial x^2} + f $$
+
+
+			      			      
+			    </script>
+			  </section>
+
+			  
 
 			  
 			  <section data-markdown>
