@@ -86,10 +86,9 @@
 
 			      <!-- ![Malla de simulación 1D](./xt_grid.png) -->
 
-			      ``$$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $$``
+			      Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $``
 
-			      ``$$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $$``
-
+			      No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $``
 			      			      
 			    </script>
 			  </section>
@@ -98,19 +97,64 @@
 			    <script type="text/template">
 			      ####  ¿Cuántos problemas resolvemos exactamente?
 
-			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{T}{L} \frac{N_x}{N_t}   $$``
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
 
-			      Así pues, a resolución fija (las $N$), infinitos, para un valor dado $c \frac{T}{L}$.
+			      Así pues, a resolución fija ( $N_x$ y
+			      $N_t$ ), resolvemos infinitos; todos,
+			      para un valor dado $ c \frac{\Delta
+			      t}{L}$.
 
-			      Esto es intuitivo: el valor de la velocidad $c$ no es importante, sólo su valor
-			      relativo $c / (L/T) $.
-
+			      <!-- Esto es intuitivo: el valor de la velocidad $c$ no es importante, sólo su valor -->
+			      <!-- relativo $c / (L/T) $. -->
 
 			      
 			    </script>
 			  </section>
 
-			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el "otro" número
+			      
+			      ``$$ \mathrm{Co}_D = D \frac{\Delta t}{\Delta x^2}   $$``
+
+			      Pero dado que ``$ \mathrm{Co} = c \frac{\Delta t}{\Delta x}  $``
+
+			      ``$$ \mathrm{Co}_D = \frac{ D }{\Delta x}  \frac{\Delta t}{\Delta x} = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x $$``
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el  número de Reynolds
+
+			      ``$$ \mathrm{Co}_D = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x   = \mathrm{Co} \frac{1}{\mathrm{Re}}  N_x $$``
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Números y escalado
+
+			      En resumidas cuentas, para simular "lo mismo" (__físicamente__) hay que mantener (de momento)
+
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
+			      y
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      Lo mismo __numéricamente__: hay que mantener $ \mathrm{Co}$ y $ \mathrm{Co}_D$... pero esto no
+			      es posible en general. Lo más aceptable es mantener ambos en valores *bajos*.
+			      
+			      
+			    </script>
+			  </section>		  
 
 			  
 			  <section data-markdown>
