@@ -43,69 +43,126 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Condiciones de contorno en OpenFOAM</h2>
 
 			    
-			    
 			    <p>
-			      <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
 			      </small>
 			    </p>
 			  </section>
 
-			  <section>
-			    <h2>Semana 2</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d.html">Convección en 1D (teoría) </a></li>
-			      <li><a href="./pasos.html">Configuración previa</a></li>
-			      <li><a href="./intro_plot.ipynb">Introducción a ipython (ipynb)</a></li>
-			      <li><a href="./conveccion_1d.ipynb">Convección en 1D (ipynb)</a></li>
-			    </ul>
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Condiciones de contorno
+
+			      Las condiciones de contorno (BC) son **vitales** en una
+			      simulación:
+
+			      * Corresponden a distintas situaciones físicas
+
+			      * Afectan la propia existencia de soluciones (lo que se traduce
+			      en "inestabilidad" en los códigos = cuelgues)
+			      
+			    </script>
 			  </section>
 
-			  <section>
-			    <h2>Semana 3</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d_algebra.ipynb">Convección en 1D con álgebra lineal (ipynb)</a></li>
-			      <li><a href="./difusion_1d.html">Difusión en 1D (teoría) </a></li>
-			      <li><a href="./difusion_1d.ipynb">Difusión en 1D (ipynb)</a></li>
-			    </ul>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: no-slip
+
+			      Lo sutil es que las condiciones de velocidad y presión están **relacionadas**.
+			      P.e. las típicas no-slip:
+
+			      0/p:
+			      ```c++
+			      pared
+			      {
+			        type fixedValue;
+			        value uniform 0 ;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      pared
+			      {
+			        type noSlip;
+			      }
+			      ```
+			      
+			    </script>
 			  </section>
 
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: no-slip
 
-			  <section>
-			    <h2>Semana 4</h2>
-			    <ul>
-			      <li><a href="./conveccion_difusion_1d.html">Convección-difusión en 1D (teoría) </a></li>
-			      <li><a href="./courant_1d.html">Números adimensionales (teoría) </a></li>
-			      <li><a href="./conveccion_difusion_1d.ipynb">Convección-difusión en 1D (ipynb)</a></li>
-			    </ul>
+			      En general:
+			      
+			      0/p:
+			      ```c++
+			      pared
+			      {
+			        type fixedValue;
+			        value uniform 0 ;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      pared
+			      {
+			        type    fixedValue;
+			        value   uniform ( u v w );
+			      }
+			      ```
+			      
+			    </script>
 			  </section>
 
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: entrada (inlet)
 
-
-			  <section>
-			    <h2>Semana 5</h2>
-			    <ul>
-			      <li><a href="./navier_stokes.html">Navier-Stokes (teoría) </a></li>
-			      <li> Flujo de Couette (OpenFOAM)</li>
-			    </ul>
+			      En general:
+			      
+			      0/p:
+			      ```c++
+			      pared
+			      {
+			        type fixedValue;
+			        value uniform 0 ;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      pared
+			      {
+			        type    fixedValue;
+			        value   uniform ( u v w );
+			      }
+			      ```
+			      
+			    </script>
 			  </section>
 
-
-			  <section>
-			    <h2>Semana 5</h2>
-			    <ul>
-			      <li><a href="./condiciones_OF.html">Condiciones de contorno (teoría) </a></li>
-			      <li> Flujo de Poiseuille (OpenFOAM)</li>
-			    </ul>
-			  </section>
+			  
 
 
 			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ## Referencias
-			      
+
+
 			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 			    </script>
 			  </section>
