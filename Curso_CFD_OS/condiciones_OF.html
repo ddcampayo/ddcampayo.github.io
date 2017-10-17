@@ -101,6 +101,9 @@
 			    </script>
 			  </section>
 
+
+
+			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ####  Velocidad y presión: no-slip
@@ -126,9 +129,11 @@
 			    </script>
 			  </section>
 
+
+			  
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Velocidad y presión: entrada (inlet)
+			      ####  Velocidad y presión: flujo debido a dif. de presión
 
 			      En un caso sencillo (Poiseuille, flujo "libre" ):
 			      
@@ -151,6 +156,7 @@
 			    </script>
 			  </section>
 
+			  
 
 			  <section data-markdown>
 			    <script type="text/template">
@@ -163,6 +169,7 @@
 			    </script>
 			  </section>
 
+			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ####  Ejemplo: Cilindro
@@ -177,9 +184,79 @@
 			  </section>
 
 			  
+ 			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Velocidad y presión: flujo debido a velocidades
+
+			      Para el cilindro, nos gustaría especificar directamente
+			      la velocidad de entrada. Entonces:
+			      
+			      0/p:
+			      ```c++
+			      entrada
+			      {
+			      type zeroGradient;
+			      }
+			      salida
+			      {
+			      type fixedValue;
+    			      value uniform 0;
+			      }
+			      ```
+			      ----
+			      ####  Velocidad y presión: flujo debido a velocidades
+			      0/U:
+			      ```c++
+
+			      entrada
+			      {
+			      type fixedValue;
+			      value uniform (1 0 0);
+			      }
+
+			      salida
+			      {
+			      type  zeroGradient;
+			      }
+			      ```
+
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Cilindro completo
+
+			      Comenzar con este blockMeshDict
+
+			      [blockMeshDict para cilindro](cylinder2/system/blockMeshDict)
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
+			  </section>
+
+
+
+			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Recirculación a la salida
+
+			      0/U:
+			      ```c++
+			      salida
+			      {
+			      type       inletOutlet;
+			      inletValue uniform (0 0 0);
+			      value      uniform (1 0 0);
+			      }
+
+			    </script>
+			  </section>
+
+
 			  
-
-
 			  
 			  <section data-markdown>
 			    <script type="text/template">
