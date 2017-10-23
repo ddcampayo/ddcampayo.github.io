@@ -1,20 +1,16 @@
-La tesis está enfocada a analizar y comprender mejor las cargas debidas al movimiento de **sloshing**.
-La principal herramienta computacional es el método de partículas conocido como SPH (Smoothed Particle Hydrodynamics).
+La tesis está enfocada a analizar y comprender mejor las cargas debidas al movimiento de *sloshing*.
+La principal herramienta computacional es el método de partículas conocido como SPH (*Smoothed Particle Hydrodynamics*).
 
-Para ello, se establecen una serie de
-objetivos:
-1. Mejorar la eficiencia y capacidad computacionales del código existente 3D para GPU (tarjetas
-gráficas).
-2. Implementar nuevos modelos físicos que actualmente no se consideran en este código, como son
-la interacción entre el fluido y la estructura, la inclusión de flujos multifásicos o modelos de
-turbulencia.
-Universidad Politécnica de Madrid
-Plan de investigación 2015-16
-13/10/2016 Universidad Politécnica de Madrid 2
-3. Simular impactos de sloshing en tanques con el código SPH y compararlos con un software de
-volúmenes finitos - OpenFOAM - u otros códigos que puedan ser de utilidad. Los resultados se
-validarán con datos experimentales.
-4. Modelizar el atrapamiento de gases en el líquido y el fenómeno de vaporización (boil-off) con SPH
-y OpenFOAM, incluyendo la simulación del cambio de fase (evaporación y condensación).
-5. Analizar de forma numérica las deformaciones en la membrana de los tanques de LNG sujetos a
-cargas de sloshing (Interacción fluido-estructura).
+La investigación está basada en tres metodologías computacionales:
+
+1. Desarrollo del código  [AQUAgpusph](http://canal.etsin.upm.es/aquagpusph/) para GPU (tarjetas gráficas).
+
+2. Implementación de nuevos modelos físicos en el software de código abierto [OpenFOAM](https://openfoam.org/)
+
+3. Desarrollo de métodos alternativos de simulación basados en triangulaciones de Delaunay
+
+La posibilidad de utilizar el servidor de cálculo del CESVIMA es por tanto muy atractiva para los puntos 2 y 3. En particular, se espera comenzar con estos objetivos:
+
+1. Implementación de un formalismo de cambio de fase basado en la ecuación de Hertz-Knudsen. Validación en impactos violentos de líquidos en condiciones de saturación termodinámica (el gas licuado se transporta por lo general en estas condiciones).
+
+2. Validación de un código basado en triangulaciones de Delaunay para un fluido bidimensional, en el límite de Stokes (alta viscosidad). Este límite tiene la particularidad de que las ecuaciones pueden resolverse con relativa facilidad utilizando transformadas de Fourier.
