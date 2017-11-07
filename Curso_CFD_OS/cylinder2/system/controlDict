@@ -61,7 +61,7 @@ forceCoeffs1
 //    rho             rho;
 
     rho         rhoInf;
-    rhoInf      100000;
+    rhoInf      1;
 
     // Reference pressure [Pa]
     pRef            0;
@@ -85,13 +85,13 @@ forceCoeffs1
     pitchAxis       (0 1 0);
 
     // Freestream velocity magnitude [m/s]
-    magUInf         30;
+    magUInf         1;
 
     // Reference length [m]
     lRef            1;
 
     // Reference area [m2]
-    Aref            1.75;
+    Aref            1;
 
     // Spatial data binning
     // - extents given by the bounds of the input geometry
