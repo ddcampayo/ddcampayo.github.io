@@ -34,9 +34,14 @@ boundaryField
 	   value           uniform (1 0 0);
     }
 
+
+
   right
     {
-        type            zeroGradient;
+        type            inletOutlet;
+        value           $internalField;
+        inletValue      uniform (0 0 0);
+//        type            zeroGradient;
     }
 
   bottom

@@ -181,24 +181,6 @@
 			  </section>
 
 
-			  
-
-
-			  
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Ejemplo: Cilindro completo
-
-			      Comenzar con este blockMeshDict
-
-			      [blockMeshDict para cilindro](cylinder2/system/blockMeshDict)
-
-			      <!-- [Directorio Poiseuille](poise) -->
-			      			      
-			    </script>
-			  </section>
-
 
 
 			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
@@ -209,16 +191,33 @@
 			      ```c++
 			      salida
 			      {
-			      type       inletOutlet;
-			      inletValue uniform (0 0 0);
-			      value      uniform (1 0 0);
-			      }
+			         type       inletOutlet;
+			         inletValue uniform (0 0 0);
+			         value      uniform (1 0 0);
+			      }```
 
+			    </script>
+			  </section>
+			  
+
+			  
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Cilindro completo
+
+			      Comenzar con [este blockMeshDict](cylinder2/system/blockMeshDict)
+			      
+			      Probemos con Re=$200$, $\nu=0.005$, y aumentemos el canal por la salida
+
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
 			    </script>
 			  </section>
 
 
-			  
+
 			  
 			  <section data-markdown>
 			    <script type="text/template">

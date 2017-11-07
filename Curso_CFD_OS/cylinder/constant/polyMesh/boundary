@@ -17,44 +17,47 @@ FoamFile
 
 6
 (
-    bottom
+    left
     {
-        type            symmetryPlane;
-        inGroups        1(symmetryPlane);
-        nFaces          120;
-        startFace       7430;
+        type            wall;
+        inGroups        1(wall);
+        nFaces          20;
+        startFace       29830;
     }
     right
     {
-        type            patch;
-        nFaces          30;
-        startFace       7550;
+        type            wall;
+        inGroups        1(wall);
+        nFaces          60;
+        startFace       29850;
     }
     top
     {
-        type            symmetryPlane;
-        inGroups        1(symmetryPlane);
-        nFaces          120;
-        startFace       7580;
+        type            wall;
+        inGroups        1(wall);
+        nFaces          70;
+        startFace       29910;
     }
-    left
+    bottom
     {
-        type            patch;
-        nFaces          30;
-        startFace       7700;
+        type            wall;
+        inGroups        1(wall);
+        nFaces          70;
+        startFace       29980;
     }
     cylinder
     {
-        type            patch;
-        nFaces          40;
-        startFace       7730;
+        type            wall;
+        inGroups        1(wall);
+        nFaces          120;
+        startFace       30050;
     }
-    defaultFaces
+    frontAndBack
     {
         type            empty;
         inGroups        1(empty);
-        nFaces          7600;
-        startFace       7770;
+        nFaces          30000;
+        startFace       30170;
     }
 )
 
