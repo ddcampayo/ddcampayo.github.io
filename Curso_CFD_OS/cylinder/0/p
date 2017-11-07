@@ -28,8 +28,7 @@ boundaryField
 
   left
     {
-      type fixedValue;
-      value uniform 1;     
+      type            zeroGradient;
     }
   right
     {
