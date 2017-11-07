@@ -43,78 +43,139 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Flujo alrededor de un cilindro, con OpenFOAM</h2>
 
 			    
-			    
 			    <p>
-			      <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
 			      </small>
 			    </p>
 			  </section>
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Resumen del cilindro
 
-			  <section>
-			    <h2>Semana 2</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d.html">Convección en 1D (teoría) </a></li>
-			      <li><a href="./pasos.html">Configuración previa</a></li>
-			      <li><a href="./intro_plot.ipynb">Introducción a ipython (ipynb)</a></li>
-			      <li><a href="./conveccion_1d.ipynb">Convección en 1D (ipynb)</a></li>
-			    </ul>
+			      Comenzar con este blockMeshDict
+
+			      [blockMeshDict para cilindro](cylinder/system/blockMeshDict)
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
 			  </section>
 
-			  <section>
-			    <h2>Semana 3</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d_algebra.ipynb">Convección en 1D con álgebra lineal (ipynb)</a></li>
-			      <li><a href="./difusion_1d.html">Difusión en 1D (teoría) </a></li>
-			      <li><a href="./difusion_1d.ipynb">Difusión en 1D (ipynb)</a></li>
-			    </ul>
+ 			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Velocidad y presión: flujo debido a velocidades
+
+			      Especificamos la velocidad de
+			      entrada. Entonces:
+			      
+			      0/p:
+			      ```c++
+			      entrada
+			      {
+			      type zeroGradient;
+			      }
+			      salida
+			      {
+			      type fixedValue;
+    			      value uniform 0;
+			      }
+			      ```
+			      ----
+			      ####  Velocidad y presión: flujo debido a velocidades
+			      0/U:
+			      ```c++
+
+			      entrada
+			      {
+			      type fixedValue;
+			      value uniform (1 0 0);
+			      }
+
+			      salida
+			      {
+			      type  zeroGradient;
+			      }
+			      ```
+
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Número de Courant
+
+			      Echar un ojo a la malla con para Foam!
+			      
+			      ``$\Delta x = 0.05$``
+
+			      ``$u_0 = 1$``
+			      
+			      ``Co$=\frac12$``
+			      
+			      ``Co=$ \frac{u_0 \Delta t }{\Delta x} \quad\to\quad
+			      \Delta t= \frac{\mathrm{Co}\Delta x}{u_0} = 0.025 $ ``
+
+			      
+			    </script>
 			  </section>
 
 
-			  <section>
-			    <h2>Semana 4</h2>
-			    <ul>
-			      <li><a href="./conveccion_difusion_1d.html">Convección-difusión en 1D (teoría) </a></li>
-			      <li><a href="./courant_1d.html">Números adimensionales (teoría) </a></li>
-			      <li><a href="./conveccion_difusion_1d.ipynb">Convección-difusión en 1D (ipynb)</a></li>
-			    </ul>
-			  </section>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Número de Reynolds
+
+                              ![Esquema de convección en 1D](./Flow_cylinder.jpg)
 
 
-
-			  <section>
-			    <h2>Semana 5</h2>
-			    <ul>
-			      <li><a href="./navier_stokes.html">Navier-Stokes (teoría) </a></li>
-			      <li> Flujo de Couette (OpenFOAM)</li>
-			    </ul>
-			  </section>
-
-
-			  <section>
-			    <h2>Semana 6</h2>
-			    <ul>
-			      <li><a href="./condiciones_OF.html">Condiciones de contorno (teoría) </a></li>
-			      <li> Flujo de Poiseuille (OpenFOAM)</li>
-			      <li> Flujo alrededor de un cilindro (OpenFOAM)</li>
-			    </ul>
-			  </section>
-
-			  <section>
-			    <h2>Semana 6</h2>
-			    <ul>
-			      <li><a href="./cilindro_OF.html"> Flujo alrededor de un cilindro (OpenFOAM) </a></li>
-			    </ul>
+			    </script>
 			  </section>
 
 			  
+			  
 
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Cilindro completo
+
+			      Comenzar con este blockMeshDict
+
+			      [blockMeshDict para cilindro](cylinder2/system/blockMeshDict)
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
+			  </section>
+
+
+
+			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Recirculación a la salida
+
+			      0/U:
+			      ```c++
+			      salida
+			      {
+			      type       inletOutlet;
+			      inletValue uniform (0 0 0);
+			      value      uniform (1 0 0);
+			      }
+
+			    </script>
+			  </section>
+
+
+			  
 			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ## Referencias
-			      
+
+
 			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 			    </script>
 			  </section>
