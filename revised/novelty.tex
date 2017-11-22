@@ -1,0 +1,54 @@
+%\documentclass[times]{elsarticle}
+\documentclass[number]{fldauth}
+
+
+\begin{document}
+
+\title{%
+  An assignment procedure from particles to mesh that preserves
+  field values
+  \\
+  Novelty file
+}
+
+
+\author{Daniel Duque\footnotemark[1] ,  Pep Espa\~nol \footnotemark[2]}
+\address{%
+  \footnotemark[1]
+  Model Basin Research Group (CEHINAV).
+  ETSI Navales, Universidad Polit\'ecnica de Madrid.
+  Madrid, Spain
+  \\
+  \footnotemark[2]
+  Dpto. de F{\'\i}sica Fundamental.
+  Universidad Nacional de Educaci\'on a Distancia.
+  Madrid, Spain}
+
+
+
+\maketitle
+
+\begin{itemize}
+
+\item Assignment procedures, from the particles onto the mesh, are key
+  for the performance of mixed Eulerian-Lagrangian simulations
+
+\item Several known procedures are presented and assessed, including
+  the well-known FLIP, along with a new one (``mass assignment'')
+  which emphasizes preservation of information
+
+\item More precisely, the assignment from the particles onto the mesh
+  and back yields the same field values when the particles coincide
+  with the mesh nodes
+
+\item The procedures are tested on three scenarios: simple 1D
+  convection, 2D convection of Zalesak's disk, and a CFD simulation of
+  the Taylor-Green periodic vortex sheet
+
+\item Mass assignment is seen to be clearly superior to other procedures
+
+\end{itemize}
+
+
+
+\end{document}

@@ -1,0 +1,151 @@
+@MISC{polyFEM,
+  author = "Daniel Duque",
+  title = "{polyFEM} 1.0",
+  howpublished = "https://github.com/ddcampayo/polyFEM",
+  url = "https://github.com/ddcampayo/polyFEM",
+  year = "2016",
+  doi  = {10.5281/zenodo.155375}
+}
+
+
+@MISC{eigenweb,
+  author = {Ga\"{e}l Guennebaud and Beno\^{i}t Jacob and others},
+  title = {Eigen v3},
+  howpublished = {http://eigen.tuxfamily.org},
+  year = {2010}
+ }
+
+
+@article{cholmod,
+    title = "Algorithm 887: CHOLMOD, supernodal sparse Cholesky factorization and update/downdate",
+    author="Y Chen and T A Davis and W W Hager and S Rajamanickam",
+    journal="ACM Trans Math Software",
+    volume=35,
+    number=3,
+    year=2009
+}
+
+@MISC{Eigen,
+  author = {Ga\"{e}l Guennebaud and Beno\^{i}t Jacob and others},
+  title = {Eigen v3},
+  howpublished = {http://eigen.tuxfamily.org},
+  year = {2010}
+ }
+
+@misc{cgal,
+    title = "\textsc{Cgal}, {C}omputational {G}eometry {A}lgorithms {L}ibrary",
+    note  = "http://www.cgal.org",
+   AUTHOR       = {{CGAL Editorial Board}},
+}
+
+@incollection{cgal:y-t2-15b,
+  author = {M Yvinec},
+  title = {{2D} Triangulation},
+  publisher = {{CGAL Editorial Board}},
+  booktitle = {{CGAL} User and Reference Manual},
+  year = 2015
+}
+  url = {http://doc.cgal.org/latest/Manual/packages.html{\#}PkgTriangulation2Summary},
+
+
+
+@incollection{cgal:k-pt2-13-15b,
+  author = {N Kruithof},
+  title = {{2D} Periodic Triangulations},
+  publisher = {{CGAL Editorial Board}},
+  booktitle = {{CGAL} User and Reference Manual},
+  year = 2015
+}
+  url = {http://doc.cgal.org/latest/Manual/packages.html{\#}PkgPeriodic2Triangulation2Summary},
+
+
+
+
+
+%
+%	Okabe00		Spatial tessellations: Concepts & applications...
+%
+
+@Book{CGbook,
+  author = 	 "A Okabe and B Boots and K Sugihara
+		  and S N Chiu",
+  title = 	 "Spatial tessellations: Concepts and applications of
+		  {V}oronoi diagrams",
+  publisher = 	 "Wiley",
+  year = 	 "2000",
+  series =	 "Probability and Statistics",
+  address =	 "NYC",
+  edition =	 "2nd",
+  note =	 "671 pages.",
+  OPTannote = 	 ""
+}
+
+
+
+
+@article{sukumar2001,
+  title={Natural neighbour Galerkin methods},
+  author={Sukumar, N and Moran, B and Yu Semenov, A and Belikov, VV},
+  journal={International Journal for Numerical Methods in Engineering},
+  volume={50},
+  number={1},
+  pages={1--27},
+  year={2001},
+  publisher={Wiley Online Library}
+}
+
+
+@article{belikov1997,
+  title={The non-{S}ibsonian interpolation: A new method of
+                  interpolation of the values of a function on an
+                  arbitrary set of points},
+  author={Belikov, VV and Ivanov, VD and Kontorovich, VK and Korytnik, SA and Semenov, A Yu},
+  journal={Computational mathematics and mathematical physics},
+  volume={37},
+  number={1},
+  pages={9--15},
+  year={1997},
+  publisher={Maik Nauka/Interperiodica}
+}
+
+
+
+@inproceedings{sibson1980,
+  title={A vector identity for the Dirichlet tessellation},
+  author={Sibson, R},
+  booktitle={Mathematical Proceedings of the Cambridge Philosophical Society},
+  volume={87},
+  number={1},
+  pages={151--155},
+  year={1980},
+  organization={Cambridge Univ Press}
+}
+
+
+@article{cyron2009,
+  title={Smooth, second order, non-negative meshfree approximants selected by maximum entropy},
+  author={Cyron, C J and Arroyo, M and Ortiz, M},
+  journal={International Journal for Numerical Methods in Engineering},
+  volume={79},
+  number={13},
+  pages={1605--1632},
+  year={2009},
+  publisher={Wiley Online Library}
+}
+
+
+
+@article {arroyo2006,
+author = {Arroyo, M and Ortiz, M},
+title = {Local maximum-entropy approximation schemes: a seamless bridge between finite elements and meshfree methods},
+journal = {International Journal for Numerical Methods in Engineering},
+volume = {65},
+number = {13},
+publisher = {John Wiley & Sons, Ltd.},
+issn = {1097-0207},
+url = {http://dx.doi.org/10.1002/nme.1534},
+doi = {10.1002/nme.1534},
+pages = {2167--2202},
+keywords = {maximum entropy, information theory, approximation theory, meshfree methods, Delaunay triangulation},
+year = {2006},
+}

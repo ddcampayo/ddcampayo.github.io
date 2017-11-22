@@ -1,0 +1,118 @@
+ \newcommand{\noop}[1]{}
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Violeau(2012)]{violeau2012fluid}
+Damien Violeau.
+\newblock \emph{Fluid Mechanics and the SPH method: theory and applications}.
+\newblock Oxford University Press, 2012.
+
+\bibitem[Evans et~al.(1957)Evans, Harlow, and Bromberg]{evans1957}
+Martha~W Evans, Francis~H Harlow, and Eleazer Bromberg.
+\newblock The particle-in-cell method for hydrodynamic calculations.
+\newblock Technical Report LA-2139, Los Alamos Scientific Laboratory, 1957.
+
+\bibitem[Amsden(1966)]{PIC2}
+A.A. Amsden.
+\newblock The particle-in-cell method for the calculation of the dynamics of
+  compressible fluids.
+\newblock Technical Report LA-3466, Los Alamos Scientific Laboratory, 1966.
+
+\bibitem[Rap{\'u}n and Vega(2010)]{rapun2010reduced}
+Mar{\'\i}a-Luisa Rap{\'u}n and Jos{\'e}~M Vega.
+\newblock Reduced order models based on local {POD} plus {G}alerkin projection.
+\newblock \emph{Journal of Computational Physics}, 229\penalty0 (8):\penalty0
+  3046--3063, 2010.
+
+\bibitem[Brackbill and Ruppel(1986)]{brackbill1986flip}
+JU~Brackbill and HM~Ruppel.
+\newblock {FLIP}: A method for adaptively zoned, particle-in-cell calculations
+  of fluid flows in two dimensions.
+\newblock \emph{Journal of Computational Physics}, 65\penalty0 (2):\penalty0
+  314--343, 1986.
+
+\bibitem[Brackbill et~al.(1988)Brackbill, Kothe, and Ruppel]{brackbill1988}
+Jeremiah~U Brackbill, Douglas~B Kothe, and Hans~M Ruppel.
+\newblock {FLIP}: A low-dissipation, particle-in-cell method for fluid flow.
+\newblock \emph{Computer Physics Communications}, 48\penalty0 (1):\penalty0
+  25--38, 1988.
+
+\bibitem[Bridson(2015)]{bridson_2015}
+Robert Bridson.
+\newblock \emph{Fluid simulation for computer graphics}.
+\newblock CRC Press, 2015.
+
+\bibitem[Cottet and Koumoutsakos(2000)]{cottet2000}
+Georges-Henri Cottet and Petros~D Koumoutsakos.
+\newblock \emph{Vortex methods: theory and practice}.
+\newblock Cambridge university press, 2000.
+
+\bibitem[Duque and Espa{\~n}ol(\noop{1}Under review)]{duque_2017b}
+Daniel Duque and P~Espa{\~n}ol.
+\newblock International journal for numerical methods in engineering.
+\newblock \emph{Rapid convergence for simulations that project from particles
+  onto a fixed mesh}, \noop{1}Under review.
+
+\bibitem[Reddy(2005)]{reddy}
+J~Reddy.
+\newblock \emph{An Introduction to the Finite Element Method}.
+\newblock McGraw-Hill Series in Mechanical Engineering. McGraw-Hill Education,
+  2005.
+
+\bibitem[Christiansen(1973)]{christiansen1973}
+IP~Christiansen.
+\newblock Numerical simulation of hydrodynamics by the method of point
+  vortices.
+\newblock \emph{Journal of Computational Physics}, 13\penalty0 (3):\penalty0
+  363--379, 1973.
+
+\bibitem[Idelsohn et~al.(2015)Idelsohn, O{\~n}ate, Nigro, Becker, and
+  Gimenez]{Idelsohn_2015}
+Sergio Idelsohn, Eugenio O{\~n}ate, Norberto Nigro, Pablo Becker, and Juan
+  Gimenez.
+\newblock {L}agrangian versus {E}ulerian integration errors.
+\newblock \emph{Computer Methods in Applied Mechanics and Engineering},
+  293:\penalty0 191--206, 2015.
+
+\bibitem[Codina(2001)]{codina_2001}
+Ramon Codina.
+\newblock Pressure stability in fractional step finite element methods for
+  incompressible flows.
+\newblock \emph{Journal of Computational Physics}, 170\penalty0 (1):\penalty0
+  112--140, 2001.
+
+\bibitem[Duque et~al.(2017)Duque, Espa{\~n}ol, and {de}~la Torre]{duque_2017a}
+Daniel Duque, Pep Espa{\~n}ol, and Jaime~Arturo {de}~la Torre.
+\newblock Extending linear finite elements to quadratic precision on arbitrary
+  meshes.
+\newblock \emph{Applied Mathematics and Computation}, 301:\penalty0 201--213,
+  2017.
+
+\bibitem[{CGAL Editorial Board}()]{CGAL}
+{CGAL Editorial Board}.
+\newblock \textsc{Cgal}, {C}omputational {G}eometry {A}lgorithms {L}ibrary.
+\newblock http://www.cgal.org.
+
+\bibitem[Guennebaud et~al.(2010)Guennebaud, Jacob, et~al.]{Eigen}
+Ga\"{e}l Guennebaud, Beno\^{i}t Jacob, et~al.
+\newblock Eigen v3.
+\newblock http://eigen.tuxfamily.org, 2010.
+
+\bibitem[Chen et~al.(2009)Chen, Davis, Hager, and Rajamanickam]{cholmod}
+Y~Chen, T~A Davis, W~W Hager, and S~Rajamanickam.
+\newblock Algorithm 887: Cholmod, supernodal sparse cholesky factorization and
+  update/downdate.
+\newblock \emph{ACM Trans Math Software}, 35\penalty0 (3), 2009.
+
+\bibitem[Duque(2017)]{polyFEM}
+Daniel Duque.
+\newblock poly{FEM} 1.0.
+\newblock https://github.com/ddcampayo/polyFEM, 2017.
+\newblock URL \url{https://github.com/ddcampayo/polyFEM,
+  10.5281/zenodo.155375}.
+
+\end{thebibliography}
