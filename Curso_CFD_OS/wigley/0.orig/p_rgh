@@ -21,18 +21,18 @@ internalField   uniform 0;
 
 boundaryField
 {
-    //- Set patchGroups for constraint patches
-    #includeEtc "caseDicts/setConstraintTypes"
+    // //- Set patchGroups for constraint patches
+    // #includeEtc "caseDicts/setConstraintTypes"
 
-    inlet
+  inlet
     {
-        type            fixedFluxPressure;
-        value           $internalField;
+      type            fixedFluxPressure;
+      value           $internalField;
     }
 
-    outlet
+  outlet
     {
-        type            zeroGradient;
+      type            zeroGradient;
     }
 
     atmosphere
@@ -42,10 +42,32 @@ boundaryField
     }
 
     hull
+      {
+         type            fixedFluxPressure;
+         value           $internalField;
+      }
+
+    // hull
+    //   {
+    // 	type            zeroGradient;
+    //   }
+
+    side
     {
-        type            fixedFluxPressure;
-        value           $internalField;
+        type            zeroGradient;
     }
+
+    bottom
+    {
+        type            zeroGradient;
+    }
+
+    midPlane
+    {
+        type            symmetryPlane;
+    }
+    
+
 }
 
 // ************************************************************************* //

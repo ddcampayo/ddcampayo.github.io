@@ -49,6 +49,21 @@ boundaryField
         type            omegaWallFunction;
         value           $internalField;
     }
+    
+    side
+    {
+        type            zeroGradient;
+    }
+
+    bottom
+    {
+        type            zeroGradient;
+    }
+
+    midPlane
+    {
+        type            symmetryPlane;
+    }
 }
 
 

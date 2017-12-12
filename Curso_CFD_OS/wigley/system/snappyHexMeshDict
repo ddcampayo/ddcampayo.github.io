@@ -17,8 +17,8 @@ FoamFile
 
 // Which of the steps to run
 castellatedMesh true;
-snap            false;
-addLayers       false;
+snap            true;
+addLayers       true;
 
 
 // Geometry. Definition of all surfaces. All surfaces are of class
@@ -39,6 +39,16 @@ geometry
             type wall;
         }
     }
+    superficieMar
+    {
+        type    searchablePlane;
+	planeType pointAndNormal;
+	pointAndNormalDict {
+	  basePoint     (0   0  0 );
+	  normalVector    (0   0  1 );
+	}
+    }
+
 };
 
 
@@ -119,9 +129,13 @@ castellatedMeshControls
     //   cells inside the surface get refined up to the level. The surface
     //   needs to be closed for this to be possible.
     // - outside. Same but cells outside.
-
-    refinementRegions
+   refinementRegions
     {
+        superficieMar
+        {
+            mode distance;
+            levels (  (0.02 2 ) );
+        }
     }
 
 
@@ -133,8 +147,8 @@ castellatedMeshControls
     // section reachable from the locationInMesh is kept.
     // NOTE: This point should never be on a face, always inside a cell, even
     // after refinement.
-    //    locationInMesh ( 0.93 0.07 -0.013);
-    locationInMesh ( 0 0 0);
+        locationInMesh ( 0.93 0.07 -0.013);
+	// locationInMesh ( 0 0 0);
 
 
     // Whether any faceZones (as specified in the refinementSurfaces)

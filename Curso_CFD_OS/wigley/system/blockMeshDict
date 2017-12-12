@@ -25,7 +25,8 @@ Lx1	#calc "   $L / 2.0 + 4.0 * $L  ";
 Ly0	0.0;
 Ly1	#calc " $B / 2.0 + 3.0 * $B / 2.0 ";
 Lz0	#calc " - $T - 2.0 * $T  ";
-Lz1	#calc "  $T / 2.0 ";
+Lz1     0.0399;
+//Lz1	#calc "  $T / 2.0 ";
 
 vertices
 (
@@ -42,7 +43,7 @@ vertices
 
 // Resolution
 
-dx   0.01;
+dx   0.02;
 
 nx	#calc "int( ($Lx1 - $Lx0)  / $dx)";
 ny	#calc "int( ($Ly1 - $Ly0)  / $dx)";
@@ -73,7 +74,7 @@ boundary
         type patch;
         faces
         (
-            (1 2 6 5)
+            (2 6 5 1)
         );
     }
     inlet
@@ -92,12 +93,13 @@ boundary
             (0 3 2 1)
         );
     }
+
     midPlane
     {
         type symmetryPlane;
         faces
         (
-            (0 1 5 4)
+            (1 5 4 0)
         );
     }
     side

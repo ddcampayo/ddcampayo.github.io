@@ -15,43 +15,61 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-Umean 1.668;
-mUmean -1.668;
+Umean   1;
+mUmean -1;
 
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform ($mUmean 0 0);
+internalField   uniform ( $Umean 0 0 );
 
 boundaryField
 {
-    //- Set patchGroups for constraint patches
-    #includeEtc "caseDicts/setConstraintTypes"
+  //- Set patchGroups for constraint patches
+  #includeEtc "caseDicts/setConstraintTypes"
 
     inlet
     {
-        type            fixedValue;
-        value           $internalField;
+      type         fixedValue;
+      value        $internalField;
     }
 
     outlet
     {
-        type            outletPhaseMeanVelocity;
-        alpha           alpha.water;
-        Umean           $Umean;
-        value           $internalField;
+      type            outletPhaseMeanVelocity;
+      alpha           alpha.water;
+      Umean           $Umean;
+      value           $internalField;
     }
 
     atmosphere
     {
-        type            pressureInletOutletVelocity;
-        value           uniform (0 0 0);
+      type            pressureInletOutletVelocity;
+      tangentialVelocity $internalField;
+      value           uniform (0 0 0);
     }
 
     hull
     {
-        type            movingWallVelocity;
-        value           uniform (0 0 0);
+        type            noSlip;
     }
+
+    side
+    {
+        type            slip;
+    }
+
+    bottom
+    {
+        type            slip;
+    }
+
+    midPlane
+    {
+        type            symmetryPlane;
+    }
+
+
+
 }
 
 
