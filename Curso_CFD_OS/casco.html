@@ -64,188 +64,76 @@
 			      1 - \left( \frac{2z}{T} \right)^2
 			      \right]
 			      $$``
+
 			      ![Casco Wigley](wigley1.png)
+
 			    </script>
 			  </section>
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Mallado con "snappy"
+			      ####  Tutorial para inspirarnos
 
-			      El mallador automático principal de OpenFOAM
-			      se llama [snappyHexMesh](https://cfd.direct/openfoam/user-guide/snappyhexmesh)
-
-			      * snappy, por el paso de "fijado"
-
-			      * hex, por hexahedros (sólo contiene estos, y hex partidos)
-
-			      * mesh, por malla
+			      Claramente:
 			      
-			      
-			    </script>
-			  </section>
+			      ``multiphase/interFoam/ras/DTCHull``,
 
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Mallado en 2D
+			      un caso muy interesante por sí sólo (pero mucho más
+			      exigente)
 
-			      Por desgracia, y como todo OpenFOAM, snappyHexMesh malla en volumen
-			      nada más. Hoy contamos como engañarlo para que malle en 2D.
+			      Podemos encontrar cascos Wigley en
 
-			      El caso más interesante está en [wingMotion](/home/OpenFOAM/OpenFOAM/OpenFOAM-4.1/run/tutorials/incompressible/pimpleDyMFoam/wingMotion).
+			      ``tutorials/resources/geometry/``
 			      
 			    </script>
 			  </section>
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  wingMotion
+			      ####  Modificaciones
 
-			      Este es un caso bastante complicado. El fichero [Allrun](/home/OpenFOAM/OpenFOAM/OpenFOAM-4.1/run/tutorials/incompressible/pimpleDyMFoam/wingMotion) explica bastante bien lo que hace:
-			      
-			      * Mallado previo con snappy de un perfil de ala
+			      Lo primero, abrir wigley-scaled-oriented.stl para ver las dimensiones.
+			      Modificar blockMesh
 
-			      * Pasado a 2D para correr un estacionario previo
-
-			      * Ejecución de un transitorio muy
-			      ambicioso, con posible movimiento del
-			      ala (y la propia malla...)
+			      <img src="dimensiones.png" width="600">
 
 			      
 			    </script>
 			  </section>
 
-
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  wingMotion, paso a paso
+			      ####  blockMesh
 
-			      Realmente, sólo nos interesan los primeros pasos. Veamos qué hace
-			      snappyHexMesh
+			      Es buena idea dimensionar en término de las dimensiones del casco ...
 
-			      ```sh
-			      cd wingMotion_snappyHexMesh/
-			      blockMesh
-			      paraFoam &
-			      snappyHexMesh
-			      paraFoam &
-			      ```
+			      [blockMeshDict](wigley/system/blockMeshDict)
 
-			      Atención a los "tiempos" 1, 2 y 3, las sucesivas etapas del mallado
-			      
 			    </script>
 			  </section>
 
 
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Etapas del mallado
-
-
-			      1. Mallado "castellado" (¿"almenado"?)
-
-			      2. Snap ("¿pegado?")
-
-			      3. Capas
-			      
-			    </script>
-			  </section>
-
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Paso a 2D
+			      ####  snappyHexMesh
 
-			      ```sh
-			      cd ../wingMotion2D_simpleFoam
-			      extrudeMesh  # (ojo a la salida)
-			      createPatch
-			      ```
+			      Lo siguente es el mallado. Colocar
+			      nuestro stl en constant/triSurface/ (y
+			      llamarlo sólo "wigley.stl", p.e.).
 
-			      Los patches inicialmente son: inlet,
-			      outlet, topAndBottom, wing,
-			      symBack, symFront
+			      Hay que modificar snappyHexMesh.
 
-			      Después de createPatch son: inlet,
-			      outlet,  topAndBottom, wing,
-			      back, front
+			      * Cambiar la sección geometry para que lea el stl
 
+			      * Borrar la sección "features"
 
-			      
-			      
-			    </script>
-			  </section>
+			      * Poner level (2 3); (o similar) en  refinementSurfaces
 
-			  
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Reutilización para nuestro cilindro
+			      * locationInMesh ( 1.73 0.017 0.03);
 
-			      Lo primero, crear un caso limpio
-			      ("cilindro_snappy") con system, constant
-			      y 0 (p.e. de cavity)
+			      * minRefinementCells 100;    nCellsBetweenLevels 6; ???
 
-			      Luego, crear un blockMesh sencillo (o
-			      copiar el del ala). Por ejemplo,
-			      [cilindro_snappy/system/blockMeshDict](este
-			      dict)
-
-			      Después, "tunear" hexnappyHexMeshDict !
-
-			      
-			    </script>
-			  </section>
-
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Reutilización de snappyHexMeshDict
-
-			      * Copiar snappyHexMeshDict del ala a nuestro system
-
-			      * Correr blockMesh (si no se ha hecho ya)
-
- 			      * Correr snappyHexMesh: obviamente, falta el obj del ala
-
-			      * Editar snappyHexMeshDict, poner false en "snap" y "addLayers" de
-			      momento
-
-			      
-			    </script>
-			  </section>
-
-			      
-
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Cilindro snappyHexMeshDict
-
-			      Para una forma tan sencilla como un cilindro, no necesitamos
-			      una superficie
-
-			      * Cambiar la sección geometry a:
-
-			      ```c++
-geometry
-{
-    cilindro
-    {
-        type    searchableCylinder;
-        point1     (0   0  -1);
-        point2     (0   0   1);
-	radius 0.5;
-    }
-
-    
-    refinementBox
-    {
-        type    searchableBox;
-        min     (0   -0.2  -1);
-        max     (10   0.2 1);
-    }
-};```
-			      
 			      
 			    </script>
 			  </section>
