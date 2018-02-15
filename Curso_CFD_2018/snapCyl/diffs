@@ -1,0 +1,99 @@
+7a8,9
+> // From: /opt/openfoam4/applications/utilities/mesh/generation/snappyHexMesh/snappyHexMeshDict
+> 
+20c22
+< addLayers       false;
+---
+> addLayers       true;
+42,47d43
+<     box1x1x1
+<     {
+<         type searchableBox;
+<         min (1.5 1 -0.5);
+<         max (3.5 2 0.5);
+<     }
+49c45
+<     sphere.stl
+---
+>     cylinder
+51,75c47,50
+<         type triSurfaceMesh;
+< 
+<         //tolerance   1E-5;   // optional:non-default tolerance on intersections
+<         //maxTreeDepth 10;    // optional:depth of octree. Decrease only in case
+<                               // of memory limitations.
+< 
+<         // Per region the patchname. If not provided will be <surface>_<region>.
+<         // Note: this name cannot be used to identity this region in any
+<         //       other part of this dictionary; it is only a name
+<         //       for the combination of surface+region (which is only used
+<         //       when creating patches)
+<         regions
+<         {
+<             secondSolid
+<             {
+<                 name mySecondPatch;
+<             }
+<         }
+<     }
+< 
+<     sphere2
+<     {
+<         type searchableSphere;
+<         centre  (1.5 1.5 1.5);
+<         radius  1.03;
+---
+>         type searchableCylinder;
+>         point1  ( 0   0 -2 );
+>         point2  ( 0   0  4 );
+>         radius  1.0;
+149c124
+<         sphere.stl
+---
+>         cylinder
+154,162d128
+<             // Optional region-wise level specification
+<             regions
+<             {
+<                 secondSolid
+<                 {
+<                     level (3 3);
+<                 }
+<             }
+< 
+240,244c206,210
+<         box1x1x1
+<         {
+<             mode inside;
+<             levels ((1.0 4));
+<         }
+---
+> //        cylinder
+> //        {
+> //            mode outside;
+> //            levels ((0.1 1));
+> //        }
+341c307
+<         finalLayerThickness 0.3;
+---
+>         finalLayerThickness 1.0;
+358c324
+<     minThickness 0.25;
+---
+>     minThickness 0.01;
+368c334
+<         sphere.stl_firstSolid
+---
+>        cylinder
+370,371c336,339
+<             nSurfaceLayers 1;
+< 
+---
+>             nSurfaceLayers 3;
+>             expansionRatio      1.2;
+>             finalLayerThickness 1.0;
+>             minThickness        0.1;
+375c343
+<             nSurfaceLayers 1;
+---
+>             nSurfaceLayers 3;
