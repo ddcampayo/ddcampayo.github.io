@@ -80,81 +80,101 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Resolución
+			      ####  Escalas físicas: espacio
 
-			      <img src="xt_grid.png" alt="Malla de simulación 1D" style="width: 300px;"/>
+			      Suele existir una *longitud* característica $L$. Definimos
+			      entonces distancias adimensionales (o "reducidas") $x = L x^*$:
+			      
+			      ``\begin{align} u_i^{n+1} = u_i^n & -  
+			      c \frac{\Delta t}{L \Delta x^*} ( u_{i}^n-u_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{L^2 \Delta x^{*2} } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
 
-			      <!-- ![Malla de simulación 1D](./xt_grid.png) -->
+			      
+			      
 
-			      Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $``
+			      <!-- <img src="xt_grid.png" alt="Malla de simulación 1D" style="width: 300px;"/> -->
 
-			      No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $``
+			      <!-- <\!-- ![Malla de simulación 1D](./xt_grid.png) -\-> -->
+
+			      <!-- Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $`` -->
+
+			      <!-- No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $`` -->
 			      			      
 			    </script>
 			  </section>
 
+
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  ¿Cuántos problemas resolvemos exactamente?
+			      ####  Escalas físicas: velocidad y tiempo
 
-			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
-
-			      Así pues, a resolución fija ( $N_x$ y
-			      $N_t$ ), resolvemos infinitos; todos,
-			      para un valor dado $ c \frac{\Delta
-			      t}{L}$.
-
-			      <!-- Esto es intuitivo: el valor de la velocidad $c$ no es importante, sólo su valor -->
-			      <!-- relativo $c / (L/T) $. -->
+			      También, una *velocidad* característica, $c$ en este caso. Entonces,
+			       la combinación $c t /L $ define un tiempo característico,
+			      tal que $t = L t^* / c$:
+			      
+			      ``$$u_i^{n+1} = u_i^n  -  
+			       \frac{c   \Delta t}{L \Delta x^*} ( u_{i}^n-u_{i-1}^n )    +
+			      \frac{D}{c L} \frac{c  \Delta t}{L \Delta x^{*2} } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} )$$``
 
 			      
+			      ``$$u_i^{n+1} = u_i^n  -  
+			       \frac{\Delta t^*}{\Delta x^*} ( u_{i}^n-u_{i-1}^n )   +
+			      \frac{D}{c L} \frac{\Delta t^*}{\Delta x^{*2} } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) $$``
+
+			      
+
+			      <!-- <img src="xt_grid.png" alt="Malla de simulación 1D" style="width: 300px;"/> -->
+
+			      <!-- <\!-- ![Malla de simulación 1D](./xt_grid.png) -\-> -->
+
+			      <!-- Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $`` -->
+
+			      <!-- No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $`` -->
+			      			      
 			    </script>
 			  </section>
 
+
+			  
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Viscosidad: el "otro" número
+			      ####  Difusión: el "otro" número
+
+			      Vemos entonces que en unidades reducidas,
+
+			      ``$$ \mathrm{Co} = \frac{\Delta t^*}{\Delta x^*}   $$``
 			      
-			      ``$$ \mathrm{Co}_D = D \frac{\Delta t}{\Delta x^2}   $$``
+			      ``$$ \mathrm{Co}_D = \frac{D}{L c} \frac{\Delta t^*}{\Delta x^{*2}}  = \frac{1}{\mathrm{Re}} \frac{\Delta t^*}{\Delta x^{*2}}  $$``
 
-			      Pero dado que ``$ \mathrm{Co} = c \frac{\Delta t}{\Delta x}  $``
-
-			      ``$$ \mathrm{Co}_D = \frac{ D }{\Delta x}  \frac{\Delta t}{\Delta x} = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x $$``
-
+			      donde aparece el famoso número de Péclet (Reynolds, si es viscosidad).
 			      
-			    </script>
-			  </section>
-
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Viscosidad: el  número de Reynolds
-
-			      ``$$ \mathrm{Co}_D = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x   = \mathrm{Co} \frac{1}{\mathrm{Re}}  N_x $$``
-
 			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
 
 			      
 			    </script>
 			  </section>
 
-
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Números y escalado
+			      ## Péclet number in the continuum
+				    
 
-			      En resumidas cuentas, para simular "lo mismo" (__físicamente__) hay que mantener (de momento)
+			      `$$\frac{\partial u}{\partial t^* } +  \frac{\partial u}{\partial x^*} =
+			      \frac{D}{L c} \frac{\partial^2 u}{\partial x^{*2}}
+			      $$`
 
-			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
-			      y
+			      `$$\frac{\partial u}{\partial t^* } +  \frac{\partial u}{\partial x^*} =
+			       \frac{1}{\mathrm{Re}} \frac{\partial^2 u}{\partial x^{*2}}
+			      $$`
 
-			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
-
-			      Lo mismo __numéricamente__: hay que mantener $ \mathrm{Co}$ y $ \mathrm{Co}_D$... pero esto no
-			      es posible en general. Lo más aceptable es mantener ambos en valores *bajos*.
+			      with the definition
 			      
-			      
+			      $$ \mathrm{Re}:= \frac{L c}{D} $$
+		    
+
 			    </script>
-			  </section>		  
+			  </section>
+
 
 			  
 			  <section data-markdown>
