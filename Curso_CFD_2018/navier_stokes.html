@@ -66,11 +66,13 @@
 			    <script type="text/template">
 			      ####  Convección + difusión en 2D y 3D
 
-			      Nos vamos a creer (la primera de muchas cosas hoy):
+			      En 1D:
 			      
-			      $$ \frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
+			      $$ \frac{\partial \phi}{\partial t} + c \frac{\partial  \phi}{\partial x}  = D \frac{\partial^2  \phi}{\partial x^2} $$
 
-			      $$ \frac{\partial u}{\partial t} + \nabla \cdot ( \vec{c} u )  = D \nabla^2 u $$
+			      No es difícil  pasar a dimensiones superiores:
+
+			      $$ \frac{\partial  \phi}{\partial t} + \nabla \cdot ( \vec{c}  \phi )  = D \nabla^2  \phi $$
 
 			      
 			    </script>
@@ -82,9 +84,9 @@
 
 			      La densidad de un fluido, $\rho$ cumple una ley de convección pura:
 
-			      $$ \frac{\partial u}{\partial t} + \nabla \cdot ( \vec{c} u )  = D \nabla^2 u $$
+			      $$ \frac{\partial \phi}{\partial t} + \nabla \cdot ( \vec{c} \phi )  = D \nabla^2  \phi $$
 
-			      $$ u \rightarrow \rho  \qquad     \vec{c} \rightarrow  \vec{u} \qquad D=0  $$  
+			      $$  \phi \rightarrow \rho  \qquad     \vec{c} \rightarrow  \vec{u} \qquad D=0  $$  
 			      
 			      $$ \frac{\partial \rho }{\partial t} + \nabla \cdot ( \rho  \vec{u} )  = 0 $$
 
@@ -98,7 +100,7 @@
 
 			      El momento, $\rho\vec{u}$ cumple una ecuación de difusión - convección (en un fluido Newtoniano):
 
-			      $$ \frac{\partial u}{\partial t} + \nabla \cdot ( \vec{c} u )  = D \nabla^2 u $$
+			      $$ \frac{\partial  \phi}{\partial t} + \nabla \cdot ( \vec{c}  \phi )  = D \nabla^2  \phi $$
 
 			      $$ u \rightarrow \rho \vec{u}   \qquad     \vec{c} \rightarrow  \vec{u} \qquad D \rightarrow \mu  $$  
 			      
@@ -124,7 +126,7 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Cierre de las ecuaciones: compresible
+			      ####  Cierre de las ecuaciones: caso compresible
 
 			      Las ecuaciones se pueden cerrar relacionando $p$ y $\rho$ mediante una
 			      ecuación de estado:
@@ -139,9 +141,9 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ####  Cierre de las ecuaciones: incompresible
+			      ####  Cierre de las ecuaciones: caso incompresible
 
-			      O, puede considerarse que $\rho$ es constante, con lo cual
+			      O puede considerarse que $\rho$ es constante, con lo cual
 
 			      $$ \frac{\partial \rho }{\partial t} + \nabla \cdot ( \rho  \vec{u} )  = 0   \implies   \nabla \cdot  \vec{u}    = 0 $$
 
@@ -173,6 +175,42 @@
 			    </script>
 			  </section>
 
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Fluidos incompresibles, versión adimensional
+
+			      Cambia un poco respecto a lo discutido en 1D:
+
+			      * La velocidad es un *campo*, así que hay que introducir una velocidad típica $c$
+
+			      * Está el asunto de la presión ...
+
+			      * Al final, así quedan las variables:
+			     
+			      ``$$x = L x^* \qquad \nabla = \frac1L \nabla^* \qquad t = L t^* / c \qquad p = p^* (\rho c^2) $$``
+			      
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Fluidos incompresibles, versión adimensional
+
+			      Se deja como ejercicio: 
+			      
+			      $$   \frac{\partial \vec{u}  }{\partial t} +  \vec{u} \cdot \nabla \vec{u}  =   \frac\mu\rho \nabla^2 \vec{u}   - \frac1\rho \nabla p $$ 
+
+			      lleva a
+			      ``$$   \frac{\partial \vec{u}^*  }{\partial t^*} +  \vec{u}^* \cdot \nabla^* \vec{u}^*  =   \frac{1}{\mathrm{Re}} (\nabla^*)^2 \vec{u}^*   - \nabla^* p^* $$``
+			      
+			    </script>
+			  </section>
+
+
+
+			  
 
 			  
 

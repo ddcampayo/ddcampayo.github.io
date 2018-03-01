@@ -114,12 +114,12 @@
 			      
 			      ``$$u_i^{n+1} = u_i^n  -  
 			       \frac{c   \Delta t}{L \Delta x^*} ( u_{i}^n-u_{i-1}^n )    +
-			      \frac{D}{c L} \frac{c  \Delta t}{L \Delta x^{*2} } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} )$$``
+			      \frac{D}{c L} \frac{c  \Delta t}{L \Delta x^{*2} } ( \ldots )$$``
 
 			      
 			      ``$$u_i^{n+1} = u_i^n  -  
 			       \frac{\Delta t^*}{\Delta x^*} ( u_{i}^n-u_{i-1}^n )   +
-			      \frac{D}{c L} \frac{\Delta t^*}{\Delta x^{*2} } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) $$``
+			      \frac{D}{c L} \frac{\Delta t^*}{\Delta x^{*2} } ( \ldots ) $$``
 
 			      
 
@@ -144,11 +144,11 @@
 
 			      ``$$ \mathrm{Co} = \frac{\Delta t^*}{\Delta x^*}   $$``
 			      
-			      ``$$ \mathrm{Co}_D = \frac{D}{L c} \frac{\Delta t^*}{\Delta x^{*2}}  = \frac{1}{\mathrm{Re}} \frac{\Delta t^*}{\Delta x^{*2}}  $$``
+			      ``$$ \mathrm{Co}_D = \frac{D}{L c} \frac{\Delta t^*}{\Delta x^{*2}}  = \frac{1}{\mathrm{Pe}} \frac{\Delta t^*}{\Delta x^{*2}}  $$``
 
-			      donde aparece el famoso número de Péclet (Reynolds, si es viscosidad).
+			      donde aparece el famoso número de Péclet (para $D$), o de Reynolds  (para $\nu$).
 			      
-			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+			      ``$$ \mathrm{Pe} := \frac{L c}{D} \qquad  \mathrm{Re} := \frac{L c}{\nu}  $$``
 
 			      
 			    </script>
@@ -164,12 +164,12 @@
 			      $$`
 
 			      `$$\frac{\partial u}{\partial t^* } +  \frac{\partial u}{\partial x^*} =
-			       \frac{1}{\mathrm{Re}} \frac{\partial^2 u}{\partial x^{*2}}
+			       \frac{1}{\mathrm{Pe}} \frac{\partial^2 u}{\partial x^{*2}}
 			      $$`
 
 			      with the definition
 			      
-			      $$ \mathrm{Re}:= \frac{L c}{D} $$
+			      $$ \mathrm{Pe}:= \frac{L c}{D} $$
 		    
 
 			    </script>
