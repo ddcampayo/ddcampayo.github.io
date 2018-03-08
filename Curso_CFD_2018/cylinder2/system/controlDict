@@ -76,13 +76,13 @@ forceCoeffs1
     CofR            (0 0 0);
 
     // Lift direction
-    liftDir         (0 0 1);
+    liftDir         (0 1 0);
 
     // Drag direction
     dragDir         (1 0 0);
 
     // Pitch axis
-    pitchAxis       (0 1 0);
+    pitchAxis       (0 0 1);
 
     // Freestream velocity magnitude [m/s]
     magUInf         1;
