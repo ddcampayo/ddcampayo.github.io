@@ -61,22 +61,27 @@
 
 
 
-	      
-	<section data-markdown>
-	  <script type="text/template">
-	    ##Why Fourier
+	<section >
+	  <section >
+	    <h4>Why Fourier</h4>
 
-	    $$\frac{d \mathbf{u}}{d t} =- \nabla p +  \nu \nabla^2 \mathbf{u} +  \mathbf{g}$$
-	    ``$$\frac{d \mathbf{u}_\mathbf{q}}{d t} =- i \mathbf{q} p_\mathbf{q} -\nu q^2 \mathbf{u}_\mathbf{q}  +\mathbf{g}_\mathbf{q}$$``
+	      $$\frac{d \mathbf{u}}{d t} =- \nabla p + \nu \nabla^2
+	      \mathbf{u} + \mathbf{g}$$
 
+	      Pressure:
+	      $$\nabla\cdot\mathbf{u}=0$$
+	  </section >
+	  <section >
+	      <h4>Why Fourier</h4>
+	      $$\frac{d \mathbf{u}_\mathbf{q}}{d t} =- i \mathbf{q}
+	      p_\mathbf{q} -\nu q^2 \mathbf{u}_\mathbf{q}
+	      +\mathbf{g}_\mathbf{q}$$
 
-	  </script>
+	    $$\mathbf{q} \cdot \mathbf{u}_\mathbf{q} = 0$$
+	  </section >
 	</section>
 
-
-
 	<section>
-
 	  <section data-markdown>
 	    <script type="text/template">
 	      ### Kolmogorov flow
@@ -87,26 +92,130 @@
 
 	    </script>
 	  </section>
+
 	  <section>
-	    <img width="640"  data-src="Kolmo_force.png"   alt="For lambda=L/8">
+	    <h4>Kolmogorov force</h4>
+	    <img width="640"  data-src="Kolmo_force.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	    
 	  </section>
+
 	  <section>
-	    <img width="640" data-src="Kolmo_force_blowup.png"   alt="For lambda=L/8">
+	    <h4>Kolmogorov force</h4>
+	    <img width="640" data-src="Kolmo_force_blowup.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
-	    
 	  </section>
 
 	</section>
-
 
 	
 	<section>
 	  <h3>Onset of 2D turbulence</h3>
-	      <video class="stretch" src="./onset_2D_turbulence.mp4" type="video/mp4"></video>
+	      <video class="stretch" data-src="./onset_2D_turbulence2.mp4" type="video/mp4"></video>
 	</section>
+
+
+	<section>
+	    <h4>Membranes: 2D fluids</h4>
+	    <img width="640"  data-src="800px-Cell_membrane_detailed_diagram_blank.svg.png"   alt="Biological membrane">
+	</section>
+
+	
+	<section data-markdown>
+	    <script type="text/template">
+	      ### Flow in membranes
+
+	      Overdamped regime, flow driven only by forces
 	      
+	      ``$$\eta \nabla^2 \mathbf{u} -\nabla p =  - \mathbf{f} $$``
+
+
+	      ``$$\mathbf{f} = - \phi\nabla\mu $$``
+
+	    </script>
+	  </section>
+
+	<section data-markdown>
+	    <script type="text/template">
+	      ### Flow in membranes: solution
+	      
+	      ``$$\mathbf{u}_{\mathbf{q},a} = \frac 1{\eta q^2}
+	      \sum_b
+	      \left[ \delta_{ab} - \frac{ \mathbf{q}_a  \mathbf{q}_b}{q^2} \right]
+	      \mathbf{f}_{\mathbf{q},a} =: \sum_b T_{ab} \mathbf{f}_{\mathbf{q},b} $$``
+
+	      
+	      ``$$T_{ab} := \frac 1{\eta_\mathrm{m} (q^2 + \color{red} {q / L_\mathrm{SD}} ) }
+	      \left[ \delta_{ab} - \frac{ \mathbf{q}_a \mathbf{q}_b}{q^2} \right] \qquad
+	      L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $$``
+  
+	      
+	    </script>
+	  </section>
+	
+	<section data-markdown>
+	    <script type="text/template">
+	      ### Modeling phase segregation
+
+	      ``$$\frac{d \phi}{d t} =
+	      M \nabla^2 \mu  $$``
+
+	      ``$$\mu = \frac{\delta}{\delta \phi}
+	      \int
+	      \left[
+	      \color{blue}{
+	      -\frac{a}{2} \phi^2 + \frac{b}{4} \phi^4}
+	      +
+	      \color{red}{
+	      \frac{c}{2} |\nabla \phi|^2 }
+	      \right]
+	      dV  $$``
+
+
+	    </script>
+	  </section>
+
+	<section>
+	    <h4>Landau double-well</h4>
+	    <img width="640"  data-src="double_Well.png"   alt="Double well potential and force">
+	</section>
+
+	<section>
+	  <h4>Equilibrium profile</h4>
+	  $\mu=0$
+	    <img width="640"  data-src="profile.png"   alt="profile">
+	</section>
+
+
+	
+	<!-- <section data-markdown> -->
+	<!--   <script type="text/template"> -->
+	<!--     ### Modeling phase segregation -->
+
+	
+	<!--     \psi_{\bfq,n+1/2} &=  \psi_{\bfq,n} \\ -->
+	<!--     & -->
+	<!--     - \frac{\Delta t}{2} D^* q^2 \left[ -->
+	<!--     -\psi_{\bfq,n+1/2} + -->
+	<!--     (\psi^3)_{\bfq,n} + -->
+	<!--     \frac12 q^2 \psi_{\bfq,n+1/2} -->
+	<!--     \right]. -->
+
+	    
+	<!--     </script> -->
+	<!-- </section> -->
+
+	<section>
+	  <h4>Membrane: results</h4>
+	  <img width="300"  data-src="real_128/parts_bw_values_500.png"   alt="t=125">
+	  <img width="300"  data-src="real_128/parts_bw_values_1000.png"   alt="t=250">
+
+	  <p>
+	  
+	  <img width="300"  data-src="real_128/parts_bw_values_3000.png"   alt="t=750">
+	  <img width="300"  data-src="real_128/parts_bw_values_4000.png"   alt="t=1000">
+	</section>
+
 
       </div>
 	    
