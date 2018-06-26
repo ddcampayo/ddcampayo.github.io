@@ -84,6 +84,50 @@
 	<section>
 	  <section data-markdown>
 	    <script type="text/template">
+	      ### Procedure
+
+	      1. Approximate $\mathbf{u}^{n+1/2} \approx \mathbf{u}^{n}$
+	      2. Project $\mathbf{u}^{n+1/2}$ on the particles
+	      3. Advance particles a half-step $ \mathbf{r}^{n+1/2} =
+	      \mathbf{r}^{n} + \frac{\Delta t}{2} \mathbf{u}^{n+1/2} . $
+	      4. Project $\mathbf{u}^{n}$ on the mesh
+	      5. <span style="color:red">Fourier calculation on the mesh $\to \mathbf{u}^{n+1/2}$ </span>
+	      6. Return to step 2 until convergence
+	      12. Move the particles a whole step:
+	      $
+	      \mathbf{r}^{n+1} =   \mathbf{r}^{n} + \mathbf{u}^{n+1/2} \Delta t
+	      $,
+	      update velocities according to the mid-point rule,
+	      $
+	      \mathbf{r}^{n+1} =   2 \mathbf{u}^{n+1/2} - \mathbf{r}^{n}
+	      $
+	      13. Go to (1) for a new time step
+	    </script>
+	  </section>
+	  <section data-markdown>
+	    <script type="text/template">
+	      ### Procedure: mesh
+	      6. Calculate the DFT of $\mathbf{u}^{n}$ on the mesh
+	      7. Calculate $\mathbf{u}_\mathbf{q}^{*} $ 
+	      8. Calculate $p_\mathbf{q}$
+	      9. Calculate $\mathbf{u}_\mathbf{q}^{n+1/2}$
+	      10. Calculate the inverse DFT of $\mathbf{u}_\mathbf{q}^{n+1/2}$ to get $\to \mathbf{u}^{n+1/2}$
+	    </script>
+	  </section>
+	</section>
+	    
+
+	
+	
+	<section>
+	  <h4>Quick check: TG vortices</h4>
+	  <img width="640"  data-src="L2_TG_comp.png"  alt="TG errors">
+ 	  <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
+	</section>
+
+	<section>
+	  <section data-markdown>
+	    <script type="text/template">
 	      ### Kolmogorov flow
 
 	      External periodic shear force:
@@ -95,27 +139,49 @@
 
 	  <section>
 	    <h4>Kolmogorov force</h4>
-	    <img width="640"  data-src="Kolmo_force.png"   alt="Kolmogorov force">
+	    <img width="600"  data-src="Kolmo_force.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	    
 	  </section>
 
 	  <section>
 	    <h4>Kolmogorov force</h4>
-	    <img width="640" data-src="Kolmo_force_blowup.png"   alt="Kolmogorov force">
+	    <img width="600" data-src="Kolmo_force_blowup.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	  </section>
 
 	</section>
 
-	
+
 	<section>
-	  <h3>Onset of 2D turbulence</h3>
-	      <video class="stretch" data-src="./onset_2D_turbulence2.mp4" type="video/mp4"></video>
-	      <video class="stretch" data-src="./onset_2D_turbulence.wav" type="audio/wav"></video>
+	  <section>
+	    <h4>Onset of 2D turbulence</h4>
+	    <img width="600"  data-src="power_K.png"   alt="power spectrum"></img>
+	  </section>
+	  <section>
+	    <h4>Onset of 2D turbulence</h4>
+	    <video class="stretch" data-src="./onset_2D_turbulence_sound.mp4" type="video/mp4"></video>
+	    <!-- <video class="stretch" data-src="./onset_2D_turbulence.wav" type="audio/wav"></video> -->
+	  </section>
 	</section>
 
+	<section>
+	  <section>
+	    <h4>2D turbulence features</h4>
+	    <img width="600"  data-src="vel_distr.png"   alt="v pdf">
+	  </section >
+	  <section >
+	    <h4>2D turbulence features</h4>
+	    <img width="600"  data-src="accel_distr.png"   alt="a pdf">
+	  </section>
+	  <section >
+	    <h4>2D turbulence features</h4>
+	    <img width="600"  data-src="power_K2.png"   alt="power spectrum">
+	  </section>
+	</section >
 
+
+	
 	<section>
 	    <h4>Membranes: 2D fluids</h4>
 	    <img width="640"  data-src="800px-Cell_membrane_detailed_diagram_blank.svg.png"   alt="Biological membrane">
@@ -198,12 +264,12 @@
 	<!--     ### Modeling phase segregation -->
 
 	
-	<!--     \psi_{\bfq,n+1/2} &=  \psi_{\bfq,n} \\ -->
+	<!--     \psi_{\mathbf{q},n+1/2} &=  \psi_{\mathbf{q},n} \ -->
 	<!--     & -->
 	<!--     - \frac{\Delta t}{2} D^* q^2 \left[ -->
-	<!--     -\psi_{\bfq,n+1/2} + -->
-	<!--     (\psi^3)_{\bfq,n} + -->
-	<!--     \frac12 q^2 \psi_{\bfq,n+1/2} -->
+	<!--     -\psi_{\mathbf{q},n+1/2} + -->
+	<!--     (\psi^3)_{\mathbf{q},n} + -->
+	<!--     \frac12 q^2 \psi_{\mathbf{q},n+1/2} -->
 	<!--     \right]. -->
 
 	    
@@ -240,7 +306,7 @@
 
       Reveal.initialize({
       // Display controls in the bottom right corner
-      controls: false,
+      controls: true,
       // Display a presentation progress bar
       progress: true,
       // Display the page number of the current slide
