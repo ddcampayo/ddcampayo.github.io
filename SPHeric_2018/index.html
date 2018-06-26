@@ -14,18 +14,20 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" href="../css/reveal.css">
-    <link rel="stylesheet" href="../css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
 
     <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="../lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- <link rel="stylesheet" href="vfill.css" > -->
 
     <!-- Printing and PDF exports -->
     <script>
       var link = document.createElement( 'link' );
       link.rel = 'stylesheet';
       link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
       document.getElementsByTagName( 'head' )[0].appendChild( link );
     </script>
 
@@ -45,7 +47,7 @@
 	  <i>
 	    Spectral Particle Methods
 	  </i>
-	  <br>
+ 	  <br>
 	  <br>
 	  2018 SPHeric meeting
 	  <br>
@@ -65,19 +67,32 @@
 	  <section >
 	    <h4>Why Fourier</h4>
 
-	      $$\frac{d \mathbf{u}}{d t} =- \nabla p + \nu \nabla^2
-	      \mathbf{u} + \mathbf{g}$$
+	    $$\frac{d \mathbf{u}}{d t} =- \nabla p + \nu \nabla^2
+	    \mathbf{u} + \mathbf{g}$$
 
-	      Pressure:
-	      $$\nabla\cdot\mathbf{u}=0$$
-	  </section >
-	  <section >
-	      <h4>Why Fourier</h4>
+	    Pressure:
+	    $$\nabla\cdot\mathbf{u}=0$$
+    	    <p class="fragment fade-up">
 	      $$\frac{d \mathbf{u}_\mathbf{q}}{d t} =- i \mathbf{q}
 	      p_\mathbf{q} -\nu q^2 \mathbf{u}_\mathbf{q}
 	      +\mathbf{g}_\mathbf{q}$$
 
-	    $$\mathbf{q} \cdot \mathbf{u}_\mathbf{q} = 0$$
+	      $$\mathbf{q} \cdot \mathbf{u}_\mathbf{q} = 0$$
+	    </p>
+	  </section >
+	  <section >
+	    <h5>... but, of course </h5>
+
+	    $d \mathbf{u}/d t$ is a <span style="font-weight:bold">total</span> derivative (hence, use particles)
+
+	    <p class="fragment fade-up">
+	      $\mathbf{u}_\mathbf{q}$ should be computed on a mesh
+              (hence, use a mesh)
+	    </p>
+
+	    <p class="fragment fade-up">
+              A compromise: use both, Particle-in-Cell style (also, pFEM v2.0)
+	    </p>
 	  </section >
 	</section>
 
@@ -104,6 +119,7 @@
 	      13. Go to (1) for a new time step
 	    </script>
 	  </section>
+
 	  <section data-markdown>
 	    <script type="text/template">
 	      ### Procedure: mesh
@@ -114,17 +130,43 @@
 	      10. Calculate the inverse DFT of $\mathbf{u}_\mathbf{q}^{n+1/2}$ to get $\to \mathbf{u}^{n+1/2}$
 	    </script>
 	  </section>
-	</section>
+
+
+	  <section>
+ 	    <h4>Procedure: onto mesh and back</h4>
+	    <img width="640"  data-src="Projection_article_cover.png"  alt="TG errors">
+ 	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
+	    <p>
+	    doi: 10.1142/S021987621850130X
 	    
+	  </section>
+
+	  <section>
+ 	    <h4>Procedure: onto mesh and back</h4>
+	    <img width="200"  data-src="contours_delta.png"  alt="Zalesak disk test">
+	    <img width="200"  data-src="contours_flip.png"  alt="Zalesak disk test">
+	    <br>
+	    <img width="200"  data-src="contours_full.png"  alt="Zalesak disk test">
+	    <img width="200"  data-src="contours_full_full.png"  alt="Zalesak disk test">	    
+	  </section>
+
+	  
+	</section>
 
 	
 	
 	<section>
-	  <h4>Quick check: TG vortices</h4>
+ 	  <h4>Quick check: TG vortices</h4>
 	  <img width="640"  data-src="L2_TG_comp.png"  alt="TG errors">
  	  <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	</section>
 
+	<section>
+	  <h4>TG vortices go turbulent</h4>
+	  <video class="stretch" data-src="./TG_goes_turb.mp4" type="video/mp4"></video>
+	</section>
+
+	
 	<section>
 	  <section data-markdown>
 	    <script type="text/template">
@@ -132,7 +174,7 @@
 
 	      External periodic shear force:
 	    
-	      $$ \mathbf{g} = f_0 \cos\left( \frac{2\pi y}{\lambda} \right) \hat{\mathbf{e}}_x $$
+	      ``$$ \mathbf{g} = f_0 \cos\left( \frac{2\pi y}{\lambda} \right) \hat{\mathbf{e}}_x $$``
 
 	    </script>
 	  </section>
@@ -158,6 +200,7 @@
 	    <h4>Onset of 2D turbulence</h4>
 	    <img width="600"  data-src="power_K.png"   alt="power spectrum"></img>
 	  </section>
+
 	  <section>
 	    <h4>Onset of 2D turbulence</h4>
 	    <video class="stretch" data-src="./onset_2D_turbulence_sound.mp4" type="video/mp4"></video>
@@ -192,13 +235,25 @@
 	    <script type="text/template">
 	      ### Flow in membranes
 
-	      Overdamped regime, flow driven only by forces
+	      ***Overdamped*** regime
+	      
+	      <img height="600"  data-src="./Re_number.jpg"   alt="lo Re">
+
+	    </script>
+	  </section>
+
+	<section data-markdown>
+	    <script type="text/template">
+	      ### Flow in membranes
+
+	      Flow driven only by forces. Stokes equation:
 	      
 	      ``$$\eta \nabla^2 \mathbf{u} -\nabla p =  - \mathbf{f} $$``
 
 
-	      ``$$\mathbf{f} = - \phi\nabla\mu $$``
+	      ``$$ \nabla \cdot \mathbf{u}  =  0 $$``
 
+              
 	    </script>
 	  </section>
 
@@ -253,10 +308,6 @@
 	    <img width="640"  data-src="profile.png"   alt="profile">
 	</section>
 
-	<section>
-	  <h3>membrane segregation</h3>
-	      <video class="stretch" data-src="./membrane_segregation.mp4" type="video/mp4"></video>
-	</section>
 
 	
 	<!-- <section data-markdown> -->
@@ -277,7 +328,8 @@
 	<!-- </section> -->
 
 	<section>
-	  <h4>Membrane: results</h4>
+	  <h4>Membrane segragation</h4>
+	  
 	  <img width="300"  data-src="real_128/parts_bw_values_500.png"   alt="t=125">
 	  <img width="300"  data-src="real_128/parts_bw_values_1000.png"   alt="t=250">
 
@@ -287,20 +339,19 @@
 	  <img width="300"  data-src="real_128/parts_bw_values_4000.png"   alt="t=1000">
 	</section>
 
-
 	<section>
-	  <h3>Onset of 2D turbulence</h3>
-	      <video class="stretch" data-src="./CH_segregation.mp4" type="video/mp4"></video>
-
+	  <h3>Membrane segregation</h3>
+	      <video class="stretch" data-src="./membrane_segregation.mp4" type="video/mp4"></video>
 	</section>
+
 
 	
       </div>
 	    
     </div>
 
-    <script src="../lib/js/head.min.js"></script>
-    <script src="../js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
     <script>
 
@@ -318,7 +369,7 @@
       // Enable the slide overview mode
       overview: false,
       // Vertical centering of slides
-      center: true,
+      center: false,
       // Enables touch navigation on devices with touch input
       touch: true,
       // Loop the presentation
@@ -368,12 +419,36 @@
       // - Set to 0 to disable movement along an axis
       parallaxBackgroundHorizontal: null,
       parallaxBackgroundVertical: null,
+      // `math-katex` plugin:
+      // *Optional* configuration:
+//      math: {
+      // Uncomment to disable syntax error notifications
+      // notificationsEnabled: false   // default: true
+
+      // Elements to ignore for math rendering (defaults shown):
+      // ignoredElements: [ 'pre', 'code' ]
+
+      // Set `enableGlobally` to `false` to avoid excessive
+      // escaping of dollar characters. You will then need to
+      // activate `$…$`-style replacements per slide with a
+      // `data-math` attribute (formulas wrapped in elements
+      // are still activated everywhere).
+      //
+      // enableGlobally: false
+
+      // In case you need to load KaTeX from a different
+      // location (relative or absolute URL):
+//      katexScript:     'plugin/math-katex/lib/katex-0.7.1/katex.min.js',
+//      katexStylesheet: 'plugin/math-katex/lib/katex-0.7.1/katex.min.css'
+//      },
+
+      
       dependencies: [
-      { src: '../plugin/markdown/marked.js' },
-      { src: '../plugin/markdown/markdown.js' },
-      { src: '../plugin/notes/notes.js', async: true },
-      { src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: '../plugin/math-katex/math-katex.js', async: true }
+      { src: 'plugin/markdown/marked.js' },
+      { src: 'plugin/markdown/markdown.js' },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/math-katex/math-katex.js', async: true }
       ]
       });
     </script>
