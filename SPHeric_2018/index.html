@@ -134,7 +134,7 @@
 
 	  <section>
  	    <h4>Procedure: onto mesh and back</h4>
-	    <img width="640"  data-src="Projection_article_cover.png"  alt="TG errors">
+	    <img  class="stretch"  data-src="Projection_article_cover.png"  alt="TG errors">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	    <p>
 	    doi: 10.1142/S021987621850130X
@@ -157,13 +157,13 @@
 	
 	<section>
  	  <h4>Quick check: TG vortices</h4>
-	  <img width="640"  data-src="L2_TG_comp.png"  alt="TG errors">
+	  <img  class="stretch"  data-src="L2_TG_comp.png"  alt="TG errors">
  	  <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	</section>
 
 	<section>
 	  <h4>TG vortices go turbulent</h4>
-	  <video class="stretch" data-src="./TG_goes_turb.mp4" type="video/mp4"></video>
+	  <video controls class="stretch" data-src="./TG_goes_turb.mp4" type="video/mp4"></video>
 	</section>
 
 	
@@ -181,14 +181,14 @@
 
 	  <section>
 	    <h4>Kolmogorov force</h4>
-	    <img width="600"  data-src="Kolmo_force.png"   alt="Kolmogorov force">
+	    <img  class="stretch"  data-src="Kolmo_force.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	    
 	  </section>
 
 	  <section>
 	    <h4>Kolmogorov force</h4>
-	    <img width="600" data-src="Kolmo_force_blowup.png"   alt="Kolmogorov force">
+	    <img  class="stretch" data-src="Kolmo_force_blowup.png"   alt="Kolmogorov force">
  	    <!-- ![Kolmogorov shearing force](./ "For lambda=L/8") -->
 	  </section>
 
@@ -198,28 +198,28 @@
 	<section>
 	  <section>
 	    <h4>Onset of 2D turbulence</h4>
-	    <img width="600"  data-src="power_K.png"   alt="power spectrum"></img>
+	    <img  class="stretch" data-src="power_K.png"   alt="power spectrum"></img>
 	  </section>
 
 	  <section>
 	    <h4>Onset of 2D turbulence</h4>
-	    <video class="stretch" data-src="./onset_2D_turbulence_sound.mp4" type="video/mp4"></video>
+	    <video controls class="stretch" data-src="./onset_2D_turbulence_sound.mp4" type="video/mp4"></video>
 	    <!-- <video class="stretch" data-src="./onset_2D_turbulence.wav" type="audio/wav"></video> -->
 	  </section>
 	</section>
 
 	<section>
 	  <section>
-	    <h4>2D turbulence features</h4>
-	    <img width="600"  data-src="vel_distr.png"   alt="v pdf">
+	    <h4>2D turbulence: velocity</h4>
+	    <img  class="stretch"  data-src="vel_distr.png"   alt="v pdf">
 	  </section >
 	  <section >
-	    <h4>2D turbulence features</h4>
-	    <img width="600"  data-src="accel_distr.png"   alt="a pdf">
+	    <h4>2D turbulence: acceleration</h4>
+	    <img  class="stretch"  data-src="accel_distr.png"   alt="a pdf">
 	  </section>
 	  <section >
-	    <h4>2D turbulence features</h4>
-	    <img width="600"  data-src="power_K2.png"   alt="power spectrum">
+	    <h4>2D turbulence: power spectrum</h4>
+	    <img  class="stretch"  data-src="power_K2.png"   alt="power spectrum">
 	  </section>
 	</section >
 
@@ -227,7 +227,7 @@
 	
 	<section>
 	    <h4>Membranes: 2D fluids</h4>
-	    <img width="640"  data-src="800px-Cell_membrane_detailed_diagram_blank.svg.png"   alt="Biological membrane">
+	    <img  class="stretch" data-src="800px-Cell_membrane_detailed_diagram_blank.svg.png"   alt="Biological membrane">
 	</section>
 
 	
@@ -244,7 +244,7 @@
 
 	<section data-markdown>
 	    <script type="text/template">
-	      ### Flow in membranes
+	      ### Stokes flow
 
 	      Flow driven only by forces. Stokes equation:
 	      
@@ -253,13 +253,9 @@
 
 	      ``$$ \nabla \cdot \mathbf{u}  =  0 $$``
 
-              
-	    </script>
-	  </section>
+	      <p class="fragment fade-up">
 
-	<section data-markdown>
-	    <script type="text/template">
-	      ### Flow in membranes: solution
+	      Solution:
 	      
 	      ``$$\mathbf{u}_{\mathbf{q},a} = \frac 1{\eta q^2}
 	      \sum_b
@@ -267,11 +263,10 @@
 	      \mathbf{f}_{\mathbf{q},a} =: \sum_b T_{ab} \mathbf{f}_{\mathbf{q},b} $$``
 
 	      
-	      ``$$T_{ab} := \frac 1{\eta_\mathrm{m} (q^2 + \color{red} {q / L_\mathrm{SD}} ) }
-	      \left[ \delta_{ab} - \frac{ \mathbf{q}_a \mathbf{q}_b}{q^2} \right] \qquad
-	      L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $$``
+	      ``$$T_{ab} := \frac 1{\eta q^2 }
+	      \left[ \delta_{ab} - \frac{ \mathbf{q}_a \mathbf{q}_b}{q^2} \right]  $$``
   
-	      
+	      </p>
 	    </script>
 	  </section>
 	
@@ -299,13 +294,12 @@
 
 	<section>
 	    <h4>Landau double-well</h4>
-	    <img width="640"  data-src="double_Well.png"   alt="Double well potential and force">
+	    <img  class="stretch"  data-src="double_Well.png"   alt="Double well potential and force">
 	</section>
 
 	<section>
-	  <h4>Equilibrium profile</h4>
-	  $\mu=0$
-	    <img width="640"  data-src="profile.png"   alt="profile">
+	  <h4>Equilibrium profile:  $\mu=0$</h4>
+	    <img  class="stretch"  data-src="profile.png"   alt="profile">
 	</section>
 
 
@@ -327,8 +321,38 @@
 	<!--     </script> -->
 	<!-- </section> -->
 
+
+
+
+
+
+	<section data-markdown>
+	    <script type="text/template">
+	      ### Closure: connection with 2D Stokes flow
+
+	      Force is due to concentration gradients:
+	      
+	      ``$$  \mathbf{f} = -\phi \nabla \mu $$``
+
+	      <p class="fragment fade-up">
+
+	      Also, the surrounding liquid modifies the Oseen tensor:
+	      
+	      ``$$T_{ab} := \frac 1{\eta_\mathrm{m} (q^2 + \color{red} {q / L_\mathrm{SD}} ) }
+	      \left[ \delta_{ab} - \frac{ \mathbf{q}_a \mathbf{q}_b}{q^2} \right] \qquad
+	      L_\mathrm{SD} = \frac{\eta_\mathrm{m} }{ 2 \eta_\mathrm{f} } $$``
+	      </p>
+	    </script>
+	</section>
+
+
+
+	
+  
+
+
 	<section>
-	  <h4>Membrane segragation</h4>
+	  <h4>Membrane segregation</h4>
 	  
 	  <img width="300"  data-src="real_128/parts_bw_values_500.png"   alt="t=125">
 	  <img width="300"  data-src="real_128/parts_bw_values_1000.png"   alt="t=250">
@@ -341,9 +365,16 @@
 
 	<section>
 	  <h3>Membrane segregation</h3>
-	      <video class="stretch" data-src="./membrane_segregation.mp4" type="video/mp4"></video>
+	      <video controls class="stretch" data-src="./membrane_segregation.mp4" type="video/mp4"></video>
 	</section>
 
+
+	<section>
+	  <h2>Thanks!</h2>
+
+	  <img  class="stretch"  data-src="MN_cover.png"   alt="profile">
+
+	</section>
 
 	
       </div>
@@ -369,7 +400,7 @@
       // Enable the slide overview mode
       overview: false,
       // Vertical centering of slides
-      center: false,
+      center: true,
       // Enables touch navigation on devices with touch input
       touch: true,
       // Loop the presentation
@@ -385,7 +416,7 @@
       embedded: false,
       // Flags if we should show a help overlay when the questionmark
       // key is pressed
-      help: false,
+      help: true,
       // Flags if speaker notes should be visible to all viewers
       showNotes: true,
       // Number of milliseconds between automatically proceeding to the
