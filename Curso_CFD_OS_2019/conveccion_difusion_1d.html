@@ -43,68 +43,127 @@
 			  <section>
 			    
 			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Convección-difusión en 1D</h2>
 
 			    
 			    
 			    <p>
-			      <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
 			      </small>
 			    </p>
 			  </section>
 
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Convección + difusión en 1D
+
+			      Igual que con la antes, podemos intentar discretizar la ecuación:
+			      
+			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
+
+			      ... o podemos remontarnos a la deducción de la misma
+			      
+			    </script>
+			  </section>
+
+
 			  
-			  <section>
-			    <h2>Semana 1</h2>
-			    <ul>
-			      <li><a href="./presentacion_1819.html"> Presentación de la asignatura </a></li>
-			    </ul>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Deducción
+
+			      Se suponen cambios de un campo $u$ sólo
+			      en la dirección $x$
+
+			      ![Esquema de convección en 1D](./conveccion_1d.png)
+
+			      El cambio en la cantidad total $A \Delta x \, u_i$ será:
+
+			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
+			      
+			    </script>
 			  </section>
 
-			  <section>
-			    <h2>Semana 2</h2>
-			    <ul>
-			      <li><a href="./conveccion_1d.html">Convección en 1D (teoría) </a></li>
-			      <li><a href="notebooks/intro_plot.ipynb">Introducción a ipython (ipynb)</a></li>
-			      <li><a href="notebooks/conveccion_1d.ipynb">Convección en 1D (ipynb)</a></li>
-			      <li><a href="notebooks/conveccion_reading.ipynb">Convección en 1D (ipynb)</a></li>
-			    </ul>
-			  </section>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, convección y difusión
 
-			  <section>
-			    <h2>Semana 3</h2>
-			    <ul>
-			      <li><a href="./difusion_1d.html">Convección en 1D (teoría) </a></li>
-			      <li><a href="notebooks/difusion_reading.ipynb">Convección en 1D (ipynb)</a></li>
-			    </ul>
-			  </section>
+			      Es muy fácil: ahora los flujos vienen dados por una combinación
+			      de convección y difusión:
+			     
+			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i-1/2}   $$``
+			      
+			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i+1/2}  $$``
 
-
-
-			  <section>
-			    <h2>Semana 4</h2>
-			    <ul>
-			      <li><a href="./conveccion_difusion_1d.html">Convección-difusión en 1D (teoría) </a></li>
-			      <li><a href="./courant_1d.html">Números adimensionales (teoría) </a></li>
-			      <li><a href="./navier_stokes.html">Navier-Stokes (teoría) </a></li>
-			    </ul>
+			      Y, como antes, hay que aproximar
+			      ``$u_{i-1/2}$`` y $u_{i+1/2}$ y sus derivadas
+			      
+			    </script>
 			  </section>
 
 
-			  <section>
-			    <h2>Semana 5</h2>
-			    <ul>
-			      <li><a href="./condiciones_OF.html">Condiciones de contorno (teoría) </a></li>
-			      <li> Flujo de Couette (OpenFOAM)</li>
-			      <li> Flujo de Poiseuille (OpenFOAM)</li>
-			      <li> Flujo alrededor de un cilindro (OpenFOAM)</li>
-			    </ul>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Ecuación de convección-difusión
+
+			      Se acaba llegando a cosas como:
+			      
+			      ``$$\frac{d  u_i }{d t} + c \frac{u_{i}^n-u_{i-1}^n }{\Delta x} =
+			      D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
+
+			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
+			      
+			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
+
+			      
+			    </script>
 			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo final
+
+			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
+
+			      ``\begin{align} u_i^{n+1} = u_i^n & -  
+			      c \frac{\Delta t}{\Delta x} ( u_{i}^n-u_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
+
+			      			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### ¿Y los fluidos?
+
+			      De momento, 
+			      
+			      $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}  = \nu \frac{\partial^2 u}{\partial x^2} + f $$
+
+
+			      			      
+			    </script>
+			  </section>
+
+			  
 
 			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ## Referencias
-			      
+
+
 			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
 			    </script>
 			  </section>
