@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CFD</title>
+
+		<meta name="description" content="CFD">
+		<meta name="author" content="Daniel Duque">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Metodos numéricos en Mecánica de Fluidos</h2>
+					<h3>Reynold's number</h3>
+					<p>
+					  <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+					  </small>
+					</p>
+				</section>
+				
+                                <section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Linear Convection - Diffusion equation
+				    
+
+				    $$\frac{\partial \phi}{\partial t} + u \frac{\partial \phi}{\partial x} =
+				    \nu \frac{\partial^2 \phi}{\partial x^2}
+				    $$
+
+
+				  </script>
+				</section>
+
+                                <section data-markdown>
+				  <script type="text/template">
+				    ## Relevant scales
+
+				    Suppose there is a well-defined _relevant_ velocity $u_0$ (e.g. the
+				    velocity of a driven wall, or a up- or downstream flow velocity).
+
+				    $$\frac{\partial \phi}{\partial t} + u_0  \frac{u}{u_0} \frac{\partial \phi}{\partial x} =
+				    \nu \frac{\partial^2 \phi}{\partial x^2}
+				    $$
+
+				    $$\frac{\partial \phi}{\partial t} + u_0  u^* \frac{\partial \phi}{\partial x} =
+				    \nu \frac{\partial^2 \phi}{\partial x^2}
+				    $$
+
+				    Adimensionalized variables are marked with an asterisk:
+
+				    $$ u^* := \frac{u}{u_0}				    $$
+
+				  </script>
+				</section>
+
+                                <section data-markdown>
+				  <script type="text/template">
+				    ## Relevant scales: length
+				    
+				    Suppose there is a well-defined
+				    _relevant_ length $L$ (e.g. pipe
+				    diameter, size of immersed object,
+				    side of system), so that
+
+
+				    $$ x^* := \frac{x}{L}				    $$
+
+
+				    `$$\frac{\partial \phi}{\partial t} + u_0  u^* \frac{\partial \phi}{L \partial x^*} =
+				    \nu \frac{\partial^2 \phi}{L^2 \partial x^{*2}}
+				    $$`
+
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    ## Relevant scales: time
+				    
+				    Now, multiply by $L/u_0$:
+
+
+				    `$$\frac{\partial \phi}{\partial \left(u_0 t/L\right) } + u^* \frac{\partial \phi}{\partial x^*} =
+				    \frac{\nu}{L u_0} \frac{\partial^2 \phi}{\partial x^{*2}}
+				    $$`
+
+				    Notice a _relevant_ time scale $L/u_0$ automatically emerges:
+
+				    `$ t^* := \frac{u_0 t}{L} $`
+
+		    
+
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    ## Reynold's number
+				    
+
+				    `$$\frac{\partial \phi}{\partial t^* } + u^* \frac{\partial \phi}{\partial x^*} =
+				    \frac{\nu}{L u_0} \frac{\partial^2 \phi}{\partial x^{*2}}
+				    $$`
+
+				    `$$\frac{\partial \phi}{\partial t^* } + u^* \frac{\partial \phi}{\partial x^*} =
+				    \frac{1}{\mathrm{Re}} \frac{\partial^2 \phi}{\partial x^{*2}}
+				    $$`
+
+				    with the definition
+				    
+				    $$ \mathrm{Re}:= \frac{L u_0}{\nu} $$
+		    
+
+				  </script>
+				</section>
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    ## Reynold's number II
+				    
+
+				    $$ \frac{1}{\mathrm{Re} } := \frac \nu{L u_0}, $$
+
+				    the inverse number is basically a reduced viscosity. Also, notice
+
+				    $$ \frac{1}{\mathrm{Re} } := \frac \mu{L u_0 \rho}, $$
+				    
+
+				  </script>
+				</section>
+
+				
+				<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>Not 3 (even 4!) numbers, just one !!</h2>
+				</section>
+
+
+
+				    
+				<section data-markdown>
+				  <script type="text/template">
+				    ## References
+
+
+				    [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+				  </script>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+    // other options ...
+
+			math: {
+			mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+//			{ src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML', async: true }
+			{ src: 'plugin/math/math.js', async: true }
+			]
+
+			});
+
+		</script>
+
+	</body>
+</html>

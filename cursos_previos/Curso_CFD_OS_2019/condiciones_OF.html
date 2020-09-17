@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CFD</title>
+
+		<meta name="description" content="CFD">
+		<meta name="author" content="Daniel Duque">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Condiciones de contorno en OpenFOAM</h2>
+
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Condiciones de contorno
+
+			      Las condiciones de contorno (BC) son **vitales** en una
+			      simulación:
+
+			      * Corresponden a distintas situaciones físicas
+
+			      * Afectan la propia existencia de soluciones (lo que se traduce
+			      en "inestabilidad" en los códigos = cuelgues)
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: no-slip
+
+			      Lo sutil es que las condiciones de velocidad y presión están **relacionadas**.
+			      P.e. las típicas no-slip:
+
+			      0/p:
+			      ```c++
+			      pared
+			      {
+  			        type zeroGradient;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      pared
+			      {
+			        type noSlip;
+			      }
+			      ```
+			      
+			    </script>
+			  </section>
+
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: no-slip
+
+			      En general:
+			      
+			      0/p:
+			      ```c++
+			      pared
+			      {
+  			        type zeroGradient;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      pared
+			      {
+			        type    fixedValue;
+			        value   uniform ( u v w );
+			      }
+			      ```
+			      
+			    </script>
+			  </section>
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Velocidad y presión: flujo debido a dif. de presión
+
+			      En un caso sencillo (Poiseuille, flujo "libre" ):
+			      
+			      0/p:
+			      ```c++
+			      entrada
+			      {
+			        type fixedValue;
+			        value uniform p1;
+			      }
+			      ```
+			      0/U:
+			      ```c++
+			      entrada
+			      {
+  			        type zeroGradient;
+			      }
+			      ```
+			      
+			    </script>
+			  </section>
+
+			  
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Poiseuille
+
+			      Alterar nuestra __caja__ genérica para este caso
+			      
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
+			  </section>
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Cilindro
+
+			      Comenzar con este blockMeshDict
+
+			      [blockMeshDict para cilindro](cylinder/system/blockMeshDict)
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
+			  </section>
+
+			  
+ 			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Velocidad y presión: flujo debido a velocidades
+
+			      Para el cilindro, nos gustaría especificar directamente
+			      la velocidad de entrada. Entonces:
+			      
+			      0/p:
+			      ```c++
+			      entrada
+			      {
+			      type zeroGradient;
+			      }
+			      salida
+			      {
+			      type fixedValue;
+    			      value uniform 0;
+			      }
+			      ```
+			      ----
+			      ####  Velocidad y presión: flujo debido a velocidades
+			      0/U:
+			      ```c++
+
+			      entrada
+			      {
+			      type fixedValue;
+			      value uniform (1 0 0);
+			      }
+
+			      salida
+			      {
+			      type  zeroGradient;
+			      }
+			      ```
+
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Ejemplo: Cilindro completo
+
+			      Comenzar con este blockMeshDict
+
+			      [blockMeshDict para cilindro](cylinder2/system/blockMeshDict)
+
+			      <!-- [Directorio Poiseuille](poise) -->
+			      			      
+			    </script>
+			  </section>
+
+
+
+			  <section data-markdown data-separator="^\n---\n$" data-separator-vertical="----">
+			    <script type="text/template">
+			      ####  Recirculación a la salida
+
+			      0/U:
+			      ```c++
+			      salida
+			      {
+			      type       inletOutlet;
+			      inletValue uniform (0 0 0);
+			      value      uniform (1 0 0);
+			      }
+
+			    </script>
+			  </section>
+
+
+			  
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ## Referencias
+
+
+			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+			    </script>
+			  </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+    // other options ...
+
+			math: {
+			mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+//			{ src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML', async: true }
+			{ src: '../plugin/math/math.js', async: true }
+			]
+
+			});
+
+		</script>
+
+	</body>
+</html>

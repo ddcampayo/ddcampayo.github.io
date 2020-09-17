@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CFD</title>
+
+		<meta name="description" content="CFD">
+		<meta name="author" content="Daniel Duque">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Metodos numéricos en Mecánica de Fluidos</h2>
+					<h3>Courant's number</h3>
+					<p>
+					  <small>Created by <a href="http://ddcampayo.github.io">Daniel Duque</a>
+					  </small>
+					</p>
+				</section>
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Linear Convection equation
+				    
+
+				    The "simplest, most basic model that can be used to learn something about CFD."
+
+				    $$\frac{\partial \phi}{\partial t} + u \frac{\partial \phi}{\partial x} = 0$$
+
+
+				  </script>
+				</section>
+
+				<section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Simple discretization
+				    
+
+				    From the definition of a derivative (and simply removing the limit), we know that:
+
+				    $$\frac{\partial \phi}{\partial x}\approx \frac{ \phi(x+\Delta x)- \phi(x)}{\Delta x}$$
+
+				    Our discrete equation, then, is:
+				    
+				    `$$\frac{ \phi_i^{n+1}- \phi_i^n}{\Delta t} + u \frac{ \phi_i^n - \phi_{i-1}^n}{\Delta x} = 0 $$`
+
+				    where $n$ and $n+1$ are two
+				    consecutive steps in time, while
+				    $i-1$ and $i$ are two neighboring
+				    points of the discretized $x$
+				    coordinate.
+				    
+				  </script>
+				</section>
+
+
+				<section data-markdown>
+				  <script type="text/template">
+				    ## Courant number
+
+
+				    If there are given initial
+				    conditions, then the only unknown
+				    in this discretization is $
+				    \phi_i^{n+1}$. We can solve for
+				    our unknown to get an equation
+				    that allows us to advance in time,
+				    as follows:
+
+				    `$$ \phi_i^{n+1} = \phi_i^n - u \frac{\Delta t}{\Delta x}( \phi_i^n- \phi_{i-1}^n)$$`
+
+				    Notice the only combination that appears is
+
+				    $$ \mathrm{Co} := u \frac{\Delta t}{\Delta x}$$
+
+				    
+				  </script>
+				</section>
+
+				
+				<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>Not 3 numbers, just one !!</h2>
+				</section>
+
+
+                                <section data-markdown>
+				  <script type="text/template">
+				    ## 1-D Linear Convection - Diffusion equation
+				    
+
+				    $$\frac{\partial \phi}{\partial t} + u \frac{\partial \phi}{\partial x} =
+				    \nu \frac{\partial^2 \phi}{\partial x^2}
+				    $$
+
+
+				  </script>
+				</section>
+
+                                <section data-markdown>
+				  <script type="text/template">
+				    ## Discretizing $\frac{\partial ^2 u}{\partial x^2}$
+
+				    We will discretize the
+				    second-order derivative with a
+				    Central Difference scheme. Consider the
+				    Taylor expansion of `$u_{i+1}$` and
+				    `$u_{i-1}$` around $u_i$:
+
+				    $u_{i+1} = u_i + \Delta x \frac{\partial u}{\partial x}\bigg|_i + \frac{\Delta x^2}{2} \frac{\partial ^2 u}{\partial x^2}\bigg|_i + \frac{\Delta x^3}{3!} \frac{\partial ^3 u}{\partial x^3}\bigg|_i $
+
+				    $u_{i-1} = u_i - \Delta x \frac{\partial u}{\partial x}\bigg|_i + \frac{\Delta x^2}{2} \frac{\partial ^2 u}{\partial x^2}\bigg|_i - \frac{\Delta x^3}{3!} \frac{\partial ^3 u}{\partial x^3}\bigg|_i $
+
+				    `$u_{i+1} + u_{i-1} = 2u_i+\Delta x^2 \frac{\partial ^2 u}{\partial x^2}\bigg|_i + O(\Delta x^4)$`
+				  </script>
+				</section>
+
+                                <section data-markdown>
+				 <script type="text/template">
+				    ## Discretizing $\frac{\partial ^2 u}{\partial x^2}$
+		    
+				    Then rearrange to solve for $\frac{\partial ^2 u}{\partial
+				    x^2}\bigg|_i$ and the result is:
+
+				    `$$\frac{\partial ^2 u}{\partial x^2}=\frac{u_{i+1}-2u_{i}+u_{i-1}}{\Delta x^2} + O(\Delta x^2)$$`
+				  </script>
+				</section>
+
+
+
+
+				    
+				<section data-markdown>
+				  <script type="text/template">
+				    ## References
+
+
+				    [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+				  </script>
+				</section>
+
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+    // other options ...
+
+			math: {
+			mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+//			{ src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML', async: true }
+			{ src: 'plugin/math/math.js', async: true }
+			]
+
+			});
+
+		</script>
+
+	</body>
+</html>
