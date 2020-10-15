@@ -46,31 +46,19 @@
 			  <!-- </section> -->
 
 
-			  <section data-markdown>
-			    <script type="text/template">
-			      ####  Convección + difusión en 1D
+			  <!-- <section data-markdown> -->
+			  <!--   <script type="text/template"> -->
+			  <!--     ####  Convección + difusión en 1D -->
 
-			      Igual que con la antes, podemos intentar discretizar la ecuación:
+			  <!--     Igual que con la antes, podemos intentar discretizar la ecuación: -->
 			      
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
+			  <!--     $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x}  = D \frac{\partial^2 f}{\partial x^2} $$ -->
 
-			      ... o podemos remontarnos a la deducción de la misma
+			  <!--     ... o podemos remontarnos a la deducción de la misma -->
 			      
-			    </script>
-			  </section>
+			  <!--   </script> -->
+			  <!-- </section> -->
 
-			  <section data-markdown>
-			    <script type="text/template">
-			      ### ¿Y los fluidos?
-
-			      De momento, 
-			      
-			      $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}  = \nu \frac{\partial^2 u}{\partial x^2} + f $$
-
-
-			      			      
-			    </script>
-			  </section>
 
 
 			  
@@ -83,9 +71,9 @@
 
 			      ![Esquema de convección en 1D](./conveccion_1d.png)
 
-			      El cambio en la cantidad total $A \Delta x \, u_i$ será:
+			      El cambio en la cantidad total $A \Delta x \, f_i$ será:
 
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
+			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
 			      
 			    </script>
 			  </section>
@@ -97,12 +85,12 @@
 			      Es muy fácil: ahora los flujos vienen dados por una combinación
 			      de convección y difusión:
 			     
-			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i-1/2}   $$``
+			      ``$$ \Phi_{i-1/2} = A c \, f_{i-1/2} - D \left. \frac{\partial f}{\partial x}\right|_{i-1/2}   $$``
 			      
-			      ``$$ \Phi_{i+1/2} = A c \, u_{i+1/2} - D \left. \frac{\partial u}{\partial x}\right|_{i+1/2}  $$``
+			      ``$$ \Phi_{i+1/2} = A c \, f_{i+1/2} - D \left. \frac{\partial f}{\partial x}\right|_{i+1/2}  $$``
 
 			      Y, como antes, hay que aproximar
-			      ``$u_{i-1/2}$`` y $u_{i+1/2}$ y sus derivadas
+			      ``$f_{i-1/2}$`` y $f_{i+1/2}$ y sus derivadas
 			      
 			    </script>
 			  </section>
@@ -114,12 +102,12 @@
 
 			      Se acaba llegando a cosas como:
 			      
-			      ``$$\frac{d  u_i }{d t} + c \frac{u_{i+1}^n-u_{i-1}^n }{2 \Delta x} =
-			      D \frac{u_{i-1} - 2 u_i  +  u_{i+1} }{\Delta x^2}  $$``
+			      ``$$\frac{d  f_i }{d t} + c \frac{f_{i+1}^n-f_{i-1}^n }{2 \Delta x} =
+			      D \frac{f_{i-1} - 2 f_i  +  f_{i+1} }{\Delta x^2}  $$``
 
 			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
 			      
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x}  = D \frac{\partial^2 u}{\partial x^2} $$
+			      $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x}  = D \frac{\partial^2 f}{\partial x^2} $$
 
 			      
 			    </script>
@@ -132,9 +120,9 @@
 
 			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
 
-			      ``\begin{align} u_i^{n+1} = u_i^n & -  
-			      c \frac{\Delta t}{2 \Delta x} ( u_{i+1}^n-u_{i-1}^n )  \\\\ &   +
-			      D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
+			      ``\begin{align} f_i^{n+1} = f_i^n & -  
+			      c \frac{\Delta t}{2 \Delta x} ( f_{i+1}^n-f_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (f^n_{i-1} - 2 f^n_i  +  f^n_{i+1} ) \end{align}``
 
 			      			      
 			    </script>
@@ -146,18 +134,34 @@
 			    <script type="text/template">
 			      ### Algoritmo estacionario
 
+			      - Ojo: lo que es estacionario es el algoritmo.
+			      - ¡ Muy distinto de resolver un transitorio y esperar al estado estacionario !
+			      - Analíticamente, se ponen las derivadas temporales (parciales) $=0$.
+                              - Numéricamente, se supone que ya no hay cambio en las distintas iteraciones.
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo estacionario
+
 			      Hay que suponer que ya no hay cambio en las distintas iteraciones. Entonces:
 
-			      ``\begin{align} u_i = u_i & -  
-			      c \frac{\Delta t}{2 \Delta x} ( u_{i+1}-u_{i-1} )  \\\\ &   +
-			      D \frac{\Delta t}{\Delta x^2 } (u_{i-1} - 2 u_i  +  u_{i+1} ) \end{align}``
+			      ``\begin{align} f_i = f_i & -  
+			      c \frac{\Delta t}{2 \Delta x} ( f_{i+1}-f_{i-1} )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (f_{i-1} - 2 f_i  +  f_{i+1} ) \end{align}``
 
-			      ``$$  \frac{c \Delta x}{2 D} ( u_{i+1}-u_{i-1} ) + u_{i-1} - 2 u_i  +  u_{i+1} =0 $$``
+			      ``$$  \frac{c \Delta x}{2 D} ( f_{i+1}-f_{i-1} ) + f_{i-1} - 2 f_i  +  f_{i+1} =0 $$``
 
 			      			      
 			    </script>
 			  </section>
 
+
+			  
 			  <section data-markdown>
 			    <script type="text/template">
 			      ### Algoritmo estacionario
@@ -170,6 +174,20 @@
 			  </section>
 
 			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### ¿Y los fluidos?
+
+			      De algún modo, $f=u$. En 1D:
+			      
+			      $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}  = \nu \frac{\partial^2 u}{\partial x^2} + F $$
+
+			      En 3D:
+			      
+			      $$\frac{\partial u_x}{\partial t} + \mathbf{u}\cdot\nabla  u_x   = \nu \nabla^2 u_x + F_x, \quad \text{etc} $$
+			      
+			    </script>
+			  </section>
 
 			  
 				<section>
@@ -178,7 +196,8 @@
 				      #####  Steady 1D conv-diffusion: results
         
 				      <img src="Versteeg_5.4.png"  style="background:white" width="40%">
-				    
+
+				      [ H. Versteeg, W. Malalasekera ](https://www.pearson.com/us/higher-education/program/Versteeg-An-Introduction-to-Computational-Fluid-Dynamics-The-Finite-Volume-Method-2nd-Edition/PGM299497.html )
        				    </script>
 				  </section>
 
@@ -276,7 +295,10 @@
 			      ## Referencias
 
 
-			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+			      - [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+
+			      - [ H. Versteeg, W. Malalasekera ](https://www.pearson.com/us/higher-education/program/Versteeg-An-Introduction-to-Computational-Fluid-Dynamics-The-Finite-Volume-Method-2nd-Edition/PGM299497.html )
+
 			    </script>
 			  </section>
 
