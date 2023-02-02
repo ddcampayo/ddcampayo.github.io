@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Curso CFD</title>
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+
+		<meta name="description" content="Welcome page">
+		<meta name="author" content="Daniel Duque">
+
+	</head>
+
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Convección-difusión en 1D</h2>
+
+			    
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <!-- <section data-markdown> -->
+			  <!--   <script type="text/template"> -->
+			  <!--     ####  Convección + difusión en 1D -->
+
+			  <!--     Igual que con la antes, podemos intentar discretizar la ecuación: -->
+			      
+			  <!--     $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x}  = D \frac{\partial^2 f}{\partial x^2} $$ -->
+
+			  <!--     ... o podemos remontarnos a la deducción de la misma -->
+			      
+			  <!--   </script> -->
+			  <!-- </section> -->
+
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Deducción
+
+			      Se suponen cambios de un campo $u$ sólo
+			      en la dirección $x$
+
+			      ![Esquema de convección en 1D](./conveccion_1d.png)
+
+			      El cambio en la cantidad total $A \Delta x \, f_i$ será:
+
+			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) =  \Phi_{i-1/2} -  \Phi_{i+1/2}  $$``
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Flujos, convección y difusión
+
+			      Es muy fácil: ahora los flujos vienen dados por una combinación
+			      de convección y difusión:
+			     
+			      ``$$ \Phi_{i-1/2} = A c \, f_{i-1/2} - D \left. \frac{\partial f}{\partial x}\right|_{i-1/2}   $$``
+			      
+			      ``$$ \Phi_{i+1/2} = A c \, f_{i+1/2} - D \left. \frac{\partial f}{\partial x}\right|_{i+1/2}  $$``
+
+			      Y, como antes, hay que aproximar
+			      ``$f_{i-1/2}$`` y $f_{i+1/2}$ y sus derivadas
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Ecuación de convección-difusión
+
+			      Se acaba llegando a cosas como:
+			      
+			      ``$$\frac{d  f_i }{d t} + c \frac{f_{i+1}^n-f_{i-1}^n }{2 \Delta x} =
+			      D \frac{f_{i-1} - 2 f_i  +  f_{i+1} }{\Delta x^2}  $$``
+
+			      Lo cual, por supuesto, lleva en el continuo a la ecuación tan conocida:
+			      
+			      $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x}  = D \frac{\partial^2 f}{\partial x^2} $$
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo final
+
+			      Ya sólo queda discretizar el tiempo. Por ejemplo, explícitamente:
+
+			      ``\begin{align} f_i^{n+1} = f_i^n & -  
+			      c \frac{\Delta t}{2 \Delta x} ( f_{i+1}^n-f_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (f^n_{i-1} - 2 f^n_i  +  f^n_{i+1} ) \end{align}``
+
+			      			      
+			    </script>
+			  </section>
+
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo estacionario
+
+			      - Ojo: lo que es estacionario es el algoritmo.
+			      - ¡ Muy distinto de resolver un transitorio y esperar al estado estacionario !
+			      - Analíticamente, se ponen las derivadas temporales (parciales) $=0$.
+                              - Numéricamente, se supone que ya no hay cambio en las distintas iteraciones.
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo estacionario
+
+			      Hay que suponer que ya no hay cambio en las distintas iteraciones. Entonces:
+
+			      ``\begin{align} f_i = f_i & -  
+			      c \frac{\Delta t}{2 \Delta x} ( f_{i+1}-f_{i-1} )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (f_{i-1} - 2 f_i  +  f_{i+1} ) \end{align}``
+
+			      ``$$  \frac{c \Delta x}{2 D} ( f_{i+1}-f_{i-1} ) + f_{i-1} - 2 f_i  +  f_{i+1} =0 $$``
+
+			      			      
+			    </script>
+			  </section>
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo estacionario
+			      Finalmente,
+			      
+			      ``$$  2 u_i =  \left( 1+  \frac{c \Delta x}{2 D} \right) u_{i+1}  + \left( 1 -  \frac{c \Delta x}{2 D} \right) u_{i-1}    $$``
+
+			      			      
+			    </script>
+			  </section>
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### ¿Y los fluidos?
+
+			      De algún modo, $f=u$. En 1D:
+			      
+			      $$\frac{\partial u}{\partial t} + u \frac{\partial u}{\partial x}  = \nu \frac{\partial^2 u}{\partial x^2} + F $$
+
+			      En 3D:
+			      
+			      $$\frac{\partial u_x}{\partial t} + \mathbf{u}\cdot\nabla  u_x   = \nu \nabla^2 u_x + F_x, \quad \text{etc} $$
+			      
+			    </script>
+			  </section>
+
+			  
+				<section>
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D conv-diffusion: results
+        
+				      <img src="Versteeg_5.4.png"  style="background:white" width="40%">
+
+				      [ H. Versteeg, W. Malalasekera ](https://www.pearson.com/us/higher-education/program/Versteeg-An-Introduction-to-Computational-Fluid-Dynamics-The-Finite-Volume-Method-2nd-Edition/PGM299497.html )
+       				    </script>
+				  </section>
+
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D conv-diffusion: What ???!?
+
+				      <img src="Versteeg_5.5.png"  style="background:white" width="40%">
+
+				      				    
+       				    </script>
+				  </section>
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D conv-diffusion: results
+
+				      <img src="Versteeg_5.6.png"  style="background:white" width="40%">
+
+				    
+       				    </script>
+				  </section>
+				</section>
+
+
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Central differencing scheme failure
+
+				    <img src="FVM_meshes.png"  style="background:white" width="40%">
+				    
+				    reasons can be algebraic:
+				    ``$$  1 -  \frac{c \Delta x}{2 D} > 0  \qquad   \frac{c \Delta x}{2 D} < 1 \qquad  \frac{c \Delta x}{D} < 2    $$``
+
+				
+				  </script>
+				</section>
+				
+				
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Central differencing scheme failure
+				    
+				    Or physical: Péclet number
+				    
+				    $$
+				    {\rm{Pe}}: =  \frac{c \Delta x}{D} < 2
+				    $$
+
+				    <img src="FVM_peclet.png"  style="background:white" width="40%">
+				    
+				
+				  </script>
+				</section>
+
+				<section data-markdown>
+				  <script type="text/template">
+				    #### Péclet number
+				    
+				    <!-- $$ -->
+				    <!-- {\rm{Pe}}: = \frac{{u L}}{D'} -->
+				    <!-- $$ -->
+
+				    Reasoning: convection time to cover a length $L$:
+				    $$
+				    c = \frac L{ t_u } \to
+				    t_u = \frac Lc
+				    $$
+
+				    Diffusion time to cover a length $L$:
+				    $$
+				    L=\sqrt{D t_D} \to
+				    t_D = \frac{L^2}{D}
+				    $$
+
+				    Their ratio is
+				    $$
+				    \frac{t_D}{t_u} = \frac{L c}{D} =: \text{Pe}
+				    $$
+
+				    
+				
+				  </script>
+				</section>
+
+
+			  
+			  
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ## Referencias
+
+
+			      - [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+
+			      - [ H. Versteeg, W. Malalasekera ](https://www.pearson.com/us/higher-education/program/Versteeg-An-Introduction-to-Computational-Fluid-Dynamics-The-Finite-Volume-Method-2nd-Edition/PGM299497.html )
+
+			    </script>
+			  </section>
+
+
+			</div>
+
+		</div>
+
+
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script>
+
+
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+			    hash: true,
+			    math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+			    // Learn about plugins: https://revealjs.com/plugins/
+			    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath ]
+			});
+		</script>
+		  
+    </script>
+  </body>
+</html>
+
+
