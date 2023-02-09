@@ -73,11 +73,11 @@
 
 			      Los flujos por las caras vienen dados por:
 			     
-			      ``$$ \Phi_{i-1/2} = A c \, f_{i-1/2}  $$``
+			      ``$$ \Phi_{i-1/2} = A u \, f_{i-1/2}  $$``
 			      
-			      ``$$ \Phi_{i+1/2} = - A c \, f_{i+1/2}  $$``
+			      ``$$ \Phi_{i+1/2} = - A u \, f_{i+1/2}  $$``
 
-			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) = A c \, f_{i-1/2} - A c \,  f_{i+1/2}  $$``
+			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) = A u \, f_{i-1/2} - A u \,  f_{i+1/2}  $$``
 
 			    </script>
 			  </section>
@@ -108,13 +108,13 @@
 
 			      De este modo,
 			      
-			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) = A c \frac{ \, f_{i-1} -  f_{i+1} }{2}  $$``
+			      ``$$\frac{d }{d t} (A \Delta x  \, f_i ) = A u \frac{ \, f_{i-1} -  f_{i+1} }{2}  $$``
 
-			      ``$$\frac{d f_i }{d t}  =   - c  \frac{ \, f_{i+1} -  f_{i-1} }{2 \Delta x}  $$``
+			      ``$$\frac{d f_i }{d t}  =   - u  \frac{ \, f_{i+1} -  f_{i-1} }{2 \Delta x}  $$``
 
 			      La parte derecha se puede identificar como la derivada espacial (centrada):
 			      
-			      $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x} = 0$$
+			      $$\frac{\partial f}{\partial t} + u \frac{\partial f}{\partial x} = 0$$
 			      
 			    </script>
 			  </section>
@@ -128,7 +128,7 @@
 
 			      Muy a menudo, se parte de las EDPs, conocidas, por ejempo:
 
-			      ``$$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x} = 0$$``
+			      ``$$\frac{\partial f}{\partial t} + u \frac{\partial f}{\partial x} = 0$$``
 
 			      Estas se *discretizan*: sustituyendo las derivadas por diferencias.
 
@@ -146,7 +146,7 @@
 
 			      Para nosotros, es más útil la expresión discreta:
 
-			      ``$$\frac{d f_i }{d t}  =   - c  \frac{ \, f_{i+1} -  f_{i-1} }{2 \Delta x}  $$``
+			      ``$$\frac{d f_i }{d t}  =   - u  \frac{ \, f_{i+1} -  f_{i-1} }{2 \Delta x}  $$``
 
 			      De hecho, habría que discretizar la derivada temporal también. Lo más sencillo
 			      es el método de Euler:
@@ -165,13 +165,13 @@
 
 			      Interpretando que la parte derecha de la ecuación se refiere al paso actual:
 			      
-			      ``$$  \frac{ f^{n+1}_i - f^{n}_i  }{\Delta t}   =   - c  \frac{ \, f^n_{i+1} -  f^n_{i-1} }{2 \Delta x}  $$``
+			      ``$$  \frac{ f^{n+1}_i - f^{n}_i  }{\Delta t}   =   - u  \frac{ \, f^n_{i+1} -  f^n_{i-1} }{2 \Delta x}  $$``
 
 			      Se llega a:
 			      
-			      ``$$f_i^{n+1} = f_i^n - c \frac{\Delta t}{2 \Delta x}(f_{i+1}^n-f_{i-1}^n)$$``
+			      ``$$f_i^{n+1} = f_i^n - u \frac{\Delta t}{2 \Delta x}(f_{i+1}^n-f_{i-1}^n)$$``
 
-			      Atención a la combinación  $c \frac{\Delta t}{ \Delta x}$: es el
+			      Atención a la combinación  $u \frac{\Delta t}{ \Delta x}$: es el
 			      **número de Courant**.
 
 			    </script>
@@ -186,7 +186,7 @@
 			      refiere a valores del siguiente tiempo
 			      (¡desconocidos!). Se llega a
 			      
-			      ``$$f_i^{n+1} = f_i^n - c \frac{\Delta t}{2 \Delta x}(f_{i+1}^{n+1}-f_{i-1}^{n+1})$$``
+			      ``$$f_i^{n+1} = f_i^n - u \frac{\Delta t}{2 \Delta x}(f_{i+1}^{n+1}-f_{i-1}^{n+1})$$``
 
 			    </script>
 			  </section>
@@ -236,10 +236,37 @@
        				    </script>
 				  </section>
 
-
-
-
 				</section>
+
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Velocidad variable
+
+			      Se deja como ejercicio que si $u$ varía con $x$,
+			      ``$$\frac{\partial f}{\partial t} + \frac{\partial }{\partial x} uf = 0.$$``
+
+			    </script>
+			  </section>
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Caso 3D
+
+			      Además, si $u=\boldsymbol{u}$ (velocidad 3D), sólo importa su componente $x$ $\ldots$
+			      
+			      ``$$\left. \frac{\partial f}{\partial t}\right|_x + \frac{\partial }{\partial x} u_x f = 0.$$``
+
+			      Pero en 3D puede haber entradas y salidas por las otras dos dimensiones. Así que,
+			      
+			      ``$$ \frac{\partial f}{\partial t} + \sum_{i=1,2,3} \frac{\partial }{\partial x_i} u_i f = 0.$$``
+
+			      ``$$ \frac{\partial f}{\partial t} + \nabla \cdot (\boldsymbol{u} f) = 0.$$``
+
+			    </script>
+			  </section>
+
+				  
 				
 
 			  
