@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Curso CFD</title>
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+
+		<meta name="description" content="Welcome page">
+		<meta name="author" content="Daniel Duque">
+
+	</head>
+
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+ 			  <section id="Title" class="present" data-background="">
+  			    <h2>Simulación numérica de fluidos con código abierto</h2>
+			    <p>Curso 2025/26</p>
+			  </section>
+
+				
+			  <section id="Profesorado" class="present" data-background="">
+			    <h2>Profesorado</h2>
+					<ul>
+					<li>Daniel Duque <a href="mailto://daniel.duque@upm.es">daniel.duque@upm.es</a></li>
+					<li>Javier Calderón <a href="mailto://javier.calderon@upm.es">javier.calderon@upm.es</a></li>
+					<li>[ Jesús M. Gómez Goñi <a href="mailto://jesus.gomez.goni@upm.es">jesus.gomez.goni@upm.es ]</a></li>
+					</ul> 
+				</section>
+				
+				<section id="Conocimientos previos" class="present">
+				  <section>
+				    <h2>¿Qué entendéis por <a HREF="https://es.wikipedia.org/wiki/Mec%C3%A1nica_de_fluidos_computacional">simulación de fluidos (CFD)</a>?</h2>
+				    <ul class="fragment">
+				      <li>Mecánica de fluidos (FD) </li>
+				      <li>Métodos numéricos  (C) </li>
+				      <li>A través del ordenador </li>
+				    </ul>
+				    <p class="fragment">Aplicando estas herramientas, podemos abordar <span style="color:red">problemas complejos</span></p>
+				  </section>
+
+				
+				  <section>
+				    <p align="left">Por ejemplo...</p>
+				    <ul>
+				      <li><a HREF="https://www.youtube.com/watch?v=nvCjv1v-nqg">Buques en olas</a></li>
+				      <li><a HREF="https://www.youtube.com/watch?v=ujZ4w_LlUoU">Hélices, sistema de gobierno</a></li>
+				      <li><a HREF="https://www.youtube.com/@DualSPHysics/videos">Métodos de partículas</a></li>
+				    </ul>
+				  </section>
+				</section>
+
+
+			  <!-- <section data-markdown> -->
+			  <!--   <script type="text/template"> -->
+			  <!--     ### Pero... ¿De dónde viene toda esta industria? ¿Y, por qué? -->
+			      
+			  <!--     ``$$ \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho u) = 0 $$`` -->
+
+			  <!--     ``$$ \frac{\partial u}{\partial t} + (u \cdot \nabla) u = - \frac{1}{\rho} \nabla p + \nu \nabla² u + F $$`` -->
+			      
+			  <!--     ``$$ \rho \left( \frac{\partial \epsilon}{\partial t} + (u \cdot \nabla) \epsilon \right) - \phi + p \nabla \cdot u = 0 $$`` -->
+			      
+			  <!--   </script> -->
+			  <!-- </section> -->
+			  
+			  <section class="present" style="top: 0px; display: block; text-align: left;">	
+			    <section>
+			      <p>Pero... ¿De dónde viene toda esta industria?</p> <p>¿Y por qué?</p>
+			      <p>
+				\[ \frac{\partial \rho}{\partial t} + \nabla \cdot (\rho u) = 0 \]
+			      </p>
+			      <p>
+				\[ \frac{\partial u}{\partial t} + (u \cdot \nabla) u = - \frac{1}{\rho} \nabla p + \nu \nabla² u + F \]
+			      </p>
+			      <p>
+				\[ \rho \left( \frac{\partial \epsilon}{\partial t} + (u \cdot \nabla) \epsilon \right) - \phi + p \nabla \cdot u = 0 \]
+			      </p>				
+			    </section>
+			  </section>
+
+				
+
+			  <section class="present" style="top: 0px; display: block; text-align: left;">
+			    <h2>¿Para qué se usan los CFD en ingeniería?</h2>
+			    <ol>
+			      <li>Diseño conceptual</li>
+			      <li>Diseño de detalle</li>
+			      <li>Rediseño</li>
+			    </ol>
+			    <p>Y en general para ayudar a reducir las horas de experimentación y ensayo</p>
+			  </section>
+			  
+			  <section class="present" style="top: 0px; display: block; text-align: left;">	
+			    <section>
+			      <h2>¿Cómo funciona un CFD?</h2>
+			      <img class="plain" src="imgs/SetUp.png" style="width:100%">
+			    </section>
+
+			    <section>
+			      <h2>Temario</h2>
+			      <ol>
+				<li>Introducción a la mecánica de fluidos computacional</li>
+				<li>Códigos libres y códigos abiertos. El entorno Linux.</li>
+				<li>Ecuaciones de movimiento: continuidad, momento y energía.</li>
+				<li>Métodos numéricos: el Método de los Volúmenes Finitos (FVM)</li>
+				<li>Preprocesado: mallado y condiciones de contorno</li>
+				<li>Procesado: discretización de las ecuaciones de movimiento. Solución de las ecuaciones</li>
+				<li>Postprocesado: generación de resultados</li>
+				<li>Flujo multifásico</li>
+			      </ol>
+			    </section>
+
+			  </section>
+			  <section class="present" style="top: 0px; display: block;">
+			    <p>Todo esto a través de una serie de tutoriales...</p>
+			    <ul>
+			      <li>Cavity flow</li>
+			      <li>Poiseouille flow</li>
+			      <li>Flujo alrededor de un cilindro</li>
+			      <li>Dam-break</li>
+			    </ul>
+			  </section>
+			  
+			  <section class="present" style="top: 0px; display: block;">
+			    <h2>Evaluación</h2>
+			    <!--p>3 trabajos (en principio...)</p-->
+			    <table>
+			      <thead>
+				<tr>
+				  <th>Prueba</th>
+				  <th>Semana</th>
+				  <th>Peso</th>
+				</tr>
+			      </thead>
+			      <tbody>
+				<tr>
+				  <td>1</td>
+				  <td>4</td>
+				  <td>30%</td>
+				</tr>
+				<tr>
+				  <td>2</td>
+				  <td>12</td>
+				  <td>70%</td>
+				</tr>
+			      </tbody>
+			    </table>
+			    <p>Es una asignatura de carácter práctico. Hay que asistir...</p>
+			    <p>Los trabajos son <span style="color:red">individuales</span></p>
+			    <p>En caso de no superar la asignatura con los trabajos...</p>
+			  </section>
+			  
+			  <section class="present" style="top: 0px; display: block;">
+			    <h2>Bibliografía</h2>
+			    <ul>
+			      <li>Guía de OpenFOAM 6.0 </li>
+			      <li>Veersteg & Malalasekera "An Introduction to Computational Fluid Dynamics" 2007</li>
+			      <li>Otros recursos (se irán añadiendo en Moodle)</li>
+			    </ul>
+			  </section>
+			  
+			  <section class="present" style="top: 0px; display: block;">
+			    <h2>Herramientas</h2>
+			    <ul>
+			      <li><a HREF="https://xubuntu.org/">xUbuntu 16.04 LTS</a></li>
+			      <aside class="notes"> Tres distribuciones, tres versiones, etc...</aside>
+			      <li><a HREF="https://openfoam.org/">OpenFOAM org</a></li>
+			      <li><a HREF="https://openfoam.com/">OpenFOAM com</a></li>
+			      <aside class="notes">Distintas versiones de OF, etc... </aside>
+			      <li>Máquinas virtuales del centro de cálculo, Aulas 7 y 14</li>
+			    </ul>
+			  </section>
+			  
+			  <section class="present" style="top: 0px; display: block;">
+			    <h1>¿Dudas?</h1>
+			  </section>
+
+
+
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+			    hash: true,
+			    math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+			    // Learn about plugins: https://revealjs.com/plugins/
+			    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath ]
+			});
+		</script>
+
+		  
+    </script>
+  </body>
+</html>
+
+
