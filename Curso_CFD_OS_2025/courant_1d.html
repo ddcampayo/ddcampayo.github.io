@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>CFD</title>
+
+		<meta name="description" content="CFD">
+		<meta name="author" content="Daniel Duque">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../css/print/pdf.css' : '../css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Números adimensionales (1D)</h2>
+			    
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Convección + difusión en 1D
+
+			      ``\begin{align} u_i^{n+1} = u_i^n & -  
+			      c \frac{\Delta t}{\Delta x} ( u_{i}^n-u_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
+
+			      Vemos que aparecen dos combinaciones de parámetros:
+			      ``$$ \mathrm{Co} := c \frac{\Delta t}{\Delta x} $$``
+
+			      ``$$ \mathrm{Co}_D := D \frac{\Delta t}{\Delta x^2} $$``
+			      
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Resolución
+
+			      <img src="xt_grid.png" alt="Malla de simulación 1D" style="width: 300px;"/>
+
+			      <!-- ![Malla de simulación 1D](./xt_grid.png) -->
+
+			      Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $``
+
+			      No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $``
+			      			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  ¿Cuántos problemas resolvemos exactamente?
+
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
+
+			      Así pues, a resolución fija ( $N_x$ y
+			      $N_t$ ), resolvemos infinitos; todos,
+			      para un valor dado $ c \frac{\Delta
+			      t}{L}$.
+
+			      <!-- Esto es intuitivo: el valor de la velocidad $c$ no es importante, sólo su valor -->
+			      <!-- relativo $c / (L/T) $. -->
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el "otro" número
+			      
+			      ``$$ \mathrm{Co}_D = D \frac{\Delta t}{\Delta x^2}   $$``
+
+			      Pero dado que ``$ \mathrm{Co} = c \frac{\Delta t}{\Delta x}  $``
+
+			      ``$$ \mathrm{Co}_D = \frac{ D }{\Delta x}  \frac{\Delta t}{\Delta x} = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x $$``
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el  número de Reynolds
+
+			      ``$$ \mathrm{Co}_D = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x   = \mathrm{Co} \frac{1}{\mathrm{Re}}  N_x $$``
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Números y escalado
+
+			      En resumidas cuentas, para simular "lo mismo" (__físicamente__) hay que mantener (de momento)
+
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
+			      y
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      Lo mismo __numéricamente__: hay que mantener $ \mathrm{Co}$ y $ \mathrm{Co}_D$... pero esto no
+			      es posible en general. Lo más aceptable es mantener ambos en valores *bajos*.
+			      
+			      
+			    </script>
+			  </section>		  
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ## Referencias
+
+
+			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+			    </script>
+			  </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../lib/js/head.min.js"></script>
+		<script src="../js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+
+    // other options ...
+
+			math: {
+			mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+			config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: '../lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../plugin/zoom-js/zoom.js', async: true },
+					{ src: '../plugin/notes/notes.js', async: true },
+//			{ src: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML', async: true }
+			{ src: '../plugin/math/math.js', async: true }
+			]
+
+			});
+
+		</script>
+
+	</body>
+</html>
