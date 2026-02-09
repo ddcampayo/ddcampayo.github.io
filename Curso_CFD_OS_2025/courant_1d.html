@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Curso CFD</title>
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+
+		<meta name="description" content="Welcome page">
+		<meta name="author" content="Daniel Duque">
+
+	</head>
+
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Números adimensionales (1D)</h2>
+			    
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Convección + difusión en 1D
+
+			      ``\begin{align} u_i^{n+1} = u_i^n & -  
+			      c \frac{\Delta t}{\Delta x} ( u_{i}^n-u_{i-1}^n )  \\\\ &   +
+			      D \frac{\Delta t}{\Delta x^2 } (u^n_{i-1} - 2 u^n_i  +  u^n_{i+1} ) \end{align}``
+
+			      Vemos que aparecen dos combinaciones de parámetros:
+			      ``$$ \mathrm{Co} := c \frac{\Delta t}{\Delta x} $$``
+
+			      ``$$ \mathrm{Co}_D := D \frac{\Delta t}{\Delta x^2} $$``
+			      
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Resolución
+
+			      <img src="xt_grid.png" alt="Malla de simulación 1D" style="width: 300px;"/>
+
+			      <!-- ![Malla de simulación 1D](./xt_grid.png) -->
+
+			      Vital: ``$ x \in [0,L] \qquad \Delta x =\frac{L}{N_x} $``
+
+			      No tanto: ``$ t \in [0,T] \qquad \Delta t =\frac{T}{N_t} $``
+			      			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  ¿Cuántos problemas resolvemos exactamente?
+
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
+
+			      Así pues, a resolución fija ( $N_x$ y
+			      $N_t$ ), resolvemos infinitos; todos,
+			      para un valor dado $ c \frac{\Delta
+			      t}{L}$.
+
+			      <!-- Esto es intuitivo: el valor de la velocidad $c$ no es importante, sólo su valor -->
+			      <!-- relativo $c / (L/T) $. -->
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el "otro" número
+			      
+			      ``$$ \mathrm{Co}_D = D \frac{\Delta t}{\Delta x^2}   $$``
+
+			      Pero dado que ``$ \mathrm{Co} = c \frac{\Delta t}{\Delta x}  $``
+
+			      ``$$ \mathrm{Co}_D = \frac{ D }{\Delta x}  \frac{\Delta t}{\Delta x} = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x $$``
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Viscosidad: el  número de Reynolds
+
+			      ``$$ \mathrm{Co}_D = \mathrm{Co} \left[ \frac{D}{L c} \right] N_x   = \mathrm{Co} \frac{1}{\mathrm{Re}}  N_x $$``
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Números y escalado
+
+			      En resumidas cuentas, para simular "lo mismo" (__físicamente__) hay que mantener (de momento)
+
+			      ``$$ \mathrm{Co} = c \frac{\Delta t}{\Delta x} =  c \frac{\Delta t}{L} N_x   $$``
+			      y
+
+			      ``$$ \mathrm{Re} := \frac{L c}{D}  $$``
+
+			      Lo mismo __numéricamente__: hay que mantener $ \mathrm{Co}$ y $ \mathrm{Co}_D$... pero esto no
+			      es posible en general. Lo más aceptable es mantener ambos en valores *bajos*.
+			      
+			      
+			    </script>
+			  </section>		  
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ## Referencias
+
+
+			      [12 Steps to Navier-Stokes](http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes/)
+			    </script>
+			  </section>
+
+
+			</div>
+
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+			    hash: true,
+			    math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+			    // Learn about plugins: https://revealjs.com/plugins/
+			    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath ]
+			});
+		</script>
+
+
+		
+</script>
+
+
+		
+
+</body>
+</html>

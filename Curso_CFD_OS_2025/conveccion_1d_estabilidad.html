@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Curso CFD</title>
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+
+		<meta name="description" content="Welcome page">
+		<meta name="author" content="Daniel Duque">
+
+	</head>
+
+
+	
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Convección (o advección) en 1D - Estabilidad</h2>
+
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo explícito para convección
+
+			      ``$$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$``
+
+			      Las simulaciones 1D muestran un deterioro debido a ciertas oscilaciones rápidas.
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Análisis de von Neumann
+
+			      Se comienza con una expresión de Fourier:
+
+
+			      ``$$u_i^{n} = \sum_m A_m^n \exp\left( j k_m i \Delta x \right) $$``
+
+
+			      ``$$u_i^{n} = \sum_m A_m^n \exp\left( \underbrace{j}_{\sqrt{-1}} \underbrace{k_m}_{m k_1} \underbrace{i \Delta x}_{x} \right) $$``
+
+			      que se inserta en
+			      
+			      ``$$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$``
+
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Análisis de von Neumann: atajo
+
+			      De todos modos, basta con probar qué modo va a dar más guerra. En
+
+			      ``$$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$``
+
+			      vemos que el peor escenario es:
+
+			      ``$$ u_{i+1}^n = -A_i^n \qquad  u_{i-1}^n = A_i^n$$``
+
+			      (¡dibujarlo!) entonces,
+
+			      ``$$A^{n+1} = A^n + \text{Co} A^n =  ( 1 + \text{Co}) A^n  $$.``
+			      
+			      El método es *inestable*: cualquier valor de Co hace que los modos rápidos se amplifiquen
+			      exponencialmente.
+    
+			    </script>
+			  </section>
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Algoritmo implícito
+			      
+			      ``$$u_i^{n+1} = u_i^n -  \text{Co}\frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2}$$``
+
+			      El peor escenario es ahora: 
+
+			      ``$$ u_{i+1}^{n+1} = A_i^{n+1} \qquad  u_{i-1}^{n+1} = -A_i^{n+1}$$``
+
+			      ``$$A^{n+1} = A^n - \text{Co} A^{n+1} =  ( 1 - \text{Co}) A^{n+1}  $$``
+
+			      ``$$A^{n+1} =\frac{1}{1- \text{Co}} A^n $$``
+
+			      En principio, sería *condicionalmente estable*: $ |1 / (1- \text{Co}) | < 1 $ si $\text{Co}>2$ (??)
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Interpolación upwind
+
+			      La interpolación lineal resulta ser bastante mala para estos problemas. Es
+			      mucho mejor un esquema "upwind":
+
+			      ``$$ u_{i-1/2} \approx  u_{i-1}  $$``
+
+			      ``$$ u_{i+1/2} \approx  u_{i}    $$``
+			      
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Análisis de von Neumann de la nterpolación upwind explícita
+
+			      ``$$u_i^{n+1} = u_i^n - \text{Co} ( u_{i}^n-u_{i-1}^n )$$``
+
+			      El peor escenario es:
+
+			      ``$$ u_{i-1}^n = - A_i^n$$``
+
+			      (¡dibujarlo!) entonces,
+
+			      ``$$A^{n+1} = A^n - 2 \text{Co} A^n =  ( 1 - 2 \text{Co}) A^n  $$.``
+
+			      El método es *condicionalmente estable*: $ | 1 - 2 \text{Co} | < 1 $ si $\text{Co}<1$
+
+    
+			    </script>
+			  </section>
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Análisis de von Neumann de la nterpolación upwind implícita
+
+			      ``$$u_i^{n+1} = u_i^n - \text{Co} ( u_{i}^{n+1}-u_{i-1}^{n+1} )$$``
+
+			      Comprobar:
+
+			      ``$$A^{n+1} = A^n - 2 \text{Co} A^{n+1} \qquad \to \qquad  A^{n+1} = \frac{1}{ 1 + 2 \text{Co} }  A^n  , $$``
+
+			      El método es *incondicionalmente estable*.
+
+    
+			    </script>
+			  </section>
+
+
+			  
+
+			  <section>
+			    <h2>Referencias</h2>
+			    <ul>
+			      <li><a href="http://lorenabarba.com/blog/cfd-python-12-steps-to-navier-stokes)">12 Steps to Navier-Stokes </a></li>
+			      <li><a href="notebooks/conveccion_1d.ipynb">Convección en 1D (ipynb)</a></li>
+			    </ul>
+			  </section>
+			  
+			</div>
+
+		</div>
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+			    hash: true,
+			    math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+			    // Learn about plugins: https://revealjs.com/plugins/
+			    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath ]
+			});
+		</script>
+
+
+		
+</script>
+
+
+		
+
+</body>
+</html>
+
+
+
+
+
+			  
+			  <section data-markdown>
+			    <script type="text/template">
+			      ### Condiciones de contorno, estado estacionario
+
+			      Convección, expĺícita:
+			      
+			      ``$$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$``
+
+			      Poniendo $u_i^{n+1} = u_i^n = u_i,$
+
+			      ``$$ u_{i+1}^n = u_{i-1}^n$$``
+			      
+
+			      Comprobar:
+
+			      ``$$A^{n+1} = A^n - 2 \text{Co} A^{n+1} \qquad \to \qquad  A^{n+1} = \frac{1}{ 1 + 2 \text{Co} }  A^n  , $$``
+
+			      El método es *incondicionalmente estable*.
+
+    
+			    </script>
+			  </section>
+
+
+
+			  
+			  <section>
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D convection: results
+        
+				      <img src="Versteeg_5.4.png"  style="background:white" width="40%">
+				    
+       				    </script>
+				  </section>
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D convection: results
+        
+				      <img src="Versteeg_5.5.png"  style="background:white" width="40%">
+				    
+       				    </script>
+				  </section>
+
+
+				  <section data-markdown>
+				    <script type="text/template">
+				      #####  Steady 1D convection: results
+        
+				      <img src="Versteeg_5.6.png"  style="background:white" width="40%">
+				    
+       				    </script>
+				  </section>
+
+
+
+
+				</section>
+				

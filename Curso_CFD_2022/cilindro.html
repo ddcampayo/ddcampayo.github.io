@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Curso CFD</title>
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../plugin/highlight/monokai.css" id="highlight-theme">
+
+		<meta name="description" content="Welcome page">
+		<meta name="author" content="Daniel Duque">
+
+	</head>
+
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+			  <section>
+			    
+			    <h2>Simulación de fluidos con código abierto</h2>
+			    <h2>Flujo aldededor de un cilindro</h2>
+
+			    
+			    
+			    <p>
+			      <small>Por <a href="http://ddcampayo.github.io">Daniel Duque</a>
+			      </small>
+			    </p>
+			  </section>
+
+			  <!-- <section> -->
+			  <!--   <h2>Índice</h2> -->
+			  <!--   <ul> -->
+			  <!--     <li><a href="./pasos.html">Pasos previos </a></li> -->
+			  <!--     <li><a href="./Intro_plot.ipynb">Introducción a ipython (ipynb)</a></li> -->
+			  <!--   </ul> -->
+			  <!-- </section> -->
+
+
+			  <section data-markdown>
+			    <script type="text/template">
+####  Solución potencial
+
+* Encontrarla y correrla en los tutoriales
+
+			      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Mallado
+* Hackear los números en blockMeshDict para capturar bien la estela
+* Encontrar un mirrorMeshDict
+* Crear un caso Frankenstein: usar mallado, con campos de Poiseuille
+* Quizá un script?
+	      
+			    </script>
+			  </section>
+
+			  <section data-markdown>
+			    <script type="text/template">
+			      ####  Simulación
+* Resultado. Número de Reynolds y régimen.
+* Fuerzas sobre el cilindro: forces, tutorial wingMotion
+* paraview, PlotOnIntersectionCurves
+* Gráficos con gnuplot
+			    </script>
+			  </section>
+
+			  
+			</div>
+
+		</div>
+
+
+
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script>
+
+
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+			    hash: true,
+			    math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+			    },
+			    // Learn about plugins: https://revealjs.com/plugins/
+			    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath ]
+			});
+		</script>
+		  
+    </script>
+  </body>
+</html>
