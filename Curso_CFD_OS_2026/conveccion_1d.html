@@ -142,7 +142,7 @@
 			      De hecho, habría que discretizar la derivada temporal también. Lo más sencillo
 			      es el método de Euler:
 
-			      $$\frac{d f_i }{d t}  \approx  \frac{ f^{n+1}_i - f^{n}_i  }{\Delta t}   $$,
+			      $$\frac{d f_i }{d t}  \approx  \frac{ f^{n+1}_i - f^{n}_i  }{\Delta t} ,  $$
 
 			      y el tiempo sería $ t= n \Delta t$.
 			      
@@ -155,6 +155,7 @@
 			      ### Algoritmo explícito
 
 			      Interpretando que la parte derecha de la ecuación se refiere al paso actual:
+
 			      $$\frac{ f^{n+1}_i - f^{n}_i  }{\Delta t} =$$
 
 			      $$- \frac{c}{2 \Delta x}  (  f^n_{i+1} -  f^n_{i-1} )  $$
