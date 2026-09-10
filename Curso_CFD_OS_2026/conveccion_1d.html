@@ -53,7 +53,7 @@
 
 			      Muy a menudo, se parte de las EDPs, conocidas, por ejempo:
 
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$
+			      $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x} = 0$$
 
 			      Estas se *discretizan*: sustituyendo las derivadas por diferencias.
 
@@ -67,14 +67,14 @@
 			    <script type="text/template">
 			      ### Deducción
 
-			      Se suponen cambios de un campo $u$ sólo
+			      Se suponen cambios de un campo $f$ sólo
 			      en la dirección $x$
 
 			      ![Esquema de convección en 1D](./conveccion_1d.png)
 
-			      El cambio en la cantidad total $A \Delta x \, u_i$ será:
+			      El cambio en la cantidad total $(A \Delta x ) f_i$ será:
 
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) =  \Phi_{i-1/2} +  \Phi_{i+1/2}  $$``			      
+			      $$\frac{d }{d t} \left( (A \Delta x)  f_i \right) = - \Phi_{i-1/2} -  \Phi_{i+1/2}  $$
 			    </script>
 			  </section>
 
@@ -85,11 +85,11 @@
 
 			      Los flujos por las caras vienen dados por:
 			     
-			      ``$$ \Phi_{i-1/2} = A c \, u_{i-1/2}  $$``
+			      $$ \Phi_{i-1/2} = - A c  f_{i-1/2}  $$
 			      
-			      ``$$ \Phi_{i+1/2} = - A c \, u_{i+1/2}  $$``
+			      $$ \Phi_{i+1/2} =  A c  f_{i+1/2}  $$
 
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) = A c \, u_{i-1/2} - A c \,  u_{i+1/2}  $$``
+			      $$\frac{d }{d t} (A \Delta x   f_i ) = A c  f_{i-1/2} - A c   f_{i+1/2}  $$
 
 			    </script>
 			  </section>
@@ -107,9 +107,9 @@
 			      Así que podemos suponer una
 			      interpolación lineal:
 
-			      ``$$ u_{i-1/2} \approx \frac {  u_{i-1}  + u_i}{2} $$``
+			      $$ f_{i-1/2} \approx \frac {  f_{i-1}  + f_i}{2} $$
 
-			      ``$$ u_{i+1/2} \approx \frac {  u_{i}  + u_{i+1}}{2} $$``
+			      $$ f_{i+1/2} \approx \frac {  f_{i}  + f_{i+1}}{2} $$
 			      
 			    </script>
 			  </section>
@@ -120,13 +120,13 @@
 
 			      De este modo,
 			      
-			      ``$$\frac{d }{d t} (A \Delta x  \, u_i ) = A c \frac{ \, u_{i-1} -  u_{i+1} }{2}  $$``
+			      $$\frac{d }{d t} (A \Delta x   f_i ) = A c \frac{  f_{i-1} -  f_{i+1} }{2}  $$
 
-			      ``$$\frac{d u_i }{d t}  =   - c  \frac{ \, u_{i+1} -  u_{i-1} }{2 \Delta x}  $$``
+			      $$\frac{d f_i }{d t}  =   - c  \frac{  f_{i+1} -  f_{i-1} }{2 \Delta x}  $$
 
 			      La parte derecha se puede identificar como la derivada espacial (centrada):
 			      
-			      $$\frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0$$
+			      $$\frac{\partial f}{\partial t} + c \frac{\partial f}{\partial x} = 0$$
 			      
 			    </script>
 			  </section>
@@ -137,14 +137,14 @@
 
 			      Para nosotros, es más útil la expresión discreta:
 
-			      ``$$\frac{d u_i }{d t}  =   - c  \frac{ \, u_{i+1} -  u_{i-1} }{2 \Delta x}  $$``
+			      $$\frac{d f_i }{d t}  =   - c  \frac{  f_{i+1} -  f_{i-1} }{2 \Delta x}  $$
 
 			      De hecho, habría que discretizar la derivada temporal también. Lo más sencillo
 			      es el método de Euler:
 
-			      ``$$\frac{d u_i }{d t}  \approx  \frac{ u^{n+1}_i - u^{n}_i  }{\Delta t}   $$ ``
+			      $$\frac{d f_i }{d t}  \approx  \frac{ f^{n+1}_i - f^{n}_i  }{\Delta t}   $$,
 
-			      Donde el tiempo es $t= n \Delta t$.
+			      y el tiempo sería $ t= n \Delta t$.
 			      
 			      
 			    </script>
@@ -155,14 +155,15 @@
 			      ### Algoritmo explícito
 
 			      Interpretando que la parte derecha de la ecuación se refiere al paso actual:
-			      
-			      ``$$  \frac{ u^{n+1}_i - u^{n}_i  }{\Delta t}   =   - \frac{c}{\Delta x}  \frac{ \, u^n_{i+1} -  u^n_{i-1} }{2 }  $$``
+			      $$\frac{ f^{n+1}_i - f^{n}_i  }{\Delta t} =$$
+
+			      $$- \frac{c}{2 \Delta x}  (  f^n_{i+1} -  f^n_{i-1} )  $$
 
 			      Se llega a:
 			      
-			      ``$$u_i^{n+1} = u_i^n - c \frac{\Delta t}{ \Delta x}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$``
+			      $$f_i^{n+1} = f_i^n - c \frac{\Delta t}{ \Delta x}\frac{f_{i+1}^n-f_{i-1}^n}{2}$$
 
-			      Atención a la combinación  $c \frac{\Delta t}{ \Delta x}$: es el
+			      Atención a  $c \frac{\Delta t}{ \Delta x}$: es el
 			      **número de Courant**.
 
 			    </script>
@@ -177,7 +178,7 @@
 			      refiere a valores del siguiente tiempo
 			      (¡desconocidos!). Se llega a
 			      
-			      ``$$u_i^{n+1} = u_i^n - c \frac{\Delta t}{ \Delta x}\frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2}$$``
+			      $$f_i^{n+1} = f_i^n - c \frac{\Delta t}{ \Delta x}\frac{f_{i+1}^{n+1}-f_{i-1}^{n+1}}{2}$$
 
 			    </script>
 			  </section>
@@ -204,6 +205,34 @@
 		<script src="../reveal.js/plugin/math/math.js"></script>
 
 		<script>
+		  Reveal.initialize({
+		      hash: true,
+		      mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js',
+		      tex: {
+			  inlineMath: [
+			      ['$', '$'],
+			      ['\\(', '\\)'],
+			  ],
+		      },
+		      options: {
+			  skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+		      },
+		  },
+		    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes , RevealMath.MathJax4],
+		  });
+		</script>
+		
+</script>
+
+
+		
+
+</body>
+</html>
+
+
+
+		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
@@ -220,12 +249,13 @@
 			});
 		</script>
 
-
-		
-</script>
-
-
-		
-
-</body>
-</html>
+				      katex: {
+			  version: 'latest',
+			  delimiters: [
+			      { left: '$$', right: '$$', display: true },
+			      { left: '$', right: '$', display: false },
+			      { left: '\\(', right: '\\)', display: false },
+			      { left: '\\[', right: '\\]', display: true },
+			  ],
+			  ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+		      },
