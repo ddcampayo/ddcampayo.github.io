@@ -50,7 +50,7 @@
 			    <script type="text/template">
 			      ### Algoritmo explícito para convección
 
-			      $$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$
+			      $$f_i^{n+1} = f_i^n - \text{Co}\frac{f_{i+1}^n-f_{i-1}^n}{2}$$
 
 			      Las simulaciones 1D muestran un deterioro debido a ciertas oscilaciones rápidas.
 			      
@@ -64,14 +64,11 @@
 			      Se comienza con una expresión de Fourier:
 
 
-			      $$u_i^{n} = \sum_m A_m^n \exp\left( j k_m i \Delta x \right) $$
-
-
-			      $$u_i^{n} = \sum_m A_m^n \exp\left( \underbrace{j}_{\sqrt{-1}} \underbrace{k_m}_{m k_1} \underbrace{i \Delta x}_{x} \right) $$
-
-			      que se inserta en
+			      $$f_i^{n} = \sum_m A_m^n \exp\left( j k_m i \Delta x \right), $$
 			      
-			      $$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$
+			      con $j=\sqrt{-1}$, $k_m = m k_1$, $i \Delta x = x$, que se inserta en
+			      
+			      $$f_i^{n+1} = f_i^n - \text{Co}\frac{f_{i+1}^n-f_{i-1}^n}{2}$$
 
 			      
 			    </script>
@@ -82,19 +79,19 @@
 			    <script type="text/template">
 			      ### Análisis de von Neumann: atajo
 
-			      De todos modos, basta con probar qué modo va a dar más guerra. En
+			      Basta con probar qué modo va a dar más guerra. En
 
-			      $$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$
+			      $$f_i^{n+1} = f_i^n - \text{Co}\frac{f_{i+1}^n-f_{i-1}^n}{2}$$
 
-			      vemos que el peor escenario es:
+			      el "peor escenario" es:
 
-			      $$ u_{i+1}^n = -A_i^n \qquad  u_{i-1}^n = A_i^n$$
+			      $$ f_{i+1}^n = -A^n \qquad  f_{i-1}^n = A^n$$
 
 			      (¡dibujarlo!) entonces,
 
-			      $$A^{n+1} = A^n + \text{Co} A^n =  ( 1 + \text{Co}) A^n  $$.
+			      $$A^{n+1} = A^n + \text{Co} A^n =  ( 1 + \text{Co}) A^n . $$
 			      
-			      El método es *inestable*: cualquier valor de Co hace que los modos rápidos se amplifiquen
+			      Inestable! *cualquier* valor de Co hace que los modos rápidos se amplifiquen
 			      exponencialmente.
     
 			    </script>
@@ -106,17 +103,17 @@
 			    <script type="text/template">
 			      ### Algoritmo implícito
 			      
-			      $$u_i^{n+1} = u_i^n -  \text{Co}\frac{u_{i+1}^{n+1}-u_{i-1}^{n+1}}{2}$$
+			      $$f_i^{n+1} = f_i^n -  \text{Co}\frac{f_{i+1}^{n+1}-f_{i-1}^{n+1}}{2}$$
 
 			      El peor escenario es ahora: 
 
-			      $$ u_{i+1}^{n+1} = A_i^{n+1} \qquad  u_{i-1}^{n+1} = -A_i^{n+1}$$
+			      $$ f_{i+1}^{n+1} = -A^{n+1} \qquad  f_{i-1}^{n+1} = A^{n+1}$$
 
-			      $$A^{n+1} = A^n - \text{Co} A^{n+1} =  ( 1 - \text{Co}) A^{n+1}  $$
+			      $$A^{n+1} = A^n + \text{Co} A^{n+1} =  ( 1 + \text{Co}) A^{n+1}  $$
 
-			      $$A^{n+1} =\frac{1}{1- \text{Co}} A^n $$
+			      $$A^{n+1} =\frac{1}{1 + \text{Co}} A^n $$
 
-			      En principio, sería *condicionalmente estable*: $ |1 / (1- \text{Co}) | < 1 $ si $\text{Co}>2$ (??)
+			      En principio, sería *incondicionalmente estable*: $ |1 / (1 + \text{Co}) | < 1 $.
 			      
 			    </script>
 			  </section>
@@ -128,9 +125,9 @@
 			      La interpolación lineal resulta ser bastante mala para estos problemas. Es
 			      mucho mejor un esquema "upwind":
 
-			      $$ u_{i-1/2} \approx  u_{i-1}  $$
+			      $$ f_{i-1/2} \approx  f_{i-1}  $$
 
-			      $$ u_{i+1/2} \approx  u_{i}    $$
+			      $$ f_{i+1/2} \approx  f_{i}    $$
 			      
 			    </script>
 			  </section>
@@ -138,13 +135,13 @@
 
 			  <section data-markdown>
 			    <script type="text/template">
-			      ### Análisis de von Neumann de la nterpolación upwind explícita
+			      ### Análisis de von Neumann del upwind explícito
 
-			      $$u_i^{n+1} = u_i^n - \text{Co} ( u_{i}^n-u_{i-1}^n )$$
+			      $$f_i^{n+1} = f_i^n - \text{Co} ( f_{i}^n-f_{i-1}^n )$$
 
-			      El peor escenario es:
+			      Peor escenario:
 
-			      $$ u_{i-1}^n = - A_i^n$$
+			      $$ f_{i+1}^{n+1} = A^{n+1} \qquad  f_{i-1}^n = - A_i^n$$
 
 			      (¡dibujarlo!) entonces,
 
@@ -161,7 +158,7 @@
 			    <script type="text/template">
 			      ### Análisis de von Neumann de la nterpolación upwind implícita
 
-			      $$u_i^{n+1} = u_i^n - \text{Co} ( u_{i}^{n+1}-u_{i-1}^{n+1} )$$
+			      $$f_i^{n+1} = f_i^n - \text{Co} ( f_{i}^{n+1}-f_{i-1}^{n+1} )$$
 
 			      Comprobar:
 
@@ -233,11 +230,11 @@
 
 			      Convección, expĺícita:
 			      
-			      $$u_i^{n+1} = u_i^n - \text{Co}\frac{u_{i+1}^n-u_{i-1}^n}{2}$$
+			      $$f_i^{n+1} = f_i^n - \text{Co}\frac{f_{i+1}^n-f_{i-1}^n}{2}$$
 
-			      Poniendo $u_i^{n+1} = u_i^n = u_i,$
+			      Poniendo $f_i^{n+1} = f_i^n = f_i,$
 
-			      $$ u_{i+1}^n = u_{i-1}^n$$
+			      $$ f_{i+1}^n = f_{i-1}^n$$
 			      
 
 			      Comprobar:
